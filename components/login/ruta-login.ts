@@ -66,7 +66,7 @@ class Login {
   }
 
   ruta() {
-    this.router.get("/autenticacion", comprobar, this.validar_vida_token);
+    this.router.post("/vida-token", comprobar, this.validar_vida_token);
     this.router.post("/autenticacion", this.autenticar);
   }
 }

@@ -14,6 +14,18 @@ class StoreHome {
     });
   }
 
+  async verificar_code(code: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM access_code WHERE code = '${code}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   async eliminar_access_code(removeID: any) {
     return await new Promise((resolve, reject) => {
       database.query(

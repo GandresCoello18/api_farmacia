@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-home";
+import Respuesta from "../../network/response";
 const { comprobar } = require("../util/util-login-admin");
 
 class HomeView {
@@ -43,8 +44,41 @@ class HomeView {
       });
   }
 
+  VerificarCode(req: Request, res: Response) {
+    const { code } = req.params || null;
+
+    Store.verificar_code(code)
+      .then((data) => {
+        if (data == 0) {
+          Respuesta.success(
+            req,
+            res,
+            { feeback: "Acceso invalido, el codigo de acceso es incorrecto" },
+            200
+          );
+        } else {
+          Respuesta.success(
+            req,
+            res,
+            { feeback: "Acceso concedido", info: data },
+            200
+          );
+        }
+      })
+      .catch((err) => {
+        Respuesta.error(
+          req,
+          res,
+          { feeback: "Acceso invalido" },
+          500,
+          "Error en verificar code Home"
+        );
+      });
+  }
+
   ruta() {
     this.router.get("/", comprobar, this.VistaHome);
+    this.router.get("/verificar/:code", this.VerificarCode);
     this.router.post("/", this.CreateCode);
   }
 }
