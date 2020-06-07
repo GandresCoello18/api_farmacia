@@ -3,6 +3,8 @@ import Respuesta from "../../network/response";
 import Store from "./store-login";
 import StoreUser from "../user/store-usuario";
 import encripctacion from "bcryptjs";
+import Fechas from "../util/util-fecha";
+import { History_session_INT } from "../../interface";
 import jwt from "jsonwebtoken";
 const { comprobar } = require("../util/util-login");
 const { config } = require("../../config/index");
@@ -46,7 +48,21 @@ class Login {
                 id_user: data[0].id_user,
                 tipo_user: data[0].tipo_user,
               };
+
               const token = jwt.sign(save, config.jwtSecret);
+
+              let history: History_session_INT = {
+                id_user: data[0].id_user,
+                fecha_session: Fechas.fecha_con_hora_actual(),
+              };
+
+              StoreUser.create_history_session(history)
+                .then(() => {
+                  console.log("historial de session registrado");
+                })
+                .catch((err) => {
+                  console.log(`Error en crear history session: ${err}`);
+                });
 
               Respuesta.success(req, res, { token: token }, 200);
             } else {

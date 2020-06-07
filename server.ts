@@ -9,6 +9,7 @@ import IndexRouter from "./network/rutas";
 import Usuarios from "./components/user/ruta-usuario";
 import Email from "./components/email/ruta-email";
 import Login from "./components/login/ruta-login";
+import Producto from "./components/producto/ruta-producto";
 
 // vistas
 import viewHome from "./components/home/vista-home";
@@ -43,6 +44,7 @@ class Server {
     this.app.use("/api/usuario", Usuarios);
     this.app.use("/api/email", Email);
     this.app.use("/api/login", Login);
+    this.app.use("/api/producto", Producto);
     // vistas en backend
     this.app.use("/view/home", viewHome);
     this.app.use("/view/login", viewLogin);
