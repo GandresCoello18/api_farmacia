@@ -176,6 +176,16 @@ class Producto {
     }
   }
 
+  mostrar_productos(req: Request, res: Response) {
+    Store.listar_producto()
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en mostrar productos");
+      });
+  }
+
   ruta() {
     const upload = this.store_file();
 
@@ -193,6 +203,7 @@ class Producto {
       upload.single("file"),
       this.create_product
     );
+    this.router.get("/", this.mostrar_productos);
   }
 }
 
