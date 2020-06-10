@@ -186,17 +186,33 @@ class Producto {
       });
   }
 
+  eliminar_producto(req: Request, res: Response) {
+    const { id_producto } = req.params || null;
+
+    Store.eliminar_producto(id_producto)
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en eliminar producto");
+      });
+  }
+
   ruta() {
     const upload = this.store_file();
 
+    ///////////// nombre de laboratorio
     this.router.post(
       "/nombre_laboratorio",
       comprobar,
       this.create_name_laboratorio
     );
     this.router.get("/nombre_laboratorio", this.mostrar_name_laboratorio);
+    /////////////// nombre de productos
     this.router.post("/nombre_producto", comprobar, this.create_name_product);
     this.router.get("/nombre_producto", this.mostrar_name_productos);
+    /////////////// productos
+    this.router.delete("/:id_producto", comprobar, this.eliminar_producto);
     this.router.post(
       "/",
       comprobar,

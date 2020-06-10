@@ -73,6 +73,18 @@ class StorNameProduct {
       );
     });
   }
+
+  async eliminar_producto(id_producto: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `DELETE FROM productos WHERE id_producto = '${id_producto}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
 }
 
 let Store = new StorNameProduct();
