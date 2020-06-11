@@ -10,6 +10,7 @@ import Usuarios from "./components/user/ruta-usuario";
 import Email from "./components/email/ruta-email";
 import Login from "./components/login/ruta-login";
 import Producto from "./components/producto/ruta-producto";
+import Cliente from "./components/cliente/ruta-cliente";
 
 // vistas
 import viewHome from "./components/home/vista-home";
@@ -45,6 +46,7 @@ class Server {
     this.app.use("/api/email", Email);
     this.app.use("/api/login", Login);
     this.app.use("/api/producto", Producto);
+    this.app.use("/api/cliente", Cliente);
     // vistas en backend
     this.app.use("/view/home", viewHome);
     this.app.use("/view/login", viewLogin);
