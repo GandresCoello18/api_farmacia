@@ -25,6 +25,33 @@ class StoreClient {
       );
     });
   }
+
+  async validar_cliente_existente(
+    identificacion: string,
+    correo: string
+  ): Promise<Cliente_INT> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM cliente WHERE identificacion = ${identificacion} OR correo = '${correo}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async borrar_cliente(id_cliente: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `DELETE FROM cliente WHERE id_cliente = '${id_cliente}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
 }
 
 let Store = new StoreClient();
