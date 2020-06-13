@@ -1,0 +1,33 @@
+- var titulo =  'ACCESS CODE | Farmacia Juanito'
+include head.pug
+body
+
+    a(href='/view/home?salir=true').btn.btn-danger Salir
+
+    section.container-fluid.p-5
+        .row.justify-content-center
+            .col-12.col-md-6.col-lg-3
+                form(action='/view/home', method='post').p-2.mt-5
+                    select(name="tipo").form-control
+                        option(value='Administrador') Administrador
+                        option(value='Común') usuario Común
+                    button.btn.btn-success.mt-2 Generar Nuevo Codigo
+            .col-12.col-md-6
+                h2.text-center.p-5 Generar y eliminar codigos de acceso
+                table.table.p-5.mt-5
+                    thead
+                        tr
+                            th(scope='col') ID code
+                            th(scope='col') Codigo
+                            th(scope='col') Tipo
+                            th(scope='col') Opciones
+                    tbody
+                        each valor in data
+                            tr
+                                td= valor.id_access
+                                td= valor.code
+                                td= valor.tipo
+                                td
+                                    a(href='/view/home?removeID='+valor.id_access).btn.btn-danger Eliminar
+                        
+include footer.pug
