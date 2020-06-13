@@ -3,7 +3,7 @@ dotenv.config();
 
 interface Tipos {
   dev: boolean;
-  port: string | undefined;
+  port: string | number | undefined;
   cors: string | undefined;
   dbUser: string | undefined;
   dbPassword: string | undefined;
@@ -19,7 +19,7 @@ interface Tipos {
 
 const config: Tipos = {
   dev: process.env.NODE_ENV !== "production",
-  port: process.env.PORT,
+  port: process.env.PORT || 3000,
   cors: process.env.CORS,
   dbUser: process.env.DB_USER,
   dbPassword: process.env.DB_PASSWORD,

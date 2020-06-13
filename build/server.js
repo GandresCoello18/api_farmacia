@@ -36,7 +36,7 @@ class Server {
     this.routes();
   }
   config() {
-    this.app.set("port", config.port || 7000);
+    this.app.set("port", config.port);
     this.app.use(helmet_1.default());
     this.app.use(cors_1.default());
     this.app.use(cookie_parser_1.default());

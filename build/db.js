@@ -9,15 +9,16 @@ const mysql_1 = __importDefault(require("mysql"));
 const { config } = require("./config/index");
 class Mysql {
   constructor() {
-    //this.conectar();
+    this.conectar();
   }
   conectar() {
     const configuracion = mysql_1.default.createConnection({
-      host: config.dbHost,
+      host: "sql9.freemysqlhosting.net",
       port: 3306,
-      user: config.dbUser,
-      password: config.dbPassword,
-      database: config.dbName,
+      user: "sql9348145",
+      password: "w46R3ayw1n",
+      database: "sql9348145",
+      socketPath: "socketpath/mysql.sock",
     });
     const connection = mysql_1.default.createConnection(configuracion);
     connection.connect(function (err) {
