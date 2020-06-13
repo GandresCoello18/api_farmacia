@@ -1,38 +1,38 @@
-import mysql from "mysql";
+"use strict";
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mysql_1 = __importDefault(require("mysql"));
 const { config } = require("./config/index");
-
 class Mysql {
   constructor() {
     this.conectar();
   }
-
   conectar() {
-    var connection = mysql.createConnection({
+    var connection = mysql_1.default.createConnection({
       host: config.dbHost,
       user: config.dbUser,
       password: config.dbPassword,
       database: config.dbName,
     });
-
-    connection.connect((err: any) => {
+    connection.connect((err) => {
       if (err) {
         console.error(new Error(err));
       } else {
         console.log("conectado con exito");
       }
     });
-
-    connection.on("err", (err: any) => {
+    connection.on("err", (err) => {
       if (err) console.log(err);
     });
-
     return connection;
   }
 }
-
 let dataBase = new Mysql();
-export default dataBase.conectar();
-
+exports.default = dataBase.conectar();
 /*import mysql from "mysql";
 const { config } = require("./config/index");
 
