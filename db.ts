@@ -10,6 +10,7 @@ class Mysql {
     var connection = mysql.createConnection({
       host: config.dbHost,
       user: config.dbUser,
+      port: 3306,
       password: config.dbPassword,
       database: config.dbName,
     });
