@@ -34,7 +34,8 @@ class UtilEmail {
       subject: `${subject}`, // Subject line
       text: `${text}`, // plain text body
       html: `<a style='padding: 5px 10px; background-color: #cdcdcd; text-decorate: none; color: #000;' href=${
-        "http://127.0.0.1:7000/api/email/verificar/" + hash
+        "https://api-laboratorio-juanito.herokuapp.com/api/email/verificar/" +
+        hash
       } target='_blank'>Continuar con la verificacion</a>`, // html body
     });
 
