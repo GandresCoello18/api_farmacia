@@ -1,5 +1,5 @@
 import mysql from "mysql";
-const { config } = require("./config/index.ts");
+const { config } = require("./config/index");
 
 class Mysql {
   constructor() {

@@ -28,7 +28,7 @@ class Server {
   }
 
   config() {
-    this.app.set("port", config.port || 4000);
+    this.app.set("port", config.port || 7000);
     this.app.use(helmet());
     this.app.use(cors());
     this.app.use(cookieParser());
