@@ -1,36 +1,33 @@
-import mysql from 'mysql';
-const { config } = require('./config/index.ts');
-
+import mysql from "mysql";
+const { config } = require("./config/index.ts");
 
 class Mysql {
-
-  constructor(){
+  constructor() {
     this.conectar();
   }
 
-  conectar(){
+  conectar() {
     var connection = mysql.createConnection({
       host: config.dbHost,
       user: config.dbUser,
-      password: '',
+      password: config.dbPassword,
       database: config.dbName,
     });
 
-    connection.connect( (err: any) => {
-      if(err){
+    connection.connect((err: any) => {
+      if (err) {
         console.error(new Error(err));
-      }else{
-        console.log('conectado con exito');
+      } else {
+        console.log("conectado con exito");
       }
     });
-  
-    connection.on('err', (err: any) => {
-      if(err) console.log(err);
+
+    connection.on("err", (err: any) => {
+      if (err) console.log(err);
     });
 
     return connection;
   }
-
 }
 
 let dataBase = new Mysql();

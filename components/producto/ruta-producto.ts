@@ -136,11 +136,12 @@ class Producto {
         tipo_dosis,
         fecha_elaboracion,
         fecha_caducidad,
+        pvp,
+        pvf,
       } = req.body || null;
 
       const obj: Producto_INT = {
         id_producto: uuidv4(),
-        imagen: req.file.originalname,
         id_name_product,
         id_name_laboratorio,
         cantidad,
@@ -151,6 +152,8 @@ class Producto {
         tipo_dosis,
         fecha_elaboracion,
         fecha_caducidad,
+        pvp,
+        pvf,
       };
 
       Store.add_product(obj)
@@ -213,12 +216,7 @@ class Producto {
     this.router.get("/nombre_producto", this.mostrar_name_productos);
     /////////////// productos
     this.router.delete("/:id_producto", comprobar, this.eliminar_producto);
-    this.router.post(
-      "/",
-      comprobar,
-      upload.single("file"),
-      this.create_product
-    );
+    this.router.post("/", comprobar, this.create_product);
     this.router.get("/", this.mostrar_productos);
   }
 }

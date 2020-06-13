@@ -21,7 +21,6 @@ export interface History_session_INT {
 
 export interface Producto_INT {
   id_producto: string;
-  imagen: string;
   id_name_product: number;
   id_name_laboratorio: number;
   cantidad: number;
@@ -32,6 +31,8 @@ export interface Producto_INT {
   tipo_dosis: string;
   fecha_elaboracion: string;
   fecha_caducidad: string;
+  pvp: number;
+  pvf: number;
 }
 
 export interface Cliente_INT {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2020 a las 06:49:34
+-- Tiempo de generación: 13-06-2020 a las 09:04:28
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -39,7 +39,31 @@ CREATE TABLE `access_code` (
 
 INSERT INTO `access_code` (`id_access`, `code`, `tipo`) VALUES
 (3, 'Md5nSL6z_', 'usuario Común'),
-(6, '924BhEGSv', 'Administrador');
+(6, '924BhEGSv', 'Administrador'),
+(7, 'bSx8Rs-mJ', 'Administrador');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `id_cliente` varchar(45) NOT NULL,
+  `nombres` varchar(40) NOT NULL,
+  `apellidos` varchar(40) NOT NULL,
+  `identificacion` int(30) NOT NULL,
+  `correo` varchar(50) NOT NULL,
+  `direccion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id_cliente`, `nombres`, `apellidos`, `identificacion`, `correo`, `direccion`) VALUES
+('0daa619e-bec7-45e6-beac-025d318a5fcc', 'karina kimara', 'coello goyes', 1204848299, 'kari@gmail.com', 'none none'),
+('238cad86-2c73-44f5-9199-ed1de169a883', 'Andres roberto', 'Coello', 1207345768, 'goyeselcoca@gmail.com', 'san juan, Kilometro 1 vi a vinces');
 
 -- --------------------------------------------------------
 
@@ -58,10 +82,10 @@ CREATE TABLE `historial_session` (
 --
 
 INSERT INTO `historial_session` (`id_historial_session`, `id_user`, `fecha_session`) VALUES
-(22, 'lXguFYhsP', '7-6-2020 15:15:52'),
-(23, 'lXguFYhsP', '7-6-2020 15:18:6'),
-(24, 'lXguFYhsP', '7-6-2020 15:31:8'),
-(25, 'lXguFYhsP', '7-6-2020 15:34:25');
+(28, 'lXguFYhsP', '2020-06-10 12:8:25'),
+(29, 'lXguFYhsP', '2020-06-10 20:9:48'),
+(30, 'lXguFYhsP', '2020-06-11 11:10:51'),
+(31, 'lXguFYhsP', '2020-06-12 12:45:49');
 
 -- --------------------------------------------------------
 
@@ -79,8 +103,8 @@ CREATE TABLE `nombre_laboratorio` (
 --
 
 INSERT INTO `nombre_laboratorio` (`id_name_laboratorio`, `nombre_laboratorio`) VALUES
-(3, 'test 4'),
-(4, 'test 5');
+(3, 'Life'),
+(4, 'Sanofi ');
 
 -- --------------------------------------------------------
 
@@ -98,8 +122,8 @@ CREATE TABLE `nombre_producto` (
 --
 
 INSERT INTO `nombre_producto` (`id_product_name`, `product_name`) VALUES
-(15, 'test'),
-(16, 'test2');
+(15, 'Simvastatina '),
+(16, 'Omeprazol ');
 
 -- --------------------------------------------------------
 
@@ -109,25 +133,28 @@ INSERT INTO `nombre_producto` (`id_product_name`, `product_name`) VALUES
 
 CREATE TABLE `productos` (
   `id_producto` varchar(45) NOT NULL,
-  `imagen` varchar(60) NOT NULL,
   `id_nombre_producto` int(11) NOT NULL,
   `id_nombre_laboratorio` int(11) NOT NULL,
   `cantidad` int(3) NOT NULL,
   `presentacion` varchar(30) NOT NULL,
   `lote` varchar(40) NOT NULL,
   `registro_sanitario` varchar(40) NOT NULL,
-  `dosis` double NOT NULL,
-  `tipo_dosis` varchar(20) NOT NULL,
+  `medida` double NOT NULL,
+  `tipo_medida` varchar(20) NOT NULL,
   `fecha_elaboracion` varchar(10) NOT NULL,
-  `fecha_caducidad` varchar(10) NOT NULL
+  `fecha_caducidad` varchar(10) NOT NULL,
+  `pvp` double NOT NULL,
+  `pvf` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `imagen`, `id_nombre_producto`, `id_nombre_laboratorio`, `cantidad`, `presentacion`, `lote`, `registro_sanitario`, `dosis`, `tipo_dosis`, `fecha_elaboracion`, `fecha_caducidad`) VALUES
-('cbc697c2-7b73-4c60-9543-9d2e7c323f0d', 'individual-02.jpg', 15, 4, 22, 'Option two', '3222', 'efec33', 455, 'Miligramos', '2020-06-27', '2020-06-22');
+INSERT INTO `productos` (`id_producto`, `id_nombre_producto`, `id_nombre_laboratorio`, `cantidad`, `presentacion`, `lote`, `registro_sanitario`, `medida`, `tipo_medida`, `fecha_elaboracion`, `fecha_caducidad`, `pvp`, `pvf`) VALUES
+('90c8ebe1-ae12-4e3e-a358-a6fc95872535', 16, 3, 1, 'Tabletas', 'CM91384811Z4', '02214-MAC-10-02', 500, 'Miligramos', '2020-06-10', '2020-06-24', 1.2, 0.82),
+('bbce1bb0-27f2-44a2-b517-78967365c060', 15, 3, 1, 'Tabletas', 'CM9138481G4T', '02214-MAC-10-02', 100, 'Miligramos', '2020-06-13', '2020-06-17', 1.55, 1.05),
+('cbc697c2-7b73-4c60-9543-9d2e7c323f0d', 15, 4, 2, 'Tabletas', 'CM913848121G', '02214-MAC-10-02', 200, 'Miligramos', '2020-06-27', '2020-06-22', 2.33, 1.91);
 
 -- --------------------------------------------------------
 
@@ -175,6 +202,12 @@ ALTER TABLE `access_code`
   ADD PRIMARY KEY (`id_access`);
 
 --
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`id_cliente`);
+
+--
 -- Indices de la tabla `historial_session`
 --
 ALTER TABLE `historial_session`
@@ -198,8 +231,8 @@ ALTER TABLE `nombre_producto`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
-  ADD KEY `id_nombre_laboratorio` (`id_nombre_laboratorio`),
-  ADD KEY `id_nombre_producto` (`id_nombre_producto`);
+  ADD KEY `productos_ibfk_1` (`id_nombre_laboratorio`),
+  ADD KEY `productos_ibfk_2` (`id_nombre_producto`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -221,25 +254,25 @@ ALTER TABLE `verificar_email`
 -- AUTO_INCREMENT de la tabla `access_code`
 --
 ALTER TABLE `access_code`
-  MODIFY `id_access` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_access` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `historial_session`
 --
 ALTER TABLE `historial_session`
-  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `nombre_laboratorio`
 --
 ALTER TABLE `nombre_laboratorio`
-  MODIFY `id_name_laboratorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_name_laboratorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `nombre_producto`
 --
 ALTER TABLE `nombre_producto`
-  MODIFY `id_product_name` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_product_name` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas
@@ -249,14 +282,14 @@ ALTER TABLE `nombre_producto`
 -- Filtros para la tabla `historial_session`
 --
 ALTER TABLE `historial_session`
-  ADD CONSTRAINT `historial_session_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `usuarios` (`id_user`);
+  ADD CONSTRAINT `historial_session_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `usuarios` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_nombre_laboratorio`) REFERENCES `nombre_laboratorio` (`id_name_laboratorio`),
-  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_nombre_producto`) REFERENCES `nombre_producto` (`id_product_name`);
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_nombre_laboratorio`) REFERENCES `nombre_laboratorio` (`id_name_laboratorio`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_nombre_producto`) REFERENCES `nombre_producto` (`id_product_name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `verificar_email`
