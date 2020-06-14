@@ -58,17 +58,17 @@ class HomeView {
             { feeback: "Acceso invalido, el codigo de acceso es incorrecto" },
             200
           );
-          res.render("verificar-code.pug", {
+          /*res.render("verificar-code.pug", {
             feeback: "Acceso invalido, el codigo de acceso es incorrecto",
             date: hoy,
-          });
+          });*/
         } else {
           Respuesta.success(req, res, { feeback: "Acceso concedido" }, 200);
-          res.render("verificar-code.pug", {
+          /*res.render("verificar-code.pug", {
             feeback: "Acceso concedido",
             date: hoy,
             info: data,
-          });
+          });*/
         }
       })
       .catch((err) => {
