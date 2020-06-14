@@ -63,7 +63,12 @@ class HomeView {
             date: hoy,
           });*/
         } else {
-          Respuesta.success(req, res, { feeback: "Acceso concedido" }, 200);
+          Respuesta.success(
+            req,
+            res,
+            { feeback: "Acceso concedido", info: data },
+            200
+          );
           /*res.render("verificar-code.pug", {
             feeback: "Acceso concedido",
             date: hoy,
