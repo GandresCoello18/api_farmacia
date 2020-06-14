@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-home";
+import Fechas from "../util/util-fecha";
 import Respuesta from "../../network/response";
 const { comprobar } = require("../util/util-login-admin");
 
@@ -47,22 +48,20 @@ class HomeView {
   VerificarCode(req: Request, res: Response) {
     const { code } = req.params || null;
 
+    const hoy = Fechas.fecha_actual();
     Store.verificar_code(code)
       .then((data) => {
         if (data == 0) {
-          Respuesta.success(
-            req,
-            res,
-            { feeback: "Acceso invalido, el codigo de acceso es incorrecto" },
-            200
-          );
+          res.render("verificar-code.pug", {
+            feeback: "Acceso invalido, el codigo de acceso es incorrecto",
+            date: hoy,
+          });
         } else {
-          Respuesta.success(
-            req,
-            res,
-            { feeback: "Acceso concedido", info: data },
-            200
-          );
+          res.render("verificar-code.pug", {
+            feeback: "Acceso concedido, Bienvenido",
+            date: hoy,
+            info: data,
+          });
         }
       })
       .catch((err) => {
