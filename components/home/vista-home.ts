@@ -52,13 +52,20 @@ class HomeView {
     Store.verificar_code(code)
       .then((data) => {
         if (data == 0) {
+          Respuesta.success(
+            req,
+            res,
+            { feeback: "Acceso invalido, el codigo de acceso es incorrecto" },
+            200
+          );
           res.render("verificar-code.pug", {
             feeback: "Acceso invalido, el codigo de acceso es incorrecto",
             date: hoy,
           });
         } else {
+          Respuesta.success(req, res, { feeback: "Acceso concedido" }, 200);
           res.render("verificar-code.pug", {
-            feeback: "Acceso concedido, Bienvenido",
+            feeback: "Acceso concedido",
             date: hoy,
             info: data,
           });
