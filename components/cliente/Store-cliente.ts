@@ -17,7 +17,7 @@ class StoreClient {
   async listar_clientes(): Promise<Cliente_INT> {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT * FROM cliente ORDER BY id_cliente DESC`,
+        `SELECT * FROM cliente WHERE id_cliente <> 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479' ORDER BY id_cliente DESC`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

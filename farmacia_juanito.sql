@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2020 a las 09:04:28
+-- Tiempo de generación: 15-06-2020 a las 07:39:21
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -63,7 +63,33 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id_cliente`, `nombres`, `apellidos`, `identificacion`, `correo`, `direccion`) VALUES
 ('0daa619e-bec7-45e6-beac-025d318a5fcc', 'karina kimara', 'coello goyes', 1204848299, 'kari@gmail.com', 'none none'),
-('238cad86-2c73-44f5-9199-ed1de169a883', 'Andres roberto', 'Coello', 1207345768, 'goyeselcoca@gmail.com', 'san juan, Kilometro 1 vi a vinces');
+('238cad86-2c73-44f5-9199-ed1de169a883', 'Andres roberto', 'Coello', 1207345768, 'goyeselcoca@gmail.com', 'san juan, Kilometro 1 vi a vinces'),
+('b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', 'consumidor_final', 'consumidor_final', 0, 'consumidor_final@gmail.com', 'sin direccion');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `factura`
+--
+
+CREATE TABLE `factura` (
+  `id_factura` varchar(45) NOT NULL,
+  `id_cliente` varchar(45) NOT NULL,
+  `fecha_factura` varchar(30) NOT NULL,
+  `descripcion_f` text NOT NULL,
+  `descuento` double NOT NULL,
+  `iva` double NOT NULL,
+  `total` double NOT NULL,
+  `efectivo` double NOT NULL,
+  `cambio` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`id_factura`, `id_cliente`, `fecha_factura`, `descripcion_f`, `descuento`, `iva`, `total`, `efectivo`, `cambio`) VALUES
+('04d7e449-d036-42a0-b4bc-eebf5106d4b5', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-14 23:8:49', 'Sin descripcion', 0, 12, 1.74, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -208,6 +234,13 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id_cliente`);
 
 --
+-- Indices de la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD PRIMARY KEY (`id_factura`),
+  ADD KEY `id_cliente` (`id_cliente`);
+
+--
 -- Indices de la tabla `historial_session`
 --
 ALTER TABLE `historial_session`
@@ -277,6 +310,12 @@ ALTER TABLE `nombre_producto`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `historial_session`

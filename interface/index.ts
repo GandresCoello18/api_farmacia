@@ -43,3 +43,15 @@ export interface Cliente_INT {
   correo: string;
   direccion: string;
 }
+
+export interface Factura_INT {
+  id_factura: string;
+  id_cliente: string;
+  fecha_factura: string;
+  descripcion: string;
+  descuento: number;
+  iva: number;
+  total: number;
+  efectivo: number;
+  cambio: number;
+}

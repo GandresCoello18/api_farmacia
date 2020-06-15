@@ -12,7 +12,7 @@ comprobar.use((req: Request, res: Response, next: NextFunction) => {
     jwt.verify(token, config.jwtSecretAdmin, (err: any, decoded: any) => {
       if (err) {
         console.log(err);
-        res.render("/login.pug", {
+        res.render("login.pug", {
           feeback: "Token inválida o expirada",
         });
       } else {
