@@ -5,6 +5,7 @@ import multer from "multer";
 import { Producto_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
 import { v4 as uuidv4 } from "uuid";
+import { strict } from "assert";
 
 class Producto {
   router: Router;
@@ -138,6 +139,7 @@ class Producto {
         fecha_caducidad,
         pvp,
         pvf,
+        id_principio_activo,
       } = req.body || null;
 
       const obj: Producto_INT = {
@@ -154,6 +156,8 @@ class Producto {
         fecha_caducidad,
         pvp,
         pvf,
+        estado: "Disponible",
+        id_principio_activo,
       };
 
       Store.add_product(obj)
@@ -201,6 +205,34 @@ class Producto {
       });
   }
 
+  create_principio_activo(req: Request, res: Response) {
+    const { name_principio_activo } = req.body || null;
+
+    Store.add_principio_activo(name_principio_activo)
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en crear principio activo");
+      });
+  }
+
+  mostrar_principio_activo(req: Request, res: Response) {
+    Store.listar_principio_activo()
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(
+          req,
+          res,
+          err,
+          500,
+          "Error en mostrar principio activo"
+        );
+      });
+  }
+
   ruta() {
     const upload = this.store_file();
 
@@ -214,6 +246,13 @@ class Producto {
     /////////////// nombre de productos
     this.router.post("/nombre_producto", comprobar, this.create_name_product);
     this.router.get("/nombre_producto", this.mostrar_name_productos);
+    /////////////// principio activo
+    this.router.post(
+      "/principio_activo",
+      comprobar,
+      this.create_principio_activo
+    );
+    this.router.get("/principio_activo", this.mostrar_principio_activo);
     /////////////// productos
     this.router.delete("/:id_producto", comprobar, this.eliminar_producto);
     this.router.post("/", comprobar, this.create_product);

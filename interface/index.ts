@@ -33,6 +33,8 @@ export interface Producto_INT {
   fecha_caducidad: string;
   pvp: number;
   pvf: number;
+  estado: string;
+  id_principio_activo: number;
 }
 
 export interface Cliente_INT {
