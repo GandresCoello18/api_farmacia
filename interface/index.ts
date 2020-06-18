@@ -33,8 +33,10 @@ export interface Producto_INT {
   fecha_caducidad: string;
   pvp: number;
   pvf: number;
-  estado: string;
+  estado: string | "Disponible" | "Aun disponible" | "Vendido" | "Caducado";
   id_principio_activo: number;
+  formato?: string;
+  unidades?: number;
 }
 
 export interface Cliente_INT {
@@ -56,4 +58,13 @@ export interface Factura_INT {
   total: number;
   efectivo: number;
   cambio: number;
+  productos: Array<Producto_INT>;
+}
+
+export interface Producto_Factura_INT {
+  id_producto_fac: string;
+  id_producto: string;
+  id_factura: string;
+  formato: string;
+  cantidad: number;
 }

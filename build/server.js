@@ -23,6 +23,12 @@ const ruta_producto_1 = __importDefault(
 const ruta_cliente_1 = __importDefault(
   require("./components/cliente/ruta-cliente")
 );
+const ruta_factura_1 = __importDefault(
+  require("./components/factura/ruta-factura")
+);
+const ruta_ventas_1 = __importDefault(
+  require("./components/ventas/ruta-ventas")
+);
 // vistas
 const vista_home_1 = __importDefault(require("./components/home/vista-home"));
 const vista_login_1 = __importDefault(
@@ -54,6 +60,8 @@ class Server {
     this.app.use("/api/login", ruta_login_1.default);
     this.app.use("/api/producto", ruta_producto_1.default);
     this.app.use("/api/cliente", ruta_cliente_1.default);
+    this.app.use("/api/factura", ruta_factura_1.default);
+    this.app.use("/api/venta", ruta_ventas_1.default);
     // vistas en backend
     this.app.use("/view/home", vista_home_1.default);
     this.app.use("/view/login", vista_login_1.default);
@@ -64,7 +72,7 @@ class Server {
   }
   start() {
     this.app.listen(this.app.get("port"), () =>
-      console.log("Server levantado")
+      console.log("RUN SERVER NODE...")
     );
   }
 }

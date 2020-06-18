@@ -12,6 +12,7 @@ import Login from "./components/login/ruta-login";
 import Producto from "./components/producto/ruta-producto";
 import Cliente from "./components/cliente/ruta-cliente";
 import Factura from "./components/factura/ruta-factura";
+import Ventas from "./components/ventas/ruta-ventas";
 
 // vistas
 import viewHome from "./components/home/vista-home";
@@ -49,6 +50,7 @@ class Server {
     this.app.use("/api/producto", Producto);
     this.app.use("/api/cliente", Cliente);
     this.app.use("/api/factura", Factura);
+    this.app.use("/api/venta", Ventas);
     // vistas en backend
     this.app.use("/view/home", viewHome);
     this.app.use("/view/login", viewLogin);

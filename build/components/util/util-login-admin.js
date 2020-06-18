@@ -19,7 +19,7 @@ comprobar.use((req, res, next) => {
       (err, decoded) => {
         if (err) {
           console.log(err);
-          res.render("/login.pug", {
+          res.render("login.pug", {
             feeback: "Token inválida o expirada",
           });
         } else {

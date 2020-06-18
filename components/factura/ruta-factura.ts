@@ -1,7 +1,9 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-factura";
+import StoreVenta from "../ventas/Store-ventas";
+import StoreProduct from "../producto/Store-producto";
 import Respuesta from "../../network/response";
-import { Factura_INT } from "../../interface/index";
+import { Factura_INT, Producto_Factura_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
 import Fecha from "../util/util-fecha";
 import { v4 as uuidv4 } from "uuid";
@@ -23,6 +25,7 @@ class Factura {
       total,
       efectivo = 0,
       cambio = 0,
+      productos,
     } = req.body || null;
 
     const obj: Factura_INT = {
@@ -35,6 +38,7 @@ class Factura {
       total,
       efectivo,
       cambio,
+      productos,
     };
 
     if (obj.id_cliente == "") {
@@ -44,6 +48,35 @@ class Factura {
 
     Store.add_factura(obj)
       .then((data) => {
+        for (let i = 0; i < obj.productos.length; i++) {
+          let objVenta: Producto_Factura_INT = {
+            id_producto_fac: uuidv4(),
+            id_producto: obj.productos[i].id_producto,
+            id_factura: obj.id_factura,
+            formato: `${obj.productos[i].formato}`,
+            cantidad: Number(obj.productos[i].unidades),
+          };
+
+          StoreVenta.add_venta(objVenta)
+            .then((data) => {
+              return Respuesta.success(req, res, data, 200);
+            })
+            .catch((err) => {
+              console.log("Error al crear venta: " + err.message);
+            });
+
+          StoreProduct.cambiar_status_producto(
+            obj.productos[i].id_producto,
+            "Vendido"
+          )
+            .then((data) => {
+              return Respuesta.success(req, res, data, 200);
+            })
+            .catch((err) => {
+              console.log("Error al cambiar estado producto: " + err.message);
+            });
+        }
+
         Respuesta.success(req, res, data, 200);
       })
       .catch((err) => {

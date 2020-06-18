@@ -39,12 +39,12 @@ var __importDefault =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-class StoreClient {
-  add_cliente(Cliente) {
+class StoreVenta {
+  add_venta(Venta) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `INSERT INTO cliente (id_cliente, nombres, apellidos, identificacion, correo, direccion) VALUES ('${Cliente.id_cliente}', '${Cliente.nombre}', '${Cliente.apellido}', ${Cliente.identificacion}, '${Cliente.correo}', '${Cliente.direccion}')`,
+          `INSERT INTO producto_factura (id_producto_fac, id_producto, id_factura, formato, cantidad) VALUES ('${Venta.id_producto_fac}', '${Venta.id_producto}', '${Venta.id_factura}', '${Venta.formato}', ${Venta.cantidad})`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -53,11 +53,11 @@ class StoreClient {
       });
     });
   }
-  listar_clientes() {
+  traer_venta() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT * FROM cliente WHERE id_cliente <> 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479' ORDER BY id_cliente DESC`,
+          `SELECT producto_factura.id_producto_fac, producto_factura.formato, producto_factura.cantidad as fact_cant, factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.total, factura.efectivo, factura.cambio, factura.descuento, productos.cantidad, productos.presentacion, productos.lote, productos.registro_sanitario, productos.medida, productos.tipo_medida, productos.fecha_elaboracion, productos.fecha_caducidad, productos.pvp, productos.pvf, productos.estado, nombre_producto.product_name, nombre_laboratorio.nombre_laboratorio, principio_activo.principio_activo, cliente.nombres, cliente.apellidos, cliente.identificacion, cliente.correo FROM producto_factura INNER JOIN factura ON factura.id_factura =  producto_factura.id_factura INNER JOIN productos ON productos.id_producto = producto_factura.id_producto INNER JOIN nombre_producto ON nombre_producto.id_product_name = productos.id_nombre_producto INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = productos.id_nombre_laboratorio INNER JOIN principio_activo ON principio_activo.id_principio_activo = productos.id_principio_activo INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente;`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -66,24 +66,11 @@ class StoreClient {
       });
     });
   }
-  validar_cliente_existente(identificacion, correo) {
+  eliminar_venta(id_producto_fac) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT * FROM cliente WHERE identificacion = ${identificacion} OR correo = '${correo}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  borrar_cliente(id_cliente) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM cliente WHERE id_cliente = '${id_cliente}' `,
+          `DELETE FROM producto_factura WHERE id_producto_fac = '${id_producto_fac}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -93,5 +80,5 @@ class StoreClient {
     });
   }
 }
-let Store = new StoreClient();
+let Store = new StoreVenta();
 exports.default = Store;

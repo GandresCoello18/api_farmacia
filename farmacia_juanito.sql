@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-06-2020 a las 07:39:21
+-- Tiempo de generación: 18-06-2020 a las 07:09:46
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -89,7 +89,7 @@ CREATE TABLE `factura` (
 --
 
 INSERT INTO `factura` (`id_factura`, `id_cliente`, `fecha_factura`, `descripcion_f`, `descuento`, `iva`, `total`, `efectivo`, `cambio`) VALUES
-('04d7e449-d036-42a0-b4bc-eebf5106d4b5', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-14 23:8:49', 'Sin descripcion', 0, 12, 1.74, 0, 0);
+('e3f5f6be-0058-471f-a359-a82b7c2e343a', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-17 21:7:0', 'Sin descripcion', 0, 12, 4.35, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,8 @@ INSERT INTO `historial_session` (`id_historial_session`, `id_user`, `fecha_sessi
 (28, 'lXguFYhsP', '2020-06-10 12:8:25'),
 (29, 'lXguFYhsP', '2020-06-10 20:9:48'),
 (30, 'lXguFYhsP', '2020-06-11 11:10:51'),
-(31, 'lXguFYhsP', '2020-06-12 12:45:49');
+(31, 'lXguFYhsP', '2020-06-12 12:45:49'),
+(33, 'lXguFYhsP', '2020-06-17 9:52:41');
 
 -- --------------------------------------------------------
 
@@ -154,6 +155,25 @@ INSERT INTO `nombre_producto` (`id_product_name`, `product_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `principio_activo`
+--
+
+CREATE TABLE `principio_activo` (
+  `id_principio_activo` int(11) NOT NULL,
+  `principio_activo` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `principio_activo`
+--
+
+INSERT INTO `principio_activo` (`id_principio_activo`, `principio_activo`) VALUES
+(1, 'test'),
+(2, 'test2 ');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `productos`
 --
 
@@ -170,17 +190,41 @@ CREATE TABLE `productos` (
   `fecha_elaboracion` varchar(10) NOT NULL,
   `fecha_caducidad` varchar(10) NOT NULL,
   `pvp` double NOT NULL,
-  `pvf` double NOT NULL
+  `pvf` double NOT NULL,
+  `estado` varchar(20) NOT NULL,
+  `id_principio_activo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `id_nombre_producto`, `id_nombre_laboratorio`, `cantidad`, `presentacion`, `lote`, `registro_sanitario`, `medida`, `tipo_medida`, `fecha_elaboracion`, `fecha_caducidad`, `pvp`, `pvf`) VALUES
-('90c8ebe1-ae12-4e3e-a358-a6fc95872535', 16, 3, 1, 'Tabletas', 'CM91384811Z4', '02214-MAC-10-02', 500, 'Miligramos', '2020-06-10', '2020-06-24', 1.2, 0.82),
-('bbce1bb0-27f2-44a2-b517-78967365c060', 15, 3, 1, 'Tabletas', 'CM9138481G4T', '02214-MAC-10-02', 100, 'Miligramos', '2020-06-13', '2020-06-17', 1.55, 1.05),
-('cbc697c2-7b73-4c60-9543-9d2e7c323f0d', 15, 4, 2, 'Tabletas', 'CM913848121G', '02214-MAC-10-02', 200, 'Miligramos', '2020-06-27', '2020-06-22', 2.33, 1.91);
+INSERT INTO `productos` (`id_producto`, `id_nombre_producto`, `id_nombre_laboratorio`, `cantidad`, `presentacion`, `lote`, `registro_sanitario`, `medida`, `tipo_medida`, `fecha_elaboracion`, `fecha_caducidad`, `pvp`, `pvf`, `estado`, `id_principio_activo`) VALUES
+('90c8ebe1-ae12-4e3e-a358-a6fc95872535', 16, 3, 18, 'Tabletas', 'CM91384811Z4', '02214-MAC-10-02', 500, 'Miligramos', '2020-06-10', '2020-04-24', 1.2, 0.82, 'Disponible', 1),
+('bbce1bb0-27f2-44a2-b517-78967365c060', 15, 3, 10, 'Tabletas', 'CM9138481G4T', '02214-MAC-10-02', 100, 'Miligramos', '2020-06-13', '2020-06-17', 1.55, 1.05, 'Vendido', 1),
+('cbc697c2-7b73-4c60-9543-9d2e7c323f0d', 15, 4, 20, 'Tabletas', 'CM913848121G', '02214-MAC-10-02', 200, 'Miligramos', '2020-06-27', '2020-06-22', 2.33, 1.91, 'Vendido', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto_factura`
+--
+
+CREATE TABLE `producto_factura` (
+  `id_producto_fac` varchar(45) NOT NULL,
+  `id_producto` varchar(45) NOT NULL,
+  `id_factura` varchar(45) NOT NULL,
+  `formato` varchar(11) NOT NULL,
+  `cantidad` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto_factura`
+--
+
+INSERT INTO `producto_factura` (`id_producto_fac`, `id_producto`, `id_factura`, `formato`, `cantidad`) VALUES
+('15eb3f38-d7d0-4901-804b-a4f398e4d477', 'cbc697c2-7b73-4c60-9543-9d2e7c323f0d', 'e3f5f6be-0058-471f-a359-a82b7c2e343a', 'Por Paquete', 1),
+('cf671478-1b82-43ac-962b-e100795306a1', 'bbce1bb0-27f2-44a2-b517-78967365c060', 'e3f5f6be-0058-471f-a359-a82b7c2e343a', 'Por Paquete', 1);
 
 -- --------------------------------------------------------
 
@@ -204,6 +248,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_user`, `nombres`, `apellidos`, `foto`, `tipo_user`, `email`, `email_on`, `password`) VALUES
+('HsYHTsK6Z', 'Belen', 'Quezada', 'avatar/hombre-0.jpg', 'usuario Común', 'belenquezada08@gmail.com', 1, '$2a$10$zTlKvu.ztKAlC/2YAEYituK4JxuVa2Xt0YwuWMgipMdpis/QsMXgS'),
 ('lXguFYhsP', 'Andres', 'coello', 'avatar/hombre-0.jpg', 'Administrador', 'goyeselcoca@gmail.com', 1, '$2a$10$RsoQF3VAWU.eyZklueegLe16fsxSgKD5WSXSsbR0OpsE0Joh4fI1e');
 
 -- --------------------------------------------------------
@@ -260,12 +305,27 @@ ALTER TABLE `nombre_producto`
   ADD PRIMARY KEY (`id_product_name`);
 
 --
+-- Indices de la tabla `principio_activo`
+--
+ALTER TABLE `principio_activo`
+  ADD PRIMARY KEY (`id_principio_activo`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `productos_ibfk_1` (`id_nombre_laboratorio`),
-  ADD KEY `productos_ibfk_2` (`id_nombre_producto`);
+  ADD KEY `productos_ibfk_2` (`id_nombre_producto`),
+  ADD KEY `id_principio_activo` (`id_principio_activo`);
+
+--
+-- Indices de la tabla `producto_factura`
+--
+ALTER TABLE `producto_factura`
+  ADD PRIMARY KEY (`id_producto_fac`),
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `id_factura` (`id_factura`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -293,7 +353,7 @@ ALTER TABLE `access_code`
 -- AUTO_INCREMENT de la tabla `historial_session`
 --
 ALTER TABLE `historial_session`
-  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `nombre_laboratorio`
@@ -306,6 +366,12 @@ ALTER TABLE `nombre_laboratorio`
 --
 ALTER TABLE `nombre_producto`
   MODIFY `id_product_name` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `principio_activo`
+--
+ALTER TABLE `principio_activo`
+  MODIFY `id_principio_activo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -328,7 +394,15 @@ ALTER TABLE `historial_session`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_nombre_laboratorio`) REFERENCES `nombre_laboratorio` (`id_name_laboratorio`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_nombre_producto`) REFERENCES `nombre_producto` (`id_product_name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_nombre_producto`) REFERENCES `nombre_producto` (`id_product_name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`id_principio_activo`) REFERENCES `principio_activo` (`id_principio_activo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `producto_factura`
+--
+ALTER TABLE `producto_factura`
+  ADD CONSTRAINT `producto_factura_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_factura_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `verificar_email`

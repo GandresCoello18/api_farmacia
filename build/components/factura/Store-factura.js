@@ -39,12 +39,12 @@ var __importDefault =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-class StoreClient {
-  add_cliente(Cliente) {
+class StoreFactura {
+  add_factura(Factura) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `INSERT INTO cliente (id_cliente, nombres, apellidos, identificacion, correo, direccion) VALUES ('${Cliente.id_cliente}', '${Cliente.nombre}', '${Cliente.apellido}', ${Cliente.identificacion}, '${Cliente.correo}', '${Cliente.direccion}')`,
+          `INSERT INTO factura (id_factura, id_cliente, fecha_factura, descripcion_f, descuento, iva, total, efectivo, cambio) VALUES ('${Factura.id_factura}', '${Factura.id_cliente}', '${Factura.fecha_factura}', '${Factura.descripcion}', ${Factura.descuento}, ${Factura.iva}, ${Factura.total}, ${Factura.efectivo}, ${Factura.cambio})`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -53,37 +53,11 @@ class StoreClient {
       });
     });
   }
-  listar_clientes() {
+  traer_facturas() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT * FROM cliente WHERE id_cliente <> 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479' ORDER BY id_cliente DESC`,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  validar_cliente_existente(identificacion, correo) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `SELECT * FROM cliente WHERE identificacion = ${identificacion} OR correo = '${correo}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  borrar_cliente(id_cliente) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM cliente WHERE id_cliente = '${id_cliente}' `,
+          `SELECT factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.descuento, factura.iva, factura.total, cliente.correo, cliente.identificacion FROM factura INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente ORDER BY factura.id_factura DESC;`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -93,5 +67,5 @@ class StoreClient {
     });
   }
 }
-let Store = new StoreClient();
+let Store = new StoreFactura();
 exports.default = Store;

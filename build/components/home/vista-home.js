@@ -7,6 +7,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Store_home_1 = __importDefault(require("./Store-home"));
+const util_fecha_1 = __importDefault(require("../util/util-fecha"));
 const response_1 = __importDefault(require("../../network/response"));
 const { comprobar } = require("../util/util-login-admin");
 class HomeView {
@@ -45,6 +46,7 @@ class HomeView {
   }
   VerificarCode(req, res) {
     const { code } = req.params || null;
+    const hoy = util_fecha_1.default.fecha_actual();
     Store_home_1.default
       .verificar_code(code)
       .then((data) => {
@@ -55,6 +57,10 @@ class HomeView {
             { feeback: "Acceso invalido, el codigo de acceso es incorrecto" },
             200
           );
+          /*res.render("verificar-code.pug", {
+                  feeback: "Acceso invalido, el codigo de acceso es incorrecto",
+                  date: hoy,
+                });*/
         } else {
           response_1.default.success(
             req,
@@ -62,6 +68,11 @@ class HomeView {
             { feeback: "Acceso concedido", info: data },
             200
           );
+          /*res.render("verificar-code.pug", {
+                  feeback: "Acceso concedido",
+                  date: hoy,
+                  info: data,
+                });*/
         }
       })
       .catch((err) => {

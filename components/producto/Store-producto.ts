@@ -109,6 +109,18 @@ class StorNameProduct {
       );
     });
   }
+
+  async cambiar_status_producto(id_producto: string, estado: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `UPDATE productos SET estado = '${estado}' WHERE id_producto = '${id_producto}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
 }
 
 let Store = new StorNameProduct();
