@@ -164,6 +164,29 @@ class StoreUsuario {
       });
     });
   }
+  traer_ultimo_historial() {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `SELECT * FROM historial_session ORDER BY fecha_session DESC LIMIT 1;`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  clean_history_session() {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(``, (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        });
+      });
+    });
+  }
 }
 let store = new StoreUsuario();
 exports.default = store;

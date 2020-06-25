@@ -191,7 +191,7 @@ class Usuario {
   listar_history(req, res) {
     const { limite } = req.query || null;
     store_usuario_1.default
-      .listar_history_session(limite)
+      .listar_history_session(Number(limite))
       .then((data) => {
         response_1.default.success(req, res, data, 200);
       })
@@ -205,9 +205,33 @@ class Usuario {
         );
       });
   }
+  clean_history(req, res) {
+    store_usuario_1.default
+      .traer_ultimo_historial()
+      .then((data) => {
+        if (data == 0) {
+          console.log("no hay historial de session");
+        } else {
+          console.log(data);
+          response_1.default.success(req, res, {}, 200);
+        }
+      })
+      .catch((err) => {
+        response_1.default.error(
+          req,
+          res,
+          err,
+          500,
+          "Error en limpiar el historial de session"
+        );
+      });
+  }
   ruta() {
+    /* entry point  history session */
     this.router.post("/history-session", this.create_history);
     this.router.get("/history-session", this.listar_history);
+    this.router.delete("/history-session", this.clean_history);
+    /* entry point user */
     this.router.get("/", this.obtener_usuarios);
     this.router.get("/:id", this.obtener_usuario);
     this.router.post("/", this.crear_usuario);

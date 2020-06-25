@@ -25,7 +25,7 @@ class Usuario {
     const { nombres, apellidos, email, password, tipo } = req.body || null;
 
     Store.validar_usuario_existente(email)
-      .then((data) => {
+      .then((data: any) => {
         if (data == 0) {
           encriptacion
             .hash(password, 10)
@@ -171,7 +171,7 @@ class Usuario {
   listar_history(req: Request, res: Response) {
     const { limite } = req.query || null;
 
-    Store.listar_history_session(limite)
+    Store.listar_history_session(Number(limite))
       .then((data) => {
         Respuestas.success(req, res, data, 200);
       })
@@ -186,9 +186,58 @@ class Usuario {
       });
   }
 
+  clean_history(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      Store.traer_ultimo_historial()
+        .then((data: any) => {
+          if (data == 0) {
+            console.log("no hay historial de session");
+          } else {
+            Store.clean_history_session(Number(data[0].id_historial_session))
+              .then(() => {
+                Respuestas.success(
+                  req,
+                  res,
+                  { feeback: "Se limpio el historial de session" },
+                  200
+                );
+              })
+              .catch((err) => {
+                Respuestas.error(
+                  req,
+                  res,
+                  err,
+                  500,
+                  "Error en limpiar el historial"
+                );
+              });
+          }
+        })
+        .catch((err) => {
+          Respuestas.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en traer el ultimo historial de session"
+          );
+        });
+    } else {
+      Respuestas.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion" },
+        200
+      );
+    }
+  }
+
   ruta() {
+    /* entry point  history session */
     this.router.post("/history-session", this.create_history);
     this.router.get("/history-session", this.listar_history);
+    this.router.delete("/history-session", comprobar, this.clean_history);
+    /* entry point user */
     this.router.get("/", this.obtener_usuarios);
     this.router.get("/:id", this.obtener_usuario);
     this.router.post("/", this.crear_usuario);

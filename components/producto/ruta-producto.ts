@@ -160,6 +160,8 @@ class Producto {
         id_principio_activo,
       };
 
+      console.log(obj);
+
       Store.add_product(obj)
         .then((data) => {
           Respuesta.success(req, res, data, 200);

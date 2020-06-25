@@ -198,6 +198,7 @@ class Producto {
         estado: "Disponible",
         id_principio_activo,
       };
+      console.log(obj);
       Store_producto_1.default
         .add_product(obj)
         .then((data) => {

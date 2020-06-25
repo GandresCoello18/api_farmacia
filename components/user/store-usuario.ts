@@ -15,7 +15,7 @@ class StoreUsuario {
     });
   }
 
-  async validar_usuario_existente(email: String) {
+  async validar_usuario_existente(email: String): Promise<Usuario_INT> {
     return await new Promise((resolve, reject) => {
       database.query(
         `SELECT * FROM usuarios WHERE email = '${email}' `,
@@ -27,7 +27,7 @@ class StoreUsuario {
     });
   }
 
-  async consultar_usuarios() {
+  async consultar_usuarios(): Promise<Usuario_INT> {
     return await new Promise((resolve, reject) => {
       database.query(`SELECT * FROM usuarios`, (err, data) => {
         if (err) return reject(err);
@@ -36,7 +36,7 @@ class StoreUsuario {
     });
   }
 
-  async consulta_usuario(id: string) {
+  async consulta_usuario(id: string): Promise<Usuario_INT> {
     return await new Promise((resolve, reject) => {
       database.query(
         `SELECT * FROM usuarios WHERE id_user = '${id}' `,
@@ -101,7 +101,7 @@ class StoreUsuario {
     });
   }
 
-  async listar_history_session(limite: any) {
+  async listar_history_session(limite: number) {
     return await new Promise((resolve, reject) => {
       if (limite) {
         database.query(
@@ -122,8 +122,31 @@ class StoreUsuario {
       }
     });
   }
+
+  async traer_ultimo_historial(): Promise<History_session_INT> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM historial_session ORDER BY fecha_session DESC LIMIT 1;`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async clean_history_session(id_historial_session: number) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `DELETE FROM historial_session WHERE id_historial_session <> ${id_historial_session}`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
 }
 
 let store = new StoreUsuario();
-
 export default store;
