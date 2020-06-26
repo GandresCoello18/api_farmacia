@@ -1,7 +1,7 @@
 import database from "../../db";
 import { Producto_INT } from "../../interface/index";
 
-class StorNameProduct {
+class StoreProduct {
   async add_name_product(name_product: string) {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -98,6 +98,18 @@ class StorNameProduct {
     });
   }
 
+  async cambiar_status_producto(id_producto: string, estado: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `UPDATE productos SET estado = '${estado}' WHERE id_producto = '${id_producto}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   async eliminar_producto(id_producto: string) {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -110,10 +122,34 @@ class StorNameProduct {
     });
   }
 
-  async cambiar_status_producto(id_producto: string, estado: string) {
+  async eliminar_principio_activo(id_principio_activo: number) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `UPDATE productos SET estado = '${estado}' WHERE id_producto = '${id_producto}' `,
+        `DELETE FROM principio_activo WHERE id_principio_activo = ${id_principio_activo}`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async eliminar_name_product(id_name_product: number) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `DELETE FROM nombre_producto WHERE id_product_name = ${id_name_product}`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async eliminar_name_laboratorio(id_name_laboratorio: number) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `DELETE FROM nombre_laboratorio WHERE id_name_laboratorio = ${id_name_laboratorio}`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -123,5 +159,5 @@ class StorNameProduct {
   }
 }
 
-let Store = new StorNameProduct();
+let Store = new StoreProduct();
 export default Store;
