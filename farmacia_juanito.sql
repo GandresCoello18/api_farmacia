@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2020 a las 07:09:46
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Servidor: localhost
+-- Tiempo de generación: 28-06-2020 a las 03:08:40
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -62,8 +62,6 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `nombres`, `apellidos`, `identificacion`, `correo`, `direccion`) VALUES
-('0daa619e-bec7-45e6-beac-025d318a5fcc', 'karina kimara', 'coello goyes', 1204848299, 'kari@gmail.com', 'none none'),
-('238cad86-2c73-44f5-9199-ed1de169a883', 'Andres roberto', 'Coello', 1207345768, 'goyeselcoca@gmail.com', 'san juan, Kilometro 1 vi a vinces'),
 ('b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', 'consumidor_final', 'consumidor_final', 0, 'consumidor_final@gmail.com', 'sin direccion');
 
 -- --------------------------------------------------------
@@ -84,13 +82,6 @@ CREATE TABLE `factura` (
   `cambio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `factura`
---
-
-INSERT INTO `factura` (`id_factura`, `id_cliente`, `fecha_factura`, `descripcion_f`, `descuento`, `iva`, `total`, `efectivo`, `cambio`) VALUES
-('e3f5f6be-0058-471f-a359-a82b7c2e343a', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-17 21:7:0', 'Sin descripcion', 0, 12, 4.35, 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -108,11 +99,9 @@ CREATE TABLE `historial_session` (
 --
 
 INSERT INTO `historial_session` (`id_historial_session`, `id_user`, `fecha_session`) VALUES
-(28, 'lXguFYhsP', '2020-06-10 12:8:25'),
-(29, 'lXguFYhsP', '2020-06-10 20:9:48'),
-(30, 'lXguFYhsP', '2020-06-11 11:10:51'),
-(31, 'lXguFYhsP', '2020-06-12 12:45:49'),
-(33, 'lXguFYhsP', '2020-06-17 9:52:41');
+(41, 'lXguFYhsP', '2020-06-26 6:9:14'),
+(45, 'lXguFYhsP', '2020-06-27 10:34:22'),
+(46, 'lXguFYhsP', '2020-06-27 14:40:33');
 
 -- --------------------------------------------------------
 
@@ -130,8 +119,7 @@ CREATE TABLE `nombre_laboratorio` (
 --
 
 INSERT INTO `nombre_laboratorio` (`id_name_laboratorio`, `nombre_laboratorio`) VALUES
-(3, 'Life'),
-(4, 'Sanofi ');
+(7, 'test-labor');
 
 -- --------------------------------------------------------
 
@@ -149,8 +137,7 @@ CREATE TABLE `nombre_producto` (
 --
 
 INSERT INTO `nombre_producto` (`id_product_name`, `product_name`) VALUES
-(15, 'Simvastatina '),
-(16, 'Omeprazol ');
+(20, 'test-product');
 
 -- --------------------------------------------------------
 
@@ -168,8 +155,7 @@ CREATE TABLE `principio_activo` (
 --
 
 INSERT INTO `principio_activo` (`id_principio_activo`, `principio_activo`) VALUES
-(1, 'test'),
-(2, 'test2 ');
+(3, 'test-activo');
 
 -- --------------------------------------------------------
 
@@ -195,15 +181,6 @@ CREATE TABLE `productos` (
   `id_principio_activo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`id_producto`, `id_nombre_producto`, `id_nombre_laboratorio`, `cantidad`, `presentacion`, `lote`, `registro_sanitario`, `medida`, `tipo_medida`, `fecha_elaboracion`, `fecha_caducidad`, `pvp`, `pvf`, `estado`, `id_principio_activo`) VALUES
-('90c8ebe1-ae12-4e3e-a358-a6fc95872535', 16, 3, 18, 'Tabletas', 'CM91384811Z4', '02214-MAC-10-02', 500, 'Miligramos', '2020-06-10', '2020-04-24', 1.2, 0.82, 'Disponible', 1),
-('bbce1bb0-27f2-44a2-b517-78967365c060', 15, 3, 10, 'Tabletas', 'CM9138481G4T', '02214-MAC-10-02', 100, 'Miligramos', '2020-06-13', '2020-06-17', 1.55, 1.05, 'Vendido', 1),
-('cbc697c2-7b73-4c60-9543-9d2e7c323f0d', 15, 4, 20, 'Tabletas', 'CM913848121G', '02214-MAC-10-02', 200, 'Miligramos', '2020-06-27', '2020-06-22', 2.33, 1.91, 'Vendido', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -217,14 +194,6 @@ CREATE TABLE `producto_factura` (
   `formato` varchar(11) NOT NULL,
   `cantidad` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `producto_factura`
---
-
-INSERT INTO `producto_factura` (`id_producto_fac`, `id_producto`, `id_factura`, `formato`, `cantidad`) VALUES
-('15eb3f38-d7d0-4901-804b-a4f398e4d477', 'cbc697c2-7b73-4c60-9543-9d2e7c323f0d', 'e3f5f6be-0058-471f-a359-a82b7c2e343a', 'Por Paquete', 1),
-('cf671478-1b82-43ac-962b-e100795306a1', 'bbce1bb0-27f2-44a2-b517-78967365c060', 'e3f5f6be-0058-471f-a359-a82b7c2e343a', 'Por Paquete', 1);
 
 -- --------------------------------------------------------
 
@@ -353,25 +322,25 @@ ALTER TABLE `access_code`
 -- AUTO_INCREMENT de la tabla `historial_session`
 --
 ALTER TABLE `historial_session`
-  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `nombre_laboratorio`
 --
 ALTER TABLE `nombre_laboratorio`
-  MODIFY `id_name_laboratorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_name_laboratorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `nombre_producto`
 --
 ALTER TABLE `nombre_producto`
-  MODIFY `id_product_name` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_product_name` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `principio_activo`
 --
 ALTER TABLE `principio_activo`
-  MODIFY `id_principio_activo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_principio_activo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

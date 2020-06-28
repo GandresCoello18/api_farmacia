@@ -22,20 +22,29 @@ class Ventas {
   }
 
   eliminar_venta(req: Request, res: Response) {
-    const { id_producto_factura } = req.params || null;
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_producto_factura } = req.params || null;
 
-    Store.eliminar_venta(id_producto_factura)
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuesta.error(req, res, err, 500, "Error en eliminar venta");
-      });
+      Store.eliminar_venta(id_producto_factura)
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(req, res, err, 500, "Error en eliminar venta");
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
   }
 
   ruta() {
     this.router.get("/", this.traer_venta);
-    this.router.delete("/:id_producto_factura", this.eliminar_venta);
+    this.router.delete("/:id_producto_factura", comprobar, this.eliminar_venta);
   }
 }
 

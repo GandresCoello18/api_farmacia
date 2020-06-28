@@ -25,6 +25,18 @@ class StoreFactura {
       );
     });
   }
+
+  async eliminar_factura(id_factura: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `DELETE FROM factura WHERE id_factura = '${id_factura}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
 }
 
 let Store = new StoreFactura();

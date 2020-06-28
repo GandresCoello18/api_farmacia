@@ -75,6 +75,33 @@ class Factura {
             .catch((err) => {
               console.log("Error al cambiar estado producto: " + err.message);
             });
+
+          if (obj.productos[i].formato == "Por Unidad") {
+            StoreProduct.producto_unico(obj.productos[i].id_producto).then(
+              (data: any) => {
+                if (data == 0) {
+                  console.log("No hay productos para modificar las unidades");
+                } else {
+                  let nueva_cantidad =
+                    Number(data[0].cantidad) -
+                    Number(obj.productos[i].unidades);
+
+                  StoreProduct.cambiar_cantidad_de_unidades_producto(
+                    obj.productos[i].id_producto,
+                    nueva_cantidad
+                  )
+                    .then(() => {
+                      console.log(
+                        "Se cambio la cantidad de unidades en producto"
+                      );
+                    })
+                    .catch((err) => {
+                      console.log(`Error: ${err.message}`);
+                    });
+                }
+              }
+            );
+          }
         }
 
         Respuesta.success(req, res, data, 200);
@@ -94,9 +121,31 @@ class Factura {
       });
   }
 
+  eliminar_factura(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_factura } = req.params || null;
+
+      Store.eliminar_factura(id_factura)
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(req, res, err, 500, "Error en eliminar factura");
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+
   ruta() {
     this.router.post("/", this.crear_factura);
     this.router.get("/", this.traer_facturas);
+    this.router.delete("/:id_factura", comprobar, this.eliminar_factura);
   }
 }
 

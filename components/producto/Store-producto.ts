@@ -98,10 +98,37 @@ class StoreProduct {
     });
   }
 
+  async producto_unico(id_producto: string): Promise<Producto_INT> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM productos WHERE id_producto = '${id_producto}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   async cambiar_status_producto(id_producto: string, estado: string) {
     return await new Promise((resolve, reject) => {
       database.query(
         `UPDATE productos SET estado = '${estado}' WHERE id_producto = '${id_producto}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async cambiar_cantidad_de_unidades_producto(
+    id_producto: string,
+    cantidad: number
+  ) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `UPDATE productos SET cantidad = ${cantidad} WHERE id_producto = '${id_producto}' `,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
