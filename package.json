@@ -8,6 +8,7 @@
     "correr-js": "build/server.js",
     "dev": "ts-node-dev --respawn --transpileOnly server.ts",
     "start": "tsc && node ./build/server.js",
+    "test": "jest",
     "format": "pretty-quick"
   },
   "keywords": [
@@ -50,9 +51,16 @@
     "uuid": "^8.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-typescript": "^7.10.1",
+    "@types/jest": "^26.0.3",
+    "babel-jest": "^26.1.0",
     "husky": "^4.2.5",
+    "jest": "^26.1.0",
     "prettier": "^2.0.5",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "ts-jest": "^26.1.1"
   },
   "husky": {
     "hooks": {
