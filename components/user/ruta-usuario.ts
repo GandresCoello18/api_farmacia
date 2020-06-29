@@ -73,7 +73,7 @@ class Usuario {
                     })
                     .catch((err) =>
                       console.log(
-                        `Error al crear hash para ${email.id_user} ocacion: ${err}`
+                        `Error al crear hash para ${email.id_user} ocacion: ${err.message}`
                       )
                     );
                 })
@@ -140,15 +140,24 @@ class Usuario {
   }
 
   eliminar_usuario(req: Request, res: Response) {
-    const { id } = req.params || null;
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id } = req.params || null;
 
-    Store.eliminar_usuario(id)
-      .then((data) => {
-        Respuestas.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuestas.error(req, res, err, 500, "Error al eliminar usuarios");
-      });
+      Store.eliminar_usuario(id)
+        .then((data) => {
+          Respuestas.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuestas.error(req, res, err, 500, "Error al eliminar usuarios");
+        });
+    } else {
+      Respuestas.success(
+        req,
+        res,
+        { feeback: "No tienes permisos aqui..!" },
+        200
+      );
+    }
   }
 
   create_history(req: Request, res: Response) {
@@ -247,5 +256,4 @@ class Usuario {
 }
 
 let user = new Usuario();
-
 export default user.router;
