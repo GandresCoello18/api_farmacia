@@ -65,26 +65,35 @@ class Factura {
               console.log("Error al crear venta: " + err.message);
             });
 
-          StoreProduct.cambiar_status_producto(
-            obj.productos[i].id_producto,
-            "Vendido"
-          )
-            .then((data) => {
-              return Respuesta.success(req, res, data, 200);
-            })
-            .catch((err) => {
-              console.log("Error al cambiar estado producto: " + err.message);
-            });
-
           if (obj.productos[i].formato == "Por Unidad") {
             StoreProduct.producto_unico(obj.productos[i].id_producto).then(
               (data: any) => {
                 if (data == 0) {
                   console.log("No hay productos para modificar las unidades");
                 } else {
+                  let estado: string = "";
                   let nueva_cantidad =
                     Number(data[0].cantidad) -
                     Number(obj.productos[i].unidades);
+
+                  if (nueva_cantidad == 0) {
+                    estado = "Vendido";
+                  } else {
+                    estado = "Aun disponible";
+                  }
+
+                  StoreProduct.cambiar_status_producto(
+                    obj.productos[i].id_producto,
+                    estado
+                  )
+                    .then((data) => {
+                      return Respuesta.success(req, res, data, 200);
+                    })
+                    .catch((err) => {
+                      console.log(
+                        "Error al cambiar estado producto: " + err.message
+                      );
+                    });
 
                   StoreProduct.cambiar_cantidad_de_unidades_producto(
                     obj.productos[i].id_producto,
@@ -101,6 +110,17 @@ class Factura {
                 }
               }
             );
+          } else {
+            StoreProduct.cambiar_status_producto(
+              obj.productos[i].id_producto,
+              "Vendido"
+            )
+              .then((data) => {
+                return Respuesta.success(req, res, data, 200);
+              })
+              .catch((err) => {
+                console.log("Error al cambiar estado producto: " + err.message);
+              });
           }
         }
 
