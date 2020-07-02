@@ -45,7 +45,7 @@
     "nodemailer": "^6.4.6",
     "pug": "^3.0.0",
     "shortid": "^2.2.15",
-    "ts-node-dev": "^1.0.0-pre.49",
+    "ts-node-dev": "^1.0.0-pre.50",
     "typescript": "^3.9.3",
     "uuid": "^8.1.0"
   },
