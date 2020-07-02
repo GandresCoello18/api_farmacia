@@ -66,6 +66,19 @@ class StoreFactura {
       });
     });
   }
+  eliminar_factura(id_factura) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM factura WHERE id_factura = '${id_factura}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
 }
 let Store = new StoreFactura();
 exports.default = Store;

@@ -39,7 +39,7 @@ var __importDefault =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-class StorNameProduct {
+class StoreProduct {
   add_name_product(name_product) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -144,11 +144,11 @@ class StorNameProduct {
       });
     });
   }
-  eliminar_producto(id_producto) {
+  producto_unico(id_producto) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `DELETE FROM productos WHERE id_producto = '${id_producto}' `,
+          `SELECT * FROM productos WHERE id_producto = '${id_producto}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -170,6 +170,71 @@ class StorNameProduct {
       });
     });
   }
+  cambiar_cantidad_de_unidades_producto(id_producto, cantidad) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE productos SET cantidad = ${cantidad} WHERE id_producto = '${id_producto}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  eliminar_producto(id_producto) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM productos WHERE id_producto = '${id_producto}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  eliminar_principio_activo(id_principio_activo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM principio_activo WHERE id_principio_activo = ${id_principio_activo}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  eliminar_name_product(id_name_product) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM nombre_producto WHERE id_product_name = ${id_name_product}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  eliminar_name_laboratorio(id_name_laboratorio) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM nombre_laboratorio WHERE id_name_laboratorio = ${id_name_laboratorio}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
 }
-let Store = new StorNameProduct();
+let Store = new StoreProduct();
 exports.default = Store;

@@ -69,7 +69,7 @@ class Usuario {
                     })
                     .catch((err) =>
                       console.log(
-                        `Error al crear hash para ${email.id_user} ocacion: ${err}`
+                        `Error al crear hash para ${email.id_user} ocacion: ${err.message}`
                       )
                     );
                 })
@@ -151,21 +151,30 @@ class Usuario {
       });
   }
   eliminar_usuario(req, res) {
-    const { id } = req.params || null;
-    store_usuario_1.default
-      .eliminar_usuario(id)
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error al eliminar usuarios"
-        );
-      });
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id } = req.params || null;
+      store_usuario_1.default
+        .eliminar_usuario(id)
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error al eliminar usuarios"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos aqui..!" },
+        200
+      );
+    }
   }
   create_history(req, res) {
     const { id_user } = req.body || null;
@@ -206,31 +215,57 @@ class Usuario {
       });
   }
   clean_history(req, res) {
-    store_usuario_1.default
-      .traer_ultimo_historial()
-      .then((data) => {
-        if (data == 0) {
-          console.log("no hay historial de session");
-        } else {
-          console.log(data);
-          response_1.default.success(req, res, {}, 200);
-        }
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error en limpiar el historial de session"
-        );
-      });
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      store_usuario_1.default
+        .traer_ultimo_historial()
+        .then((data) => {
+          if (data == 0) {
+            console.log("no hay historial de session");
+          } else {
+            store_usuario_1.default
+              .clean_history_session(Number(data[0].id_historial_session))
+              .then(() => {
+                response_1.default.success(
+                  req,
+                  res,
+                  { feeback: "Se limpio el historial de session" },
+                  200
+                );
+              })
+              .catch((err) => {
+                response_1.default.error(
+                  req,
+                  res,
+                  err,
+                  500,
+                  "Error en limpiar el historial"
+                );
+              });
+          }
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en traer el ultimo historial de session"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion" },
+        200
+      );
+    }
   }
   ruta() {
     /* entry point  history session */
     this.router.post("/history-session", this.create_history);
     this.router.get("/history-session", this.listar_history);
-    this.router.delete("/history-session", this.clean_history);
+    this.router.delete("/history-session", comprobar, this.clean_history);
     /* entry point user */
     this.router.get("/", this.obtener_usuarios);
     this.router.get("/:id", this.obtener_usuario);

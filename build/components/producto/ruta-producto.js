@@ -49,6 +49,7 @@ class Producto {
     this.router = express_1.Router();
     this.ruta();
   }
+  /* configuracion para la subida de imagnes */
   store_file() {
     const storage = multer_1.default.diskStorage({
       destination: function (req, file, cb) {
@@ -76,6 +77,7 @@ class Producto {
     });
     return upload;
   }
+  /* METODO POST */
   create_name_product(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
       if (res.locals.datos_user.tipo_user == "Administrador") {
@@ -132,38 +134,6 @@ class Producto {
       }
     });
   }
-  mostrar_name_productos(req, res) {
-    Store_producto_1.default
-      .listar_name_producto()
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error al mostrar name product"
-        );
-      });
-  }
-  mostrar_name_laboratorio(req, res) {
-    Store_producto_1.default
-      .listar_name_laboratorio()
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error al mostrar name laboratorio"
-        );
-      });
-  }
   create_product(req, res) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const {
@@ -198,7 +168,6 @@ class Producto {
         estado: "Disponible",
         id_principio_activo,
       };
-      console.log(obj);
       Store_producto_1.default
         .add_product(obj)
         .then((data) => {
@@ -222,39 +191,6 @@ class Producto {
       );
     }
   }
-  mostrar_productos(req, res) {
-    Store_producto_1.default
-      .listar_producto()
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error en mostrar productos"
-        );
-      });
-  }
-  eliminar_producto(req, res) {
-    const { id_producto } = req.params || null;
-    Store_producto_1.default
-      .eliminar_producto(id_producto)
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error en eliminar producto"
-        );
-      });
-  }
   create_principio_activo(req, res) {
     const { name_principio_activo } = req.body || null;
     Store_producto_1.default
@@ -269,6 +205,55 @@ class Producto {
           err,
           500,
           "Error en crear principio activo"
+        );
+      });
+  }
+  /* METODO GET */
+  mostrar_name_productos(req, res) {
+    Store_producto_1.default
+      .listar_name_producto()
+      .then((data) => {
+        response_1.default.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        response_1.default.error(
+          req,
+          res,
+          err,
+          500,
+          "Error al mostrar name product"
+        );
+      });
+  }
+  mostrar_name_laboratorio(req, res) {
+    Store_producto_1.default
+      .listar_name_laboratorio()
+      .then((data) => {
+        response_1.default.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        response_1.default.error(
+          req,
+          res,
+          err,
+          500,
+          "Error al mostrar name laboratorio"
+        );
+      });
+  }
+  mostrar_productos(req, res) {
+    Store_producto_1.default
+      .listar_producto()
+      .then((data) => {
+        response_1.default.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        response_1.default.error(
+          req,
+          res,
+          err,
+          500,
+          "Error en mostrar productos"
         );
       });
   }
@@ -288,8 +273,113 @@ class Producto {
         );
       });
   }
+  /* METODO DELETE */
+  eliminar_producto(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_producto } = req.params || null;
+      Store_producto_1.default
+        .eliminar_producto(id_producto)
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en eliminar producto"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+  eliminar_principio_activo(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_principio } = req.params || null;
+      Store_producto_1.default
+        .eliminar_principio_activo(Number(id_principio))
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error a eliminar principio activo"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+  eliminar_name_producto(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_name_producto } = req.params || null;
+      Store_producto_1.default
+        .eliminar_name_product(Number(id_name_producto))
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en eliminar product name"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+  eliminar_laboratorio(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_name_laboratorio } = req.params || null;
+      Store_producto_1.default
+        .eliminar_name_laboratorio(Number(id_name_laboratorio))
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error al eliminar nombre del laboratorio"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
   ruta() {
-    const upload = this.store_file();
+    //const upload = this.store_file();
     ///////////// nombre de laboratorio
     this.router.post(
       "/nombre_laboratorio",
@@ -297,9 +387,19 @@ class Producto {
       this.create_name_laboratorio
     );
     this.router.get("/nombre_laboratorio", this.mostrar_name_laboratorio);
+    this.router.delete(
+      "/nombre_laboratorio/:id_name_laboratorio",
+      comprobar,
+      this.eliminar_laboratorio
+    );
     /////////////// nombre de productos
     this.router.post("/nombre_producto", comprobar, this.create_name_product);
     this.router.get("/nombre_producto", this.mostrar_name_productos);
+    this.router.delete(
+      "/nombre_producto/:id_name_producto",
+      comprobar,
+      this.eliminar_name_producto
+    );
     /////////////// principio activo
     this.router.post(
       "/principio_activo",
@@ -307,6 +407,11 @@ class Producto {
       this.create_principio_activo
     );
     this.router.get("/principio_activo", this.mostrar_principio_activo);
+    this.router.delete(
+      "/principio_activo/:id_principio",
+      comprobar,
+      this.eliminar_principio_activo
+    );
     /////////////// productos
     this.router.delete("/:id_producto", comprobar, this.eliminar_producto);
     this.router.post("/", comprobar, this.create_product);

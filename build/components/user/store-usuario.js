@@ -146,7 +146,7 @@ class StoreUsuario {
       return yield new Promise((resolve, reject) => {
         if (limite) {
           db_1.default.query(
-            `SELECT historial_session.id_historial_session, historial_session.fecha_session, usuarios.nombres, usuarios.apellidos, usuarios.foto, usuarios.email FROM historial_session INNER JOIN usuarios on usuarios.id_user = historial_session.id_user ORDER BY historial_session.id_historial_session DESC LIMIT ${limite};`,
+            `SELECT historial_session.id_historial_session, historial_session.fecha_session, usuarios.nombres, usuarios.apellidos, usuarios.foto, usuarios.tipo_user, usuarios.email FROM historial_session INNER JOIN usuarios on usuarios.id_user = historial_session.id_user ORDER BY historial_session.id_historial_session DESC LIMIT ${limite};`,
             (err, data) => {
               if (err) return reject(err);
               resolve(data);
@@ -154,7 +154,7 @@ class StoreUsuario {
           );
         } else {
           db_1.default.query(
-            `SELECT historial_session.id_historial_session, historial_session.fecha_session, usuarios.nombres, usuarios.apellidos, usuarios.foto, usuarios.email FROM historial_session INNER JOIN usuarios on usuarios.id_user = historial_session.id_user ORDER BY historial_session.id_historial_session DESC;`,
+            `SELECT historial_session.id_historial_session, historial_session.fecha_session, usuarios.nombres, usuarios.apellidos, usuarios.foto, usuarios.tipo_user, usuarios.email FROM historial_session INNER JOIN usuarios on usuarios.id_user = historial_session.id_user ORDER BY historial_session.id_historial_session DESC;`,
             (err, data) => {
               if (err) return reject(err);
               resolve(data);
@@ -177,13 +177,16 @@ class StoreUsuario {
       });
     });
   }
-  clean_history_session() {
+  clean_history_session(id_historial_session) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
-        db_1.default.query(``, (err, data) => {
-          if (err) return reject(err);
-          resolve(data);
-        });
+        db_1.default.query(
+          `DELETE FROM historial_session WHERE id_historial_session <> ${id_historial_session}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
       });
     });
   }
