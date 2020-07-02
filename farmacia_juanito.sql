@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-06-2020 a las 03:08:40
+-- Tiempo de generación: 02-07-2020 a las 19:39:36
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -82,6 +82,19 @@ CREATE TABLE `factura` (
   `cambio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`id_factura`, `id_cliente`, `fecha_factura`, `descripcion_f`, `descuento`, `iva`, `total`, `efectivo`, `cambio`) VALUES
+('09198257-3c4a-4bcb-aa42-8a9b9319f630', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-30 14:0:53', 'Sin descripcion', 0, 12, 78.4, 80, 1.6),
+('09e6e649-720e-4a8c-b039-d2e23b2023a2', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-30 22:22:48', 'Sin descripcion', 0, 12, 16.07, 20, 3.93),
+('15a38e8e-4a69-435d-9042-b0b8a67dc994', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-30 16:15:15', 'Sin descripcion', 0, 12, 11.2, 15, 3.8),
+('4f11e40b-6dd0-4297-8ccc-c76989b8d256', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-07-01 11:26:28', 'Sin descripcion', 0, 12, 18.37, 20, 1.63),
+('511d1f2a-5ee6-41e5-9549-fddb44dea168', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-27 13:43:56', 'Sin descripcion', 0, 12, 100.8, 105, 4.2),
+('8e2cd77c-4e14-4141-aaf4-8f1c24db3db9', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-06-29 13:57:56', 'Sin descripcion', 0, 12, 26.88, 30, 3.12),
+('8efce5c5-cca9-44de-963c-8b104f3ed654', 'b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479', '2020-07-01 11:25:48', 'Sin descripcion', 0, 12, 10.6, 11, 0.4);
+
 -- --------------------------------------------------------
 
 --
@@ -99,9 +112,11 @@ CREATE TABLE `historial_session` (
 --
 
 INSERT INTO `historial_session` (`id_historial_session`, `id_user`, `fecha_session`) VALUES
-(41, 'lXguFYhsP', '2020-06-26 6:9:14'),
-(45, 'lXguFYhsP', '2020-06-27 10:34:22'),
-(46, 'lXguFYhsP', '2020-06-27 14:40:33');
+(48, 'lXguFYhsP', '2020-06-30 12:31:54'),
+(49, 'lXguFYhsP', '2020-06-30 22:20:47'),
+(50, 'lXguFYhsP', '2020-07-01 9:23:4'),
+(51, 'lXguFYhsP', '2020-07-01 21:11:12'),
+(52, 'lXguFYhsP', '2020-07-02 12:22:7');
 
 -- --------------------------------------------------------
 
@@ -181,6 +196,19 @@ CREATE TABLE `productos` (
   `id_principio_activo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id_producto`, `id_nombre_producto`, `id_nombre_laboratorio`, `cantidad`, `presentacion`, `lote`, `registro_sanitario`, `medida`, `tipo_medida`, `fecha_elaboracion`, `fecha_caducidad`, `pvp`, `pvf`, `estado`, `id_principio_activo`) VALUES
+('10bc595d-4c6f-45cd-9d64-70aefd63061c', 20, 7, 6, 'Tabletas', '505', 'efec33', 100, 'Gramos', '2020-06-09', '2020-08-13', 41, 20, 'Aun disponible', 3),
+('2be2f7ee-0b0a-4abc-b50b-f7690f4fb35e', 20, 7, 10, 'Tabletas', '40242054', 'efec33', 200, 'Miligramos', '2020-06-16', '2020-07-05', 10, 20, 'Vendido', 3),
+('7a668bce-b10d-4100-86e2-b6cfceb265c4', 20, 7, 1, 'Suero', '02402250', 'efec33', 200, 'Miligramos', '2020-06-11', '2020-07-05', 40, 20, 'Vendido', 3),
+('9caaa4f5-2e76-46c5-8106-efbfab302650', 20, 7, 15, 'Suero', '42050', 'efec33', 100, 'Miligramos', '2020-06-08', '2020-06-19', 40, 21, 'Vendido', 3),
+('ad833436-335b-42f2-9a7a-d01a1496d36b', 20, 7, 1, 'Jarabe', '242.0', 'efec33', 500, 'Litros', '2020-06-13', '2020-11-16', 70, 20, 'Vendido', 3),
+('b0f27de5-6576-472d-9ba1-c6a46b655690', 20, 7, 1, 'Jarabe', '4505', 'efec33', 400, 'Miligramos', '2020-04-10', '2020-06-09', 10, 5, 'Vendido', 3),
+('ce2fce7e-5165-45ef-ade7-7d8876b481b2', 20, 7, 4, 'Tabletas', '58200', 'efec33', 400, 'Gramos', '2020-06-01', '2020-10-16', 40, 10, 'Vendido', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -194,6 +222,21 @@ CREATE TABLE `producto_factura` (
   `formato` varchar(11) NOT NULL,
   `cantidad` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto_factura`
+--
+
+INSERT INTO `producto_factura` (`id_producto_fac`, `id_producto`, `id_factura`, `formato`, `cantidad`) VALUES
+('3be45657-a2e2-4ddf-aa6a-ba09e986c378', '2be2f7ee-0b0a-4abc-b50b-f7690f4fb35e', '511d1f2a-5ee6-41e5-9549-fddb44dea168', 'Por Paquete', 1),
+('5d3469ec-b76b-4d5f-833f-97f5e0f1026b', '7a668bce-b10d-4100-86e2-b6cfceb265c4', '511d1f2a-5ee6-41e5-9549-fddb44dea168', 'Por Paquete', 1),
+('7b2a5b32-d6d7-4342-ad7b-de04df96aaab', '10bc595d-4c6f-45cd-9d64-70aefd63061c', '8efce5c5-cca9-44de-963c-8b104f3ed654', 'Por Unidad', 3),
+('80035e8e-7172-427e-b360-71fbb1bc314a', '9caaa4f5-2e76-46c5-8106-efbfab302650', '511d1f2a-5ee6-41e5-9549-fddb44dea168', 'Por Paquete', 1),
+('a3254d07-c209-4d1e-9710-352b2d1d1b74', '10bc595d-4c6f-45cd-9d64-70aefd63061c', '09e6e649-720e-4a8c-b039-d2e23b2023a2', 'Por Unidad', 7),
+('a542fe5a-56f0-4ff6-b17c-fc6b575efb7e', 'b0f27de5-6576-472d-9ba1-c6a46b655690', '15a38e8e-4a69-435d-9042-b0b8a67dc994', 'Por Paquete', 1),
+('c33e6012-0a54-4661-815c-a2479b12f212', 'ad833436-335b-42f2-9a7a-d01a1496d36b', '09198257-3c4a-4bcb-aa42-8a9b9319f630', 'Por Paquete', 1),
+('e1be6f6b-8593-42b9-8b8a-a328c7f26e4a', 'ce2fce7e-5165-45ef-ade7-7d8876b481b2', '8e2cd77c-4e14-4141-aaf4-8f1c24db3db9', 'Por Unidad', 6),
+('f2aafb6c-b661-4f09-9e01-d7bf650f8fda', '10bc595d-4c6f-45cd-9d64-70aefd63061c', '4f11e40b-6dd0-4297-8ccc-c76989b8d256', 'Por Unidad', 4);
 
 -- --------------------------------------------------------
 
@@ -322,7 +365,7 @@ ALTER TABLE `access_code`
 -- AUTO_INCREMENT de la tabla `historial_session`
 --
 ALTER TABLE `historial_session`
-  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_historial_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `nombre_laboratorio`
