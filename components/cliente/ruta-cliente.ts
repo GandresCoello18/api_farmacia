@@ -29,6 +29,8 @@ class Cliente {
             direccion,
           };
 
+          if (obj.correo == "") obj.correo = "no especificado";
+
           Store.add_cliente(obj)
             .then((data) => {
               Respuesta.success(req, res, data, 200);

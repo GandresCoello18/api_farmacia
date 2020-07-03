@@ -30,6 +30,7 @@ class Cliente {
             correo,
             direccion,
           };
+          if (obj.correo == "") obj.correo = "no especificado";
           Store_cliente_1.default
             .add_cliente(obj)
             .then((data) => {
