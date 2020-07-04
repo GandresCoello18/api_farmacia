@@ -63,21 +63,63 @@ class Cliente {
   }
 
   eliminar_cliente(req: Request, res: Response) {
-    const { id_cliente } = req.params || null;
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_cliente } = req.params || null;
 
-    Store.borrar_cliente(id_cliente)
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuesta.error(req, res, err, 500, "Error en eliminar cliente");
-      });
+      Store.borrar_cliente(id_cliente)
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(req, res, err, 500, "Error en eliminar cliente");
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion." },
+        200
+      );
+    }
+  }
+
+  editar_cliente(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_cliente } = req.params || null;
+      const { nombre, apellido, identificacion, correo, direccion } =
+        req.body || null;
+
+      const obj: Cliente_INT = {
+        id_cliente,
+        nombre,
+        apellido,
+        identificacion,
+        correo,
+        direccion,
+      };
+
+      Store.editar_cliente(obj)
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(req, res, err, 500, "Error en editar cliente");
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion." },
+        200
+      );
+    }
   }
 
   ruta() {
     this.router.post("/", this.crear_cliente);
     this.router.get("/", this.mostrar_clientes);
-    this.router.delete("/:id_cliente", this.eliminar_cliente);
+    this.router.put("/:id_cliente", comprobar, this.editar_cliente);
+    this.router.delete("/:id_cliente", comprobar, this.eliminar_cliente);
   }
 }
 

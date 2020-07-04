@@ -52,11 +52,11 @@ class StoreUsuario {
     id: string,
     nombres: string,
     apellidos: string,
-    foto: string
+    email_on: Boolean
   ) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `UPDATE usuarios SET nombres = '${nombres}', apellidos = '${apellidos}', foto = '${foto}' WHERE id_user = '${id}' `,
+        `UPDATE usuarios SET nombres = '${nombres}', apellidos = '${apellidos}', email_on = ${email_on} WHERE id_user = '${id}' `,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

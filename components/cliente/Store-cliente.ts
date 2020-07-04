@@ -41,6 +41,18 @@ class StoreClient {
     });
   }
 
+  async editar_cliente(Cliente: Cliente_INT) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `UPDATE cliente SET nombres = '${Cliente.nombre}', apellidos = '${Cliente.apellido}', identificacion = '${Cliente.identificacion}', correo = '${Cliente.correo}' WHERE id_cliente = '${Cliente.id_cliente}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   async borrar_cliente(id_cliente: string) {
     return await new Promise((resolve, reject) => {
       database.query(

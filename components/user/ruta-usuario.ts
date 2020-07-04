@@ -127,16 +127,25 @@ class Usuario {
   }
 
   editar_usuario(req: Request, res: Response) {
-    const { id } = req.params || null;
-    const { nombres, apellidos, foto } = req.body || null;
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id } = req.params || null;
+      const { nombres, apellidos, email_on } = req.body || null;
 
-    Store.editar_usuario(id, nombres, apellidos, foto)
-      .then((data) => {
-        Respuestas.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuestas.error(req, res, err, 500, "Error al modificar usuarios");
-      });
+      Store.editar_usuario(id, nombres, apellidos, email_on)
+        .then((data) => {
+          Respuestas.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuestas.error(req, res, err, 500, "Error al modificar usuarios");
+        });
+    } else {
+      Respuestas.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion" },
+        200
+      );
+    }
   }
 
   eliminar_usuario(req: Request, res: Response) {
@@ -250,8 +259,8 @@ class Usuario {
     this.router.get("/", this.obtener_usuarios);
     this.router.get("/:id", this.obtener_usuario);
     this.router.post("/", this.crear_usuario);
-    this.router.put("/:id", this.editar_usuario);
-    this.router.delete("/:id", this.eliminar_usuario);
+    this.router.put("/:id", comprobar, this.editar_usuario);
+    this.router.delete("/:id", comprobar, this.eliminar_usuario);
   }
 }
 
