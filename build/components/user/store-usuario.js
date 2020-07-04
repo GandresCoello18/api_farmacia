@@ -89,11 +89,11 @@ class StoreUsuario {
       });
     });
   }
-  editar_usuario(id, nombres, apellidos, foto) {
+  editar_usuario(id, nombres, apellidos, email_on) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `UPDATE usuarios SET nombres = '${nombres}', apellidos = '${apellidos}', foto = '${foto}' WHERE id_user = '${id}' `,
+          `UPDATE usuarios SET nombres = '${nombres}', apellidos = '${apellidos}', email_on = ${email_on} WHERE id_user = '${id}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
