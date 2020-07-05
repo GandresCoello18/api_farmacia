@@ -235,6 +235,58 @@ class StoreProduct {
       });
     });
   }
+  editar_principio_activo(id_principio_activo, principio_activo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE principio_activo SET principio_activo = '${principio_activo}' WHERE id_principio_activo = ${id_principio_activo}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  editar_product_name(id_name_producto, name_product) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE nombre_producto SET product_name = '${name_product}' WHERE id_product_name = ${id_name_producto}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  editar_laboratorio_name(id_name_laboratorio, name_laboratorio) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE nombre_laboratorio SET nombre_laboratorio = '${name_laboratorio}' WHERE id_name_laboratorio = ${id_name_laboratorio}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  editar_producto_complete(Producto) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE productos SET id_nombre_producto = ${Producto.id_name_product}, id_nombre_laboratorio = ${Producto.id_name_laboratorio}, cantidad = ${Producto.cantidad}, presentacion = '${Producto.presentacion}', lote = '${Producto.lote}', registro_sanitario = '${Producto.registro_sanitario}', medida = ${Producto.dosis}, tipo_medida = '${Producto.tipo_dosis}', fecha_elaboracion = '${Producto.fecha_elaboracion}', fecha_caducidad = '${Producto.fecha_caducidad}', pvp = ${Producto.pvp}, pvf = ${Producto.pvf}, id_principio_activo = ${Producto.id_principio_activo} WHERE id_producto = '${Producto.id_producto}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
 }
 let Store = new StoreProduct();
 exports.default = Store;

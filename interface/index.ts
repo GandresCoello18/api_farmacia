@@ -33,7 +33,7 @@ export interface Producto_INT {
   fecha_caducidad: string;
   pvp: number;
   pvf: number;
-  estado: string | "Disponible" | "Aun disponible" | "Vendido" | "Caducado";
+  estado?: string | "Disponible" | "Aun disponible" | "Vendido" | "Caducado";
   id_principio_activo: number;
   formato?: string;
   unidades?: number;
