@@ -55,6 +55,7 @@ class Factura {
             id_factura: obj.id_factura,
             formato: `${obj.productos[i].formato}`,
             cantidad: Number(obj.productos[i].unidades),
+            item_total: Number(obj.productos[i].item_total),
           };
           Store_ventas_1.default
             .add_venta(objVenta)

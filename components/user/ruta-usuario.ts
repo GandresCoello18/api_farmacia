@@ -129,9 +129,9 @@ class Usuario {
   editar_usuario(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id } = req.params || null;
-      const { nombres, apellidos, email_on } = req.body || null;
+      const { nombres, apellidos, email_on, tipo_user } = req.body || null;
 
-      Store.editar_usuario(id, nombres, apellidos, email_on)
+      Store.editar_usuario(id, nombres, apellidos, email_on, tipo_user)
         .then((data) => {
           Respuestas.success(req, res, data, 200);
         })

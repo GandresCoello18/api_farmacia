@@ -10,7 +10,9 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const helmet_1 = __importDefault(require("helmet"));
+const express_pino_logger_1 = __importDefault(require("express-pino-logger"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+// puntos de entrada
 const rutas_1 = __importDefault(require("./network/rutas"));
 const ruta_usuario_1 = __importDefault(
   require("./components/user/ruta-usuario")
@@ -32,12 +34,16 @@ const ruta_ventas_1 = __importDefault(
 const ruta_estadisticas_1 = __importDefault(
   require("./components/estadisticas/ruta-estadisticas")
 );
+const ruta_proveedor_1 = __importDefault(
+  require("./components/proveedor/ruta-proveedor")
+);
 // vistas
 const vista_home_1 = __importDefault(require("./components/home/vista-home"));
 const vista_login_1 = __importDefault(
   require("./components/login/vista-login")
 );
 const { config } = require("./config/index");
+const logger_1 = require("./components/util/logger");
 class Server {
   constructor() {
     this.app = express_1.default();
@@ -48,6 +54,7 @@ class Server {
     this.app.set("port", config.port);
     this.app.use(helmet_1.default());
     this.app.use(cors_1.default());
+    this.app.use(express_pino_logger_1.default({ logger: logger_1.logger }));
     this.app.use(cookie_parser_1.default());
     this.app.use(body_parser_1.default.json());
     this.app.use("/static", express_1.default.static("public"));
@@ -66,6 +73,7 @@ class Server {
     this.app.use("/api/factura", ruta_factura_1.default);
     this.app.use("/api/venta", ruta_ventas_1.default);
     this.app.use("/api/estadisticas", ruta_estadisticas_1.default);
+    this.app.use("/api/proveedor", ruta_proveedor_1.default);
     // vistas en backend
     this.app.use("/view/home", vista_home_1.default);
     this.app.use("/view/login", vista_login_1.default);

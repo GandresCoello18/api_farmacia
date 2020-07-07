@@ -37,6 +37,7 @@ export interface Producto_INT {
   id_principio_activo: number;
   formato?: string;
   unidades?: number;
+  item_total?: number;
 }
 
 export interface Cliente_INT {
@@ -67,4 +68,13 @@ export interface Producto_Factura_INT {
   id_factura: string;
   formato: string;
   cantidad: number;
+  item_total: number;
+}
+
+export interface Proveedor_INT {
+  id_proveedor: string;
+  nombres: string;
+  id_laboratorio: number;
+  correo: string;
+  telefono: number;
 }
