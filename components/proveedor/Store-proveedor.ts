@@ -2,17 +2,7 @@ import database from "../../db";
 import { Proveedor_INT, Producto_proveedor_INT } from "../../interface/index";
 
 class StoreProveedor {
-  async mostrar_proveedor(): Promise<Proveedor_INT> {
-    return await new Promise((resolve, reject) => {
-      database.query(
-        `SELECT * FROM proveedores INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = proveedores.id_laboratorio ORDER BY id_proveedores DESC`,
-        (err, data) => {
-          if (err) return reject(err);
-          resolve(data);
-        }
-      );
-    });
-  }
+  /* CREAR - INSERTAR - POST */
 
   async add_proveedor(Proveedor: Proveedor_INT) {
     return await new Promise((resolve, reject) => {
@@ -26,36 +16,24 @@ class StoreProveedor {
     });
   }
 
-  async eliminar_proveedor(id_proveedor: string) {
-    return await new Promise((resolve, reject) => {
-      database.query(
-        `DELETE FROM proveedores WHERE id_proveedores = '${id_proveedor}' `,
-        (err, data) => {
-          if (err) return reject(err);
-          resolve(data);
-        }
-      );
-    });
-  }
-
-  async editar_proveedor(Proveedor: Proveedor_INT) {
-    return await new Promise((resolve, reject) => {
-      database.query(
-        `UPDATE proveedores SET nombres = '${Proveedor.nombres}', id_laboratorio = ${Proveedor.id_laboratorio}, correo = '${Proveedor.correo}', telefono = '${Proveedor.telefono}'  WHERE id_proveedores = '${Proveedor.id_proveedor}' `,
-        (err, data) => {
-          if (err) return reject(err);
-          resolve(data);
-        }
-      );
-    });
-  }
-
-  ///////////////////////////////////
-
   async add_product_proveedor(PP: Producto_proveedor_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
         `INSERT INTO producto_proveedor (id_product_proveedor, descripcion, fecha_pago, total, id_proveedor, fecha_ingreso, estado_pp, abonado) VALUES ('${PP.id_product_proveedor}', '${PP.descripcion}', '${PP.fecha_pago}', ${PP.total}, '${PP.id_proveedor}', '${PP.fecha_ingreso}', '${PP.estado_pp}', ${PP.abono})`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  /* MOSTRAR - CONSULTAR - SELECT */
+
+  async mostrar_proveedor(): Promise<Proveedor_INT> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM proveedores INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = proveedores.id_laboratorio ORDER BY id_proveedores DESC`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -90,10 +68,38 @@ class StoreProveedor {
     });
   }
 
+  /* DELETE - ELIMINAR - BORRAR */
+
+  async eliminar_proveedor(id_proveedor: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `DELETE FROM proveedores WHERE id_proveedores = '${id_proveedor}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   async eliminar_product_proveedor(id_producto_proveedor: string) {
     return await new Promise((resolve, reject) => {
       database.query(
         `DELETE FROM producto_proveedor WHERE id_product_proveedor = '${id_producto_proveedor}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  /* EDITAR - MODIFICAR - ACTUALIZAR */
+
+  async editar_proveedor(Proveedor: Proveedor_INT) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `UPDATE proveedores SET nombres = '${Proveedor.nombres}', id_laboratorio = ${Proveedor.id_laboratorio}, correo = '${Proveedor.correo}', telefono = '${Proveedor.telefono}'  WHERE id_proveedores = '${Proveedor.id_proveedor}' `,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

@@ -119,6 +119,7 @@ class Login {
       });
   }
   ruta() {
+    // LOGIN
     this.router.post("/vida-token", comprobar, this.validar_vida_token);
     this.router.post("/autenticacion", this.autenticar);
   }

@@ -31,9 +31,6 @@ const ruta_factura_1 = __importDefault(
 const ruta_ventas_1 = __importDefault(
   require("./components/ventas/ruta-ventas")
 );
-const ruta_estadisticas_1 = __importDefault(
-  require("./components/estadisticas/ruta-estadisticas")
-);
 const ruta_proveedor_1 = __importDefault(
   require("./components/proveedor/ruta-proveedor")
 );
@@ -72,7 +69,6 @@ class Server {
     this.app.use("/api/cliente", ruta_cliente_1.default);
     this.app.use("/api/factura", ruta_factura_1.default);
     this.app.use("/api/venta", ruta_ventas_1.default);
-    this.app.use("/api/estadisticas", ruta_estadisticas_1.default);
     this.app.use("/api/proveedor", ruta_proveedor_1.default);
     // vistas en backend
     this.app.use("/view/home", vista_home_1.default);

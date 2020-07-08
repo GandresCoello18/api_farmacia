@@ -16,6 +16,7 @@ class Proveedor {
     this.router = express_1.Router();
     this.ruta();
   }
+  /* PROVEEDORES */
   mostrar_proveedores(req, res) {
     Store_proveedor_1.default
       .mostrar_proveedor()
@@ -116,6 +117,7 @@ class Proveedor {
       );
     }
   }
+  /* PRODUCTO PROVEEDOR */
   nuevo_producto_proveedor(req, res) {
     const {
       descripcion,

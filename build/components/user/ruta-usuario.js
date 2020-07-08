@@ -19,6 +19,7 @@ class Usuario {
     this.router = express_1.Router();
     this.ruta();
   }
+  /* USUARIO */
   crear_usuario(req, res) {
     const { nombres, apellidos, email, password, tipo } = req.body || null;
     store_usuario_1.default
@@ -185,6 +186,7 @@ class Usuario {
       );
     }
   }
+  /* USER HISTORY */
   create_history(req, res) {
     const { id_user } = req.body || null;
     let history = {

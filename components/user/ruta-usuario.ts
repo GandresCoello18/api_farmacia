@@ -21,6 +21,8 @@ class Usuario {
     this.ruta();
   }
 
+  /* USUARIO */
+
   crear_usuario(req: Request, res: Response) {
     const { nombres, apellidos, email, password, tipo } = req.body || null;
 
@@ -168,6 +170,8 @@ class Usuario {
       );
     }
   }
+
+  /* USER HISTORY */
 
   create_history(req: Request, res: Response) {
     const { id_user } = req.body || null;

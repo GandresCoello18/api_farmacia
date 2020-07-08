@@ -40,6 +40,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 class StoreVenta {
+  /* INSERTAR - POST - CREAR */
   add_venta(Venta) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -53,6 +54,7 @@ class StoreVenta {
       });
     });
   }
+  /* SELECT - MOSTRAR - CONSULTAR */
   traer_venta() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -66,6 +68,7 @@ class StoreVenta {
       });
     });
   }
+  /* ELIMINAT - BORRAR - DELETE */
   eliminar_venta(id_producto_fac) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {

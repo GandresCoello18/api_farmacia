@@ -43,6 +43,7 @@ class Ventas {
   }
 
   ruta() {
+    // VENTAS
     this.router.get("/", this.traer_venta);
     this.router.delete("/:id_producto_factura", comprobar, this.eliminar_venta);
   }

@@ -40,6 +40,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 class StoreUsuario {
+  /* INSERTAR - POST - CREAR */
   insertar_usuario(user) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -53,6 +54,20 @@ class StoreUsuario {
       });
     });
   }
+  create_history_session(History) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `INSERT INTO historial_session (id_user, fecha_session) VALUES ('${History.id_user}', '${History.fecha_session}') `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* SELECT - MOSTRAR - CONSULTAR */
   validar_usuario_existente(email) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -89,58 +104,6 @@ class StoreUsuario {
       });
     });
   }
-  editar_usuario(id, nombres, apellidos, email_on, tipo_user) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `UPDATE usuarios SET nombres = '${nombres}', apellidos = '${apellidos}', email_on = ${email_on}, tipo_user = '${tipo_user}' WHERE id_user = '${id}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  eliminar_usuario(id) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM usuarios WHERE id_user = '${id}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  verificar_email(id) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `UPDATE usuarios SET email_on = 1 WHERE id_user = '${id}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  create_history_session(History) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `INSERT INTO historial_session (id_user, fecha_session) VALUES ('${History.id_user}', '${History.fecha_session}') `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
   listar_history_session(limite) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -169,6 +132,47 @@ class StoreUsuario {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
           `SELECT * FROM historial_session ORDER BY fecha_session DESC LIMIT 1;`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* PUT - MODIFICAR - ACTUALIZAR */
+  editar_usuario(id, nombres, apellidos, email_on, tipo_user) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE usuarios SET nombres = '${nombres}', apellidos = '${apellidos}', email_on = ${email_on}, tipo_user = '${tipo_user}' WHERE id_user = '${id}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  verificar_email(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE usuarios SET email_on = 1 WHERE id_user = '${id}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* DELETE - BORRAR - ELIMINAR */
+  eliminar_usuario(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM usuarios WHERE id_user = '${id}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);

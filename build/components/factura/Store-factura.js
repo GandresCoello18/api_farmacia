@@ -40,6 +40,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 class StoreFactura {
+  /* CREAR - INSERTAR - POST */
   add_factura(Factura) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -53,6 +54,7 @@ class StoreFactura {
       });
     });
   }
+  /* SELECT - MOSTRAR - CONSULTA */
   traer_facturas() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -66,6 +68,7 @@ class StoreFactura {
       });
     });
   }
+  /* DELETE - ELIMINAR - BORRAR */
   eliminar_factura(id_factura) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {

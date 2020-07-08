@@ -15,7 +15,6 @@ import Producto from "./components/producto/ruta-producto";
 import Cliente from "./components/cliente/ruta-cliente";
 import Factura from "./components/factura/ruta-factura";
 import Ventas from "./components/ventas/ruta-ventas";
-import Estadisticas from "./components/estadisticas/ruta-estadisticas";
 import Proveedores from "./components/proveedor/ruta-proveedor";
 
 // vistas
@@ -57,7 +56,6 @@ class Server {
     this.app.use("/api/cliente", Cliente);
     this.app.use("/api/factura", Factura);
     this.app.use("/api/venta", Ventas);
-    this.app.use("/api/estadisticas", Estadisticas);
     this.app.use("/api/proveedor", Proveedores);
     // vistas en backend
     this.app.use("/view/home", viewHome);

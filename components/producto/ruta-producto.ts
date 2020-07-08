@@ -49,7 +49,8 @@ class Producto {
 
     return upload;
   }
-  /* METODO POST */
+  /* NOMBRE DEL PRODUCTO */
+
   async create_name_product(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { name_product } = req.body || null;
@@ -70,6 +71,67 @@ class Producto {
       );
     }
   }
+
+  mostrar_name_productos(req: Request, res: Response) {
+    Store.listar_name_producto()
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error al mostrar name product");
+      });
+  }
+
+  eliminar_name_producto(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_name_producto } = req.params || null;
+
+      Store.eliminar_name_product(Number(id_name_producto))
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(req, res, err, 500, "Error en eliminar product name");
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+
+  editar_product_name(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_name_producto } = req.params || null;
+      const { name_product } = req.body || null;
+
+      Store.editar_product_name(Number(id_name_producto), name_product)
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en editar el product name"
+          );
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+
+  /* NOMBRE DEL LABORATORIO */
 
   async create_name_laboratorio(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
@@ -97,6 +159,82 @@ class Producto {
       );
     }
   }
+
+  mostrar_name_laboratorio(req: Request, res: Response) {
+    Store.listar_name_laboratorio()
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(
+          req,
+          res,
+          err,
+          500,
+          "Error al mostrar name laboratorio"
+        );
+      });
+  }
+
+  eliminar_laboratorio(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_name_laboratorio } = req.params || null;
+
+      Store.eliminar_name_laboratorio(Number(id_name_laboratorio))
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(
+            req,
+            res,
+            err,
+            500,
+            "Error al eliminar nombre del laboratorio"
+          );
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+
+  editar_name_laboratorio(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_name_laboratorio } = req.params || null;
+      const { name_laboratorio } = req.body;
+
+      Store.editar_laboratorio_name(
+        Number(id_name_laboratorio),
+        name_laboratorio
+      )
+        .then((data) => {
+          Respuesta.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(
+            req,
+            res,
+            err,
+            500,
+            "Error al editar nombre laboratorio"
+          );
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+
+  /* PRODUCTO COMPLETO */
 
   create_product(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
@@ -157,44 +295,6 @@ class Producto {
     }
   }
 
-  create_principio_activo(req: Request, res: Response) {
-    const { name_principio_activo } = req.body || null;
-
-    Store.add_principio_activo(name_principio_activo)
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuesta.error(req, res, err, 500, "Error en crear principio activo");
-      });
-  }
-  /* METODO GET */
-  mostrar_name_productos(req: Request, res: Response) {
-    Store.listar_name_producto()
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuesta.error(req, res, err, 500, "Error al mostrar name product");
-      });
-  }
-
-  mostrar_name_laboratorio(req: Request, res: Response) {
-    Store.listar_name_laboratorio()
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuesta.error(
-          req,
-          res,
-          err,
-          500,
-          "Error al mostrar name laboratorio"
-        );
-      });
-  }
-
   mostrar_productos(req: Request, res: Response) {
     Store.listar_producto()
       .then((data) => {
@@ -205,23 +305,6 @@ class Producto {
       });
   }
 
-  mostrar_principio_activo(req: Request, res: Response) {
-    Store.listar_principio_activo()
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuesta.error(
-          req,
-          res,
-          err,
-          500,
-          "Error en mostrar principio activo"
-        );
-      });
-  }
-
-  /* METODO DELETE */
   eliminar_producto(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_producto } = req.params || null;
@@ -296,6 +379,36 @@ class Producto {
     }
   }
 
+  /* PRINCIPIO ACTIVO */
+
+  create_principio_activo(req: Request, res: Response) {
+    const { name_principio_activo } = req.body || null;
+
+    Store.add_principio_activo(name_principio_activo)
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en crear principio activo");
+      });
+  }
+
+  mostrar_principio_activo(req: Request, res: Response) {
+    Store.listar_principio_activo()
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(
+          req,
+          res,
+          err,
+          500,
+          "Error en mostrar principio activo"
+        );
+      });
+  }
+
   eliminar_principio_activo(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_principio } = req.params || null;
@@ -339,113 +452,6 @@ class Producto {
             err,
             500,
             "Error en editar principio activo"
-          );
-        });
-    } else {
-      Respuesta.success(
-        req,
-        res,
-        { feeback: "No tienes permisos para estan accion" },
-        200
-      );
-    }
-  }
-
-  eliminar_name_producto(req: Request, res: Response) {
-    if (res.locals.datos_user.tipo_user == "Administrador") {
-      const { id_name_producto } = req.params || null;
-
-      Store.eliminar_name_product(Number(id_name_producto))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
-        })
-        .catch((err) => {
-          Respuesta.error(req, res, err, 500, "Error en eliminar product name");
-        });
-    } else {
-      Respuesta.success(
-        req,
-        res,
-        { feeback: "No tienes permisos para estan accion" },
-        200
-      );
-    }
-  }
-
-  editar_product_name(req: Request, res: Response) {
-    if (res.locals.datos_user.tipo_user == "Administrador") {
-      const { id_name_producto } = req.params || null;
-      const { name_product } = req.body || null;
-
-      Store.editar_product_name(Number(id_name_producto), name_product)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
-        })
-        .catch((err) => {
-          Respuesta.error(
-            req,
-            res,
-            err,
-            500,
-            "Error en editar el product name"
-          );
-        });
-    } else {
-      Respuesta.success(
-        req,
-        res,
-        { feeback: "No tienes permisos para estan accion" },
-        200
-      );
-    }
-  }
-
-  eliminar_laboratorio(req: Request, res: Response) {
-    if (res.locals.datos_user.tipo_user == "Administrador") {
-      const { id_name_laboratorio } = req.params || null;
-
-      Store.eliminar_name_laboratorio(Number(id_name_laboratorio))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
-        })
-        .catch((err) => {
-          Respuesta.error(
-            req,
-            res,
-            err,
-            500,
-            "Error al eliminar nombre del laboratorio"
-          );
-        });
-    } else {
-      Respuesta.success(
-        req,
-        res,
-        { feeback: "No tienes permisos para estan accion" },
-        200
-      );
-    }
-  }
-
-  editar_name_laboratorio(req: Request, res: Response) {
-    if (res.locals.datos_user.tipo_user == "Administrador") {
-      const { id_name_laboratorio } = req.params || null;
-      const { name_laboratorio } = req.body;
-
-      Store.editar_laboratorio_name(
-        Number(id_name_laboratorio),
-        name_laboratorio
-      )
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
-        })
-        .catch((err) => {
-          Respuesta.error(
-            req,
-            res,
-            err,
-            500,
-            "Error al editar nombre laboratorio"
           );
         });
     } else {
@@ -508,7 +514,7 @@ class Producto {
       comprobar,
       this.eliminar_principio_activo
     );
-    /////////////// productos
+    /////////////// producto completo
     this.router.delete("/:id_producto", comprobar, this.eliminar_producto);
     this.router.post("/", comprobar, this.create_product);
     this.router.put("/:id_producto", comprobar, this.editar_producto);

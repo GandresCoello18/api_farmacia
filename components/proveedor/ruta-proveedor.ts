@@ -14,6 +14,8 @@ class Proveedor {
     this.ruta();
   }
 
+  /* PROVEEDORES */
+
   mostrar_proveedores(req: Request, res: Response) {
     Store.mostrar_proveedor()
       .then((data) => {
@@ -94,6 +96,8 @@ class Proveedor {
       );
     }
   }
+
+  /* PRODUCTO PROVEEDOR */
 
   nuevo_producto_proveedor(req: Request, res: Response) {
     const {

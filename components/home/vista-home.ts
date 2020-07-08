@@ -88,6 +88,7 @@ class HomeView {
   }
 
   ruta() {
+    // HOME VIEW
     this.router.get("/", comprobar, this.VistaHome);
     this.router.get("/verificar/:code", this.VerificarCode);
     this.router.post("/", this.CreateCode);

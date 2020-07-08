@@ -46,5 +46,3 @@ class UtilEmail {
 
 let utilemail = new UtilEmail();
 export default utilemail;
-
-//send().catch(console.error);

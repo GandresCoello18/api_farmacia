@@ -40,6 +40,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 class StoreProduct {
+  /* INSERTAR - POST - CREAR */
   add_name_product(name_product) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -79,6 +80,20 @@ class StoreProduct {
       });
     });
   }
+  add_product(Producto) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `INSERT INTO productos (id_producto, id_nombre_producto, id_nombre_laboratorio, cantidad, presentacion, lote, registro_sanitario, medida, tipo_medida, fecha_elaboracion, fecha_caducidad, pvp, pvf, estado, id_principio_activo) VALUES ('${Producto.id_producto}', ${Producto.id_name_product}, ${Producto.id_name_laboratorio}, ${Producto.cantidad}, '${Producto.presentacion}', '${Producto.lote}', '${Producto.registro_sanitario}', ${Producto.dosis}, '${Producto.tipo_dosis}', '${Producto.fecha_elaboracion}', '${Producto.fecha_caducidad}', ${Producto.pvp}, ${Producto.pvf}, '${Producto.estado}', ${Producto.id_principio_activo})`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* SELECT - MOSTRAR - CONSULTAR */
   listar_principio_activo() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -118,19 +133,6 @@ class StoreProduct {
       });
     });
   }
-  add_product(Producto) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `INSERT INTO productos (id_producto, id_nombre_producto, id_nombre_laboratorio, cantidad, presentacion, lote, registro_sanitario, medida, tipo_medida, fecha_elaboracion, fecha_caducidad, pvp, pvf, estado, id_principio_activo) VALUES ('${Producto.id_producto}', ${Producto.id_name_product}, ${Producto.id_name_laboratorio}, ${Producto.cantidad}, '${Producto.presentacion}', '${Producto.lote}', '${Producto.registro_sanitario}', ${Producto.dosis}, '${Producto.tipo_dosis}', '${Producto.fecha_elaboracion}', '${Producto.fecha_caducidad}', ${Producto.pvp}, ${Producto.pvf}, '${Producto.estado}', ${Producto.id_principio_activo})`,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
   listar_producto() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -157,6 +159,7 @@ class StoreProduct {
       });
     });
   }
+  /* EDITAR - MODIFICAR - ACTUALIZAR */
   cambiar_status_producto(id_producto, estado) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -175,58 +178,6 @@ class StoreProduct {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
           `UPDATE productos SET cantidad = ${cantidad} WHERE id_producto = '${id_producto}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  eliminar_producto(id_producto) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM productos WHERE id_producto = '${id_producto}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  eliminar_principio_activo(id_principio_activo) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM principio_activo WHERE id_principio_activo = ${id_principio_activo}`,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  eliminar_name_product(id_name_product) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM nombre_producto WHERE id_product_name = ${id_name_product}`,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  eliminar_name_laboratorio(id_name_laboratorio) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM nombre_laboratorio WHERE id_name_laboratorio = ${id_name_laboratorio}`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -279,6 +230,59 @@ class StoreProduct {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
           `UPDATE productos SET id_nombre_producto = ${Producto.id_name_product}, id_nombre_laboratorio = ${Producto.id_name_laboratorio}, cantidad = ${Producto.cantidad}, presentacion = '${Producto.presentacion}', lote = '${Producto.lote}', registro_sanitario = '${Producto.registro_sanitario}', medida = ${Producto.dosis}, tipo_medida = '${Producto.tipo_dosis}', fecha_elaboracion = '${Producto.fecha_elaboracion}', fecha_caducidad = '${Producto.fecha_caducidad}', pvp = ${Producto.pvp}, pvf = ${Producto.pvf}, id_principio_activo = ${Producto.id_principio_activo} WHERE id_producto = '${Producto.id_producto}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* DELETE - ELIMINAR - BORRAR */
+  eliminar_producto(id_producto) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM productos WHERE id_producto = '${id_producto}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  eliminar_principio_activo(id_principio_activo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM principio_activo WHERE id_principio_activo = ${id_principio_activo}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  eliminar_name_product(id_name_product) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM nombre_producto WHERE id_product_name = ${id_name_product}`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  eliminar_name_laboratorio(id_name_laboratorio) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM nombre_laboratorio WHERE id_name_laboratorio = ${id_name_laboratorio}`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);

@@ -2,6 +2,8 @@ import database from "../../db";
 import { Producto_Factura_INT } from "../../interface/index";
 
 class StoreVenta {
+  /* INSERTAR - POST - CREAR */
+
   async add_venta(Venta: Producto_Factura_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -14,6 +16,8 @@ class StoreVenta {
     });
   }
 
+  /* SELECT - MOSTRAR - CONSULTAR */
+
   async traer_venta(): Promise<Producto_Factura_INT> {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -25,6 +29,8 @@ class StoreVenta {
       );
     });
   }
+
+  /* ELIMINAT - BORRAR - DELETE */
 
   async eliminar_venta(id_producto_fac: string) {
     return await new Promise((resolve, reject) => {
