@@ -78,3 +78,13 @@ export interface Proveedor_INT {
   correo: string;
   telefono: number;
 }
+
+export interface Producto_proveedor_INT {
+  id_product_proveedor: string;
+  descripcion: string;
+  fecha_pago: string;
+  fecha_ingreso: string;
+  total: number;
+  id_proveedor: string;
+  estado_pp: string;
+}
