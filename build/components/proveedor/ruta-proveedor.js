@@ -77,7 +77,7 @@ class Proveedor {
       response_1.default.success(
         req,
         res,
-        { feeback: "Estos datos ya son existentes" },
+        { feeback: "No tienes permisos para estan accion" },
         200
       );
     }
@@ -111,7 +111,7 @@ class Proveedor {
       response_1.default.success(
         req,
         res,
-        { feeback: "Estos datos ya son existentes" },
+        { feeback: "No tienes permisos para estan accion" },
         200
       );
     }
@@ -123,6 +123,7 @@ class Proveedor {
       total,
       id_proveedor,
       estado_pp,
+      abono,
     } = req.body;
     const obj = {
       id_product_proveedor: uuid_1.v4(),
@@ -132,8 +133,8 @@ class Proveedor {
       total,
       id_proveedor,
       estado_pp,
+      abono,
     };
-    console.log(obj);
     Store_proveedor_1.default
       .add_product_proveedor(obj)
       .then((data) => {
@@ -186,7 +187,42 @@ class Proveedor {
       response_1.default.success(
         req,
         res,
-        { feeback: "Estos datos ya son existentes" },
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+  editar_producto_proveedor(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_producto_proveedor } = req.params || null;
+      const { descripcion, fecha_pago, total, estado_pp, abonado } =
+        req.body || null;
+      Store_proveedor_1.default
+        .editar_product_proveedor(
+          descripcion,
+          fecha_pago,
+          total,
+          estado_pp,
+          abonado,
+          id_producto_proveedor
+        )
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en editar producto del proveedor"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
         200
       );
     }
@@ -194,18 +230,29 @@ class Proveedor {
   pago_producto_proveedor(req, res) {
     const { id_producto_proveedor } = req.params || null;
     Store_proveedor_1.default
-      .pago_product_proveedor(id_producto_proveedor)
+      .mostrar_unico_product_proveedor(id_producto_proveedor)
       .then((data) => {
-        response_1.default.success(req, res, data, 200);
+        Store_proveedor_1.default
+          .pago_product_proveedor(
+            id_producto_proveedor,
+            data[0].total,
+            util_fecha_1.default.fecha_actual()
+          )
+          .then((data) => {
+            response_1.default.success(req, res, data, 200);
+          })
+          .catch((err) => {
+            response_1.default.error(
+              req,
+              res,
+              err,
+              500,
+              "Error en pago de producto del proveedor"
+            );
+          });
       })
       .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error en pago de producto del proveedor"
-        );
+        console.log(`Error en traer producto unico ${err.message}`);
       });
   }
   ruta() {
@@ -217,6 +264,11 @@ class Proveedor {
     ////////  NEW PRODUCT PROVEEDORES
     this.router.post("/producto", this.nuevo_producto_proveedor);
     this.router.get("/producto", this.mostrar_productos_proveedore);
+    this.router.put(
+      "/producto/:id_producto_proveedor",
+      comprobar,
+      this.editar_producto_proveedor
+    );
     this.router.delete(
       "/producto/:id_producto_proveedor",
       comprobar,

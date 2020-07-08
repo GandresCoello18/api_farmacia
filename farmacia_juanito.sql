@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-07-2020 a las 04:13:01
+-- Tiempo de generación: 08-07-2020 a las 19:52:02
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -248,6 +248,30 @@ INSERT INTO `producto_factura` (`id_producto_fac`, `id_producto`, `id_factura`, 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `producto_proveedor`
+--
+
+CREATE TABLE `producto_proveedor` (
+  `id_product_proveedor` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL,
+  `fecha_pago` varchar(20) NOT NULL,
+  `total` double NOT NULL,
+  `id_proveedor` varchar(50) NOT NULL,
+  `fecha_ingreso` varchar(30) NOT NULL,
+  `estado_pp` varchar(20) NOT NULL,
+  `abonado` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto_proveedor`
+--
+
+INSERT INTO `producto_proveedor` (`id_product_proveedor`, `descripcion`, `fecha_pago`, `total`, `id_proveedor`, `fecha_ingreso`, `estado_pp`, `abonado`) VALUES
+('c1c03ec6-2096-4901-8c60-35f9ebbce35a', 'este es un test mus simple.....', '2020-07-08', 100, 'f0cca7c1-cba3-422d-8c87-6d9716be79bc', '2020-07-07 16:51:4', 'Pagado', 100);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `proveedores`
 --
 
@@ -368,6 +392,13 @@ ALTER TABLE `producto_factura`
   ADD KEY `id_factura` (`id_factura`);
 
 --
+-- Indices de la tabla `producto_proveedor`
+--
+ALTER TABLE `producto_proveedor`
+  ADD PRIMARY KEY (`id_product_proveedor`),
+  ADD KEY `id_proveedor` (`id_proveedor`);
+
+--
 -- Indices de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
@@ -450,6 +481,12 @@ ALTER TABLE `productos`
 ALTER TABLE `producto_factura`
   ADD CONSTRAINT `producto_factura_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `producto_factura_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `producto_proveedor`
+--
+ALTER TABLE `producto_proveedor`
+  ADD CONSTRAINT `producto_proveedor_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedores`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `proveedores`

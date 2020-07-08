@@ -87,4 +87,5 @@ export interface Producto_proveedor_INT {
   total: number;
   id_proveedor: string;
   estado_pp: string;
+  abono: number;
 }
