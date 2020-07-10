@@ -16,6 +16,7 @@ import Cliente from "./components/cliente/ruta-cliente";
 import Factura from "./components/factura/ruta-factura";
 import Ventas from "./components/ventas/ruta-ventas";
 import Proveedores from "./components/proveedor/ruta-proveedor";
+import Prestamo from "./components/prestamo/ruta-prestamo";
 
 // vistas
 import viewHome from "./components/home/vista-home";
@@ -57,6 +58,7 @@ class Server {
     this.app.use("/api/factura", Factura);
     this.app.use("/api/venta", Ventas);
     this.app.use("/api/proveedor", Proveedores);
+    this.app.use("/api/prestamo", Prestamo);
     // vistas en backend
     this.app.use("/view/home", viewHome);
     this.app.use("/view/login", viewLogin);

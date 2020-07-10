@@ -89,3 +89,10 @@ export interface Producto_proveedor_INT {
   estado_pp: string;
   abono: number;
 }
+
+export interface Prestamo_INT {
+  id_prestamo: string;
+  descripcion_prestamo: string;
+  fecha_prestamo: string;
+  cantidad_prestamo: number;
+}
