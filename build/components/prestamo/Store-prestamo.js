@@ -40,6 +40,21 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 class StorePrestamos {
+  /* INSERTAR - POST - CREAR */
+  add_prestamos(Prestamo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `INSERT INTO prestamos (id_prestamo, descripcion_prestamo, fecha_prestamo, cantidad_prestamo) VALUES ('${Prestamo.id_prestamo}', '${Prestamo.descripcion_prestamo}', '${Prestamo.fecha_prestamo}', ${Prestamo.cantidad_prestamo})`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* SELECT - CONSULTA - MOSTRAR */
   mostrar_prestamos() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -66,11 +81,26 @@ class StorePrestamos {
       });
     });
   }
-  add_prestamos(Prestamo) {
+  /* MODIFICAR - ACTUALIZAR - PUT */
+  edit_prestamos(Prestamo) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `INSERT INTO prestamos (id_prestamo, descripcion_prestamo, fecha_prestamo, cantidad_prestamo) VALUES ('${Prestamo.id_prestamo}', '${Prestamo.descripcion_prestamo}', '${Prestamo.fecha_prestamo}', ${Prestamo.cantidad_prestamo})`,
+          `UPDATE prestamos SET descripcion_prestamo = '${Prestamo.descripcion_prestamo}', cantidad_prestamo = ${Prestamo.cantidad_prestamo} WHERE id_prestamo = '${Prestamo.id_prestamo}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* DELETE - ELIMINAR - REMOVER */
+  eliminar_prestamos(id_prestamo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM prestamos WHERE id_prestamo = '${id_prestamo}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);

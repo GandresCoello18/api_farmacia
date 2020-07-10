@@ -1,5 +1,5 @@
 export interface Usuario_INT {
-  id_user?: string;
+  readonly id_user?: string;
   nombres: string;
   apellidos: string;
   foto?: string;
@@ -20,7 +20,7 @@ export interface History_session_INT {
 }
 
 export interface Producto_INT {
-  id_producto: string;
+  readonly id_producto: string;
   id_name_product: number;
   id_name_laboratorio: number;
   cantidad: number;
@@ -41,7 +41,7 @@ export interface Producto_INT {
 }
 
 export interface Cliente_INT {
-  id_cliente: string;
+  readonly id_cliente: string;
   nombre: string;
   apellido: string;
   identificacion: number;
@@ -50,7 +50,7 @@ export interface Cliente_INT {
 }
 
 export interface Factura_INT {
-  id_factura: string;
+  readonly id_factura: string;
   id_cliente: string;
   fecha_factura: string;
   descripcion: string;
@@ -63,7 +63,7 @@ export interface Factura_INT {
 }
 
 export interface Producto_Factura_INT {
-  id_producto_fac: string;
+  readonly id_producto_fac: string;
   id_producto: string;
   id_factura: string;
   formato: string;
@@ -72,7 +72,7 @@ export interface Producto_Factura_INT {
 }
 
 export interface Proveedor_INT {
-  id_proveedor: string;
+  readonly id_proveedor: string;
   nombres: string;
   id_laboratorio: number;
   correo: string;
@@ -80,7 +80,7 @@ export interface Proveedor_INT {
 }
 
 export interface Producto_proveedor_INT {
-  id_product_proveedor: string;
+  readonly id_product_proveedor: string;
   descripcion: string;
   fecha_pago: string;
   fecha_ingreso: string;
@@ -91,8 +91,8 @@ export interface Producto_proveedor_INT {
 }
 
 export interface Prestamo_INT {
-  id_prestamo: string;
+  readonly id_prestamo: string;
   descripcion_prestamo: string;
-  fecha_prestamo: string;
+  fecha_prestamo?: string;
   cantidad_prestamo: number;
 }

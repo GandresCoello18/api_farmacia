@@ -136,6 +136,23 @@ class Factura {
         response_1.default.error(req, res, err, 500, "Error en traer facturas");
       });
   }
+  monto_total_por_fecha(req, res) {
+    const { fecha } = req.params || null;
+    Store_factura_1.default
+      .monto_total_por_fecha(fecha)
+      .then((data) => {
+        response_1.default.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        response_1.default.error(
+          req,
+          res,
+          err,
+          500,
+          "Error en mostrar monto total por fecha"
+        );
+      });
+  }
   eliminar_factura(req, res) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_factura } = req.params || null;
@@ -164,6 +181,7 @@ class Factura {
   }
   ruta() {
     this.router.post("/", this.crear_factura);
+    this.router.get("/monto_total/:fecha", this.monto_total_por_fecha);
     this.router.get("/", this.traer_facturas);
     this.router.delete("/:id_factura", comprobar, this.eliminar_factura);
   }

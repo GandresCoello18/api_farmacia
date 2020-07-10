@@ -68,6 +68,19 @@ class StoreFactura {
       });
     });
   }
+  monto_total_por_fecha(fecha) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `SELECT SUM(total) as total, COUNT(id_factura) as cantidad FROM factura WHERE fecha_factura LIKE "%${fecha}%"`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
   /* DELETE - ELIMINAR - BORRAR */
   eliminar_factura(id_factura) {
     return __awaiter(this, void 0, void 0, function* () {

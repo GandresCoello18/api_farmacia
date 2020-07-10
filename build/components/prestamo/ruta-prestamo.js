@@ -81,10 +81,71 @@ class Proveedor {
       );
     }
   }
+  editar_prestamo(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_prestamo } = req.params || null;
+      const { descripcion_prestamo, cantidad_prestamo } = req.body || null;
+      let obj = {
+        id_prestamo,
+        cantidad_prestamo: Number(cantidad_prestamo),
+        descripcion_prestamo,
+      };
+      console.log(obj);
+      Store_prestamo_1.default
+        .edit_prestamos(obj)
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en editar prestamo " + err
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+  eliminar_prestamo(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_prestamo } = req.params || null;
+      Store_prestamo_1.default
+        .eliminar_prestamos(id_prestamo)
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en eliminar prestamo"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
   ruta() {
     this.router.get("/fecha/:fecha", this.mostrar_prestamo_por_fecha);
     this.router.get("/", this.mostrar_prestamos);
     this.router.post("/", comprobar, this.crear_prestamo);
+    this.router.put("/:id_prestamo", comprobar, this.editar_prestamo);
+    this.router.delete("/:id_prestamo", comprobar, this.eliminar_prestamo);
   }
 }
 let proveedor = new Proveedor();
