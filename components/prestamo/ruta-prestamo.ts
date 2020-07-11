@@ -36,6 +36,24 @@ class Proveedor {
       });
   }
 
+  mostrar_monto_total_por_fecha(req: Request, res: Response) {
+    const { fecha } = req.params || null;
+
+    Store.mostrar_monto_total_por_fecha(fecha)
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(
+          req,
+          res,
+          err,
+          500,
+          "Error en mostrar monto total por fecha en prestamos"
+        );
+      });
+  }
+
   crear_prestamo(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { descripcion_prestamo, cantidad_prestamo } = req.body || null;
@@ -122,6 +140,10 @@ class Proveedor {
   }
 
   ruta() {
+    this.router.get(
+      "/monto_total/fecha/:fecha",
+      this.mostrar_monto_total_por_fecha
+    );
     this.router.get("/fecha/:fecha", this.mostrar_prestamo_por_fecha);
     this.router.get("/", this.mostrar_prestamos);
     this.router.post("/", comprobar, this.crear_prestamo);

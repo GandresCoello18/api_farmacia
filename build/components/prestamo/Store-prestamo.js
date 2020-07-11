@@ -81,6 +81,19 @@ class StorePrestamos {
       });
     });
   }
+  mostrar_monto_total_por_fecha(fecha) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `SELECT SUM(cantidad_prestamo) as total, COUNT(id_prestamo) as count FROM prestamos WHERE fecha_prestamo LIKE "%${fecha}%";`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
   /* MODIFICAR - ACTUALIZAR - PUT */
   edit_prestamos(Prestamo) {
     return __awaiter(this, void 0, void 0, function* () {

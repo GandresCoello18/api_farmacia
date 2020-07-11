@@ -25,6 +25,7 @@ class Usuario {
     store_usuario_1.default
       .validar_usuario_existente(email)
       .then((data) => {
+        /* valida si el usuario ya exite en la base de datos */
         if (data == 0) {
           bcryptjs_1.default
             .hash(password, 10)
@@ -47,6 +48,7 @@ class Usuario {
                     id_user: user.id_user,
                     hash: shortid_1.default.generate(),
                   };
+                  /* envia un email al destinatario para confirmar su cuenta */
                   store_email_1.default
                     .crear_hash(email)
                     .then(() => {

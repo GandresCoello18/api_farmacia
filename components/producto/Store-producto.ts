@@ -114,6 +114,44 @@ class StoreProduct {
     });
   }
 
+  //////////////////////////////  validar registros existentes
+
+  async existente_laboratorio_name(name_laboratorio: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM nombre_laboratorio WHERE nombre_laboratorio = '${name_laboratorio}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async existente_product_name(product_name: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM nombre_producto WHERE product_name = '${product_name}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async existente_principio_active(principio_activo: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM principio_activo WHERE principio_activo = '${principio_activo}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   /* EDITAR - MODIFICAR - ACTUALIZAR */
 
   async cambiar_status_producto(id_producto: string, estado: string) {

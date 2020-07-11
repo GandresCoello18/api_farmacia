@@ -27,6 +27,7 @@ class Login {
 
     Store.validar_credenciales(email)
       .then(async (data: any) => {
+        /* valida si el usuario ya exite en la base de datos */
         if (data == 0) {
           Respuesta.success(
             req,
@@ -43,12 +44,14 @@ class Login {
               200
             );
           } else {
+            /* crea una serie de caracteres encriptados a partir de la clave ingresada */
             if (await encripctacion.compare(password, data[0].password)) {
               let save = {
                 id_user: data[0].id_user,
                 tipo_user: data[0].tipo_user,
               };
 
+              /* configura el token sin tiempo de expiracion */
               const token = jwt.sign(save, config.jwtSecret);
 
               let history: History_session_INT = {

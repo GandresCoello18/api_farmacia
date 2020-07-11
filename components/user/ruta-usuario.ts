@@ -28,6 +28,7 @@ class Usuario {
 
     Store.validar_usuario_existente(email)
       .then((data: any) => {
+        /* valida si el usuario ya exite en la base de datos */
         if (data == 0) {
           encriptacion
             .hash(password, 10)
@@ -52,6 +53,7 @@ class Usuario {
                     hash: id.generate(),
                   };
 
+                  /* envia un email al destinatario para confirmar su cuenta */
                   StoreEmail.crear_hash(email)
                     .then(() => {
                       utilEmail

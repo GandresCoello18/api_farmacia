@@ -151,6 +151,18 @@ class Proveedor {
       });
   }
 
+  mostrar_monto_total_por_fecha_pp(req: Request, res: Response) {
+    const { fecha } = req.params || null;
+
+    Store.mostrar_monto_total_product_proveedor(fecha)
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en monto total pp");
+      });
+  }
+
   eliminar_producto_proveedor(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_producto_proveedor } = req.params || null;
@@ -251,6 +263,10 @@ class Proveedor {
     ////////  NEW PRODUCT PROVEEDORES
     this.router.post("/producto", this.nuevo_producto_proveedor);
     this.router.get("/producto", this.mostrar_productos_proveedore);
+    this.router.get(
+      "/producto/monto_total/:fecha",
+      this.mostrar_monto_total_por_fecha_pp
+    );
     this.router.put(
       "/producto/:id_producto_proveedor",
       comprobar,

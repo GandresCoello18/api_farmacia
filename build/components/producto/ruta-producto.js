@@ -83,9 +83,33 @@ class Producto {
       if (res.locals.datos_user.tipo_user == "Administrador") {
         const { name_product } = req.body || null;
         Store_producto_1.default
-          .add_name_product(name_product)
+          .existente_product_name(name_product)
           .then((data) => {
-            response_1.default.success(req, res, data, 201);
+            if (data == 0) {
+              Store_producto_1.default
+                .add_name_product(name_product)
+                .then((data) => {
+                  response_1.default.success(req, res, data, 201);
+                })
+                .catch((err) => {
+                  response_1.default.error(
+                    req,
+                    res,
+                    err,
+                    500,
+                    "Error en crear name_product"
+                  );
+                });
+            } else {
+              response_1.default.success(
+                req,
+                res,
+                {
+                  feeback: "Este registro ya existe, intena con otro nombre..!",
+                },
+                200
+              );
+            }
           })
           .catch((err) => {
             response_1.default.error(
@@ -93,7 +117,7 @@ class Producto {
               res,
               err,
               500,
-              "Error en crear name_product"
+              "Error en validar registro existente"
             );
           });
       } else {
@@ -181,9 +205,33 @@ class Producto {
       if (res.locals.datos_user.tipo_user == "Administrador") {
         const { name_laboratorio } = req.body || null;
         Store_producto_1.default
-          .add_name_laboratorio(name_laboratorio)
+          .existente_laboratorio_name(name_laboratorio)
           .then((data) => {
-            response_1.default.success(req, res, data, 201);
+            if (data == 0) {
+              Store_producto_1.default
+                .add_name_laboratorio(name_laboratorio)
+                .then((data) => {
+                  response_1.default.success(req, res, data, 201);
+                })
+                .catch((err) => {
+                  response_1.default.error(
+                    req,
+                    res,
+                    err,
+                    500,
+                    "Error en crear name_laboratorio"
+                  );
+                });
+            } else {
+              response_1.default.success(
+                req,
+                res,
+                {
+                  feeback: "Este registro ya existe, pruebe con otro nombre..!",
+                },
+                200
+              );
+            }
           })
           .catch((err) => {
             response_1.default.error(
@@ -191,7 +239,7 @@ class Producto {
               res,
               err,
               500,
-              "Error en crear name_laboratorio"
+              "Error en validar laboratorio existente"
             );
           });
       } else {
@@ -432,21 +480,52 @@ class Producto {
   }
   /* PRINCIPIO ACTIVO */
   create_principio_activo(req, res) {
-    const { name_principio_activo } = req.body || null;
-    Store_producto_1.default
-      .add_principio_activo(name_principio_activo)
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error en crear principio activo"
-        );
-      });
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { name_principio_activo } = req.body || null;
+      Store_producto_1.default
+        .existente_principio_active(name_principio_activo)
+        .then((data) => {
+          if (data == 0) {
+            Store_producto_1.default
+              .add_principio_activo(name_principio_activo)
+              .then((data) => {
+                response_1.default.success(req, res, data, 200);
+              })
+              .catch((err) => {
+                response_1.default.error(
+                  req,
+                  res,
+                  err,
+                  500,
+                  "Error en crear principio activo"
+                );
+              });
+          } else {
+            response_1.default.success(
+              req,
+              res,
+              { feeback: "Este registro ya exite, prueba con otro nombre" },
+              200
+            );
+          }
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en validar registro existente principio activo"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
   }
   mostrar_principio_activo(req, res) {
     Store_producto_1.default

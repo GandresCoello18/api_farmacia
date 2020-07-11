@@ -107,6 +107,19 @@ class StoreProveedor {
       });
     });
   }
+  mostrar_monto_total_product_proveedor(fecha) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `SELECT SUM(total) as total, COUNT(id_product_proveedor) as count FROM producto_proveedor WHERE fecha_pago LIKE '%${fecha}%' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
   /* DELETE - ELIMINAR - BORRAR */
   eliminar_proveedor(id_proveedor) {
     return __awaiter(this, void 0, void 0, function* () {

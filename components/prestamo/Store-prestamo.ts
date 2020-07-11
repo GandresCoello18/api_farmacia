@@ -42,6 +42,18 @@ class StorePrestamos {
     });
   }
 
+  async mostrar_monto_total_por_fecha(fecha: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT SUM(cantidad_prestamo) as total, COUNT(id_prestamo) as count FROM prestamos WHERE fecha_prestamo LIKE "%${fecha}%";`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   /* MODIFICAR - ACTUALIZAR - PUT */
 
   async edit_prestamos(Prestamo: Prestamo_INT) {
