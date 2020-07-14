@@ -13,10 +13,10 @@ class Mysql {
   }
   conectar() {
     var connection = mysql_1.default.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "farmacia_juanito",
+      host: config.dbHost,
+      user: config.dbUser,
+      password: config.dbPassword,
+      database: config.dbName,
     });
     connection.connect((err) => {
       if (err) {

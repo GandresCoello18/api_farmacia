@@ -8,10 +8,10 @@ class Mysql {
 
   conectar() {
     var connection = mysql.createConnection({
-      host: "localhost", //config.dbHost,
-      user: "root", //config.dbUser,
-      password: "", //config.dbPassword,
-      database: "farmacia_juanito", //config.dbName,
+      host: config.dbHost,
+      user: config.dbUser,
+      password: config.dbPassword,
+      database: config.dbName,
     });
 
     connection.connect((err: any) => {
