@@ -284,7 +284,7 @@ class Producto {
 
   /* PRODUCTO COMPLETO */
 
-  create_product(req: Request, res: Response) {
+  async create_product(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const {
         id_name_product,
@@ -302,6 +302,14 @@ class Producto {
         id_principio_activo,
       } = req.body || null;
 
+      let p = 0;
+      if (id_principio_activo == "") {
+        let r: any = await Store.search_princt_activ_none();
+        p = Number(r[0].id_principio_activo);
+      } else {
+        p = id_principio_activo;
+      }
+
       const obj: Producto_INT = {
         id_producto: uuidv4(),
         id_name_product,
@@ -317,7 +325,7 @@ class Producto {
         pvp,
         pvf,
         estado: "Disponible",
-        id_principio_activo,
+        id_principio_activo: p,
       };
 
       Store.add_product(obj)

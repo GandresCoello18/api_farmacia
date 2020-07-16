@@ -323,61 +323,70 @@ class Producto {
   }
   /* PRODUCTO COMPLETO */
   create_product(req, res) {
-    if (res.locals.datos_user.tipo_user == "Administrador") {
-      const {
-        id_name_product,
-        id_name_laboratorio,
-        cantidad,
-        presentacion,
-        lote,
-        registro_sanitario,
-        dosis,
-        tipo_dosis,
-        fecha_elaboracion,
-        fecha_caducidad,
-        pvp,
-        pvf,
-        id_principio_activo,
-      } = req.body || null;
-      const obj = {
-        id_producto: uuid_1.v4(),
-        id_name_product,
-        id_name_laboratorio,
-        cantidad,
-        presentacion,
-        lote,
-        registro_sanitario,
-        dosis,
-        tipo_dosis,
-        fecha_elaboracion,
-        fecha_caducidad,
-        pvp,
-        pvf,
-        estado: "Disponible",
-        id_principio_activo,
-      };
-      Store_producto_1.default
-        .add_product(obj)
-        .then((data) => {
-          response_1.default.success(req, res, data, 200);
-        })
-        .catch((err) => {
-          response_1.default.error(
-            req,
-            res,
-            err,
-            500,
-            `Error al crear producto: ${err}`
-          );
-        });
-    } else {
-      response_1.default.success(
-        req,
-        res,
-        { feeback: "No tienes permisos aqui..!" },
-        200
-      );
-    }
+    return __awaiter(this, void 0, void 0, function* () {
+      if (res.locals.datos_user.tipo_user == "Administrador") {
+        const {
+          id_name_product,
+          id_name_laboratorio,
+          cantidad,
+          presentacion,
+          lote,
+          registro_sanitario,
+          dosis,
+          tipo_dosis,
+          fecha_elaboracion,
+          fecha_caducidad,
+          pvp,
+          pvf,
+          id_principio_activo,
+        } = req.body || null;
+        let p = 0;
+        if (id_principio_activo == "") {
+          let r = yield Store_producto_1.default.search_princt_activ_none();
+          p = Number(r[0].id_principio_activo);
+        } else {
+          p = id_principio_activo;
+        }
+        const obj = {
+          id_producto: uuid_1.v4(),
+          id_name_product,
+          id_name_laboratorio,
+          cantidad,
+          presentacion,
+          lote,
+          registro_sanitario,
+          dosis,
+          tipo_dosis,
+          fecha_elaboracion,
+          fecha_caducidad,
+          pvp,
+          pvf,
+          estado: "Disponible",
+          id_principio_activo: p,
+        };
+        Store_producto_1.default
+          .add_product(obj)
+          .then((data) => {
+            response_1.default.success(req, res, data, 200);
+          })
+          .catch((err) => {
+            response_1.default.error(
+              req,
+              res,
+              err,
+              500,
+              `Error al crear producto: ${err}`
+            );
+          });
+      } else {
+        response_1.default.success(
+          req,
+          res,
+          { feeback: "No tienes permisos aqui..!" },
+          200
+        );
+      }
+    });
   }
   mostrar_productos(req, res) {
     Store_producto_1.default

@@ -57,7 +57,19 @@ class StoreProduct {
   async listar_principio_activo() {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT * FROM principio_activo ORDER BY id_principio_activo DESC`,
+        `SELECT * FROM principio_activo WHERE principio_activo <> "none" ORDER BY id_principio_activo DESC`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async search_princt_activ_none() {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT * FROM principio_activo WHERE principio_activo = "none" `,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
