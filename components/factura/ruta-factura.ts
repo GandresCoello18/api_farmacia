@@ -74,7 +74,7 @@ class Factura {
                 } else {
                   let estado: string = "";
                   let nueva_cantidad =
-                    Number(data[0].cantidad) -
+                    Number(data[0].cantidad_disponible) -
                     Number(obj.productos[i].unidades);
 
                   if (nueva_cantidad == 0) {

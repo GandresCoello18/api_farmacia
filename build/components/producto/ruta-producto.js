@@ -339,6 +339,7 @@ class Producto {
           pvp,
           pvf,
           id_principio_activo,
+          cantidad_disponible,
         } = req.body || null;
         let p = 0;
         if (id_principio_activo == "") {
@@ -363,6 +364,7 @@ class Producto {
           pvf,
           estado: "Disponible",
           id_principio_activo: p,
+          cantidad_disponible,
         };
         Store_producto_1.default
           .add_product(obj)
@@ -447,6 +449,7 @@ class Producto {
         caducidad,
         pvp,
         pvf,
+        cantidad_disponible,
       } = req.body || null;
       const obj = {
         id_producto,
@@ -463,6 +466,7 @@ class Producto {
         fecha_caducidad: caducidad,
         pvp,
         pvf,
+        cantidad_disponible,
       };
       Store_producto_1.default
         .editar_producto_complete(obj)
@@ -475,7 +479,7 @@ class Producto {
             res,
             err,
             500,
-            "Error al editar producto"
+            "Error al editar producto " + err
           );
         });
     } else {

@@ -24,6 +24,7 @@ export interface Producto_INT {
   id_name_product: number;
   id_name_laboratorio: number;
   cantidad: number;
+  cantidad_disponible: number;
   presentacion: string;
   lote: string;
   registro_sanitario: string;

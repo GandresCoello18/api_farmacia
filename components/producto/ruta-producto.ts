@@ -300,6 +300,7 @@ class Producto {
         pvp,
         pvf,
         id_principio_activo,
+        cantidad_disponible,
       } = req.body || null;
 
       let p = 0;
@@ -326,6 +327,7 @@ class Producto {
         pvf,
         estado: "Disponible",
         id_principio_activo: p,
+        cantidad_disponible,
       };
 
       Store.add_product(obj)
@@ -399,6 +401,7 @@ class Producto {
         caducidad,
         pvp,
         pvf,
+        cantidad_disponible,
       } = req.body || null;
 
       const obj: Producto_INT = {
@@ -416,6 +419,7 @@ class Producto {
         fecha_caducidad: caducidad,
         pvp,
         pvf,
+        cantidad_disponible,
       };
 
       Store.editar_producto_complete(obj)
@@ -423,7 +427,13 @@ class Producto {
           Respuesta.success(req, res, data, 200);
         })
         .catch((err) => {
-          Respuesta.error(req, res, err, 500, "Error al editar producto");
+          Respuesta.error(
+            req,
+            res,
+            err,
+            500,
+            "Error al editar producto " + err
+          );
         });
     } else {
       Respuesta.success(
