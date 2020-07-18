@@ -340,6 +340,7 @@ class Producto {
           pvf,
           id_principio_activo,
           cantidad_disponible,
+          veces_ingreso,
         } = req.body || null;
         let p = 0;
         if (id_principio_activo == "") {
@@ -348,38 +349,40 @@ class Producto {
         } else {
           p = id_principio_activo;
         }
-        const obj = {
-          id_producto: uuid_1.v4(),
-          id_name_product,
-          id_name_laboratorio,
-          cantidad,
-          presentacion,
-          lote,
-          registro_sanitario,
-          dosis,
-          tipo_dosis,
-          fecha_elaboracion,
-          fecha_caducidad,
-          pvp,
-          pvf,
-          estado: "Disponible",
-          id_principio_activo: p,
-          cantidad_disponible,
-        };
-        Store_producto_1.default
-          .add_product(obj)
-          .then((data) => {
-            response_1.default.success(req, res, data, 200);
-          })
-          .catch((err) => {
-            response_1.default.error(
-              req,
-              res,
-              err,
-              500,
-              `Error al crear producto: ${err}`
-            );
-          });
+        for (let i = 0; i < Number(veces_ingreso); i++) {
+          const obj = {
+            id_producto: uuid_1.v4(),
+            id_name_product,
+            id_name_laboratorio,
+            cantidad,
+            presentacion,
+            lote,
+            registro_sanitario,
+            dosis,
+            tipo_dosis,
+            fecha_elaboracion,
+            fecha_caducidad,
+            pvp,
+            pvf,
+            estado: "Disponible",
+            id_principio_activo: p,
+            cantidad_disponible,
+          };
+          Store_producto_1.default
+            .add_product(obj)
+            .then((data) => {
+              response_1.default.success(req, res, data, 200);
+            })
+            .catch((err) => {
+              response_1.default.error(
+                req,
+                res,
+                err,
+                500,
+                `Error al crear producto: ${err}`
+              );
+            });
+        }
       } else {
         response_1.default.success(
           req,
