@@ -7,11 +7,12 @@ class Mysql {
   }
 
   conectar() {
-    var connection = mysql.createConnection({
-      host: "localhost", //config.dbHost,
-      user: "root", //config.dbUser,
-      password: "", //config.dbPassword,
-      database: "farmacia_juanito", //config.dbName,
+    const connection = mysql.createConnection({
+      host: "databasefj.c8twgaydusab.us-east-2.rds.amazonaws.com", //config.dbHost,
+      user: "andresco_fj", //config.dbUser,
+      password: "r2Z63EhRKqQ3atu", //"KFsVqyQMmxgV7eH", //config.dbPassword,
+      database: "databaseFJ", //config.dbName,
+      port: 3306,
     });
 
     connection.connect((err: any) => {
