@@ -9,6 +9,7 @@ interface Tipos {
   dbPassword: string | undefined;
   dbHost: string | undefined;
   dbName: string | undefined;
+  dbPort: string | undefined;
   adminPassword: String | undefined;
   userPassword: String | undefined;
   jwtSecret: String | undefined;
@@ -25,6 +26,7 @@ const config: Tipos = {
   dbPassword: process.env.DB_PASSWORD,
   dbHost: process.env.DB_HOST,
   dbName: process.env.DB_NAME,
+  dbPort: process.env.DB_PORT,
   adminPassword: process.env.DEFAULT_ADMIN_PASSWORD,
   userPassword: process.env.DEFAULT_USER_PASSWORD,
   jwtSecret: process.env.AUTH_JWT_SECRET,
