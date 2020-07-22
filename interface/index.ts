@@ -39,6 +39,7 @@ export interface Producto_INT {
   formato?: string;
   unidades?: number;
   item_total?: number;
+  iva?: number;
 }
 
 export interface Cliente_INT {
@@ -70,6 +71,7 @@ export interface Producto_Factura_INT {
   formato: string;
   cantidad: number;
   item_total: number;
+  iva: number;
 }
 
 export interface Proveedor_INT {

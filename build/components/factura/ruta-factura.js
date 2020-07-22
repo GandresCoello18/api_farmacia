@@ -56,11 +56,12 @@ class Factura {
             formato: `${obj.productos[i].formato}`,
             cantidad: Number(obj.productos[i].unidades),
             item_total: Number(obj.productos[i].item_total),
+            iva: Number(obj.productos[i].iva),
           };
           Store_ventas_1.default
             .add_venta(objVenta)
             .then((data) => {
-              return response_1.default.success(req, res, data, 200);
+              response_1.default.success(req, res, data, 200);
             })
             .catch((err) => {
               console.log("Error al crear venta: " + err.message);
@@ -123,7 +124,13 @@ class Factura {
         response_1.default.success(req, res, data, 200);
       })
       .catch((err) => {
-        response_1.default.error(req, res, err, 500, "Error en crear factura");
+        response_1.default.error(
+          req,
+          res,
+          err,
+          500,
+          "Error en crear factura " + err.message
+        );
       });
   }
   traer_facturas(req, res) {
