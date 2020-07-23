@@ -5,6 +5,7 @@ import path from "path";
 import helmet from "helmet";
 import expressPinoLogger from "express-pino-logger";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
 
 // puntos de entrada
 import IndexRouter from "./network/rutas";
@@ -23,6 +24,7 @@ import viewHome from "./components/home/vista-home";
 import viewLogin from "./components/login/vista-login";
 
 const { config } = require("./config/index");
+const swaggerDoc = require("./swagger.json");
 import { logger } from "./components/util/logger";
 
 class Server {
@@ -49,6 +51,11 @@ class Server {
 
   routes() {
     // peticiones de datos con api rest
+    this.app.use(
+      "/api/swagger-doc",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDoc)
+    );
     this.app.use("/api", IndexRouter);
     this.app.use("/api/usuario", Usuarios);
     this.app.use("/api/email", Email);
