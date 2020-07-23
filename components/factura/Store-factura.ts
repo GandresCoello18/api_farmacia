@@ -2,6 +2,8 @@ import database from "../../db";
 import { Factura_INT } from "../../interface/index";
 
 class StoreFactura {
+  /* CREAR - INSERTAR - POST */
+
   async add_factura(Factura: Factura_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -14,6 +16,8 @@ class StoreFactura {
     });
   }
 
+  /* SELECT - MOSTRAR - CONSULTA */
+
   async traer_facturas(): Promise<Factura_INT> {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -25,6 +29,20 @@ class StoreFactura {
       );
     });
   }
+
+  async monto_total_por_fecha(fecha: string) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT SUM(total) as total, COUNT(id_factura) as cantidad FROM factura WHERE fecha_factura LIKE "%${fecha}%"`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  /* DELETE - ELIMINAR - BORRAR */
 
   async eliminar_factura(id_factura: string) {
     return await new Promise((resolve, reject) => {

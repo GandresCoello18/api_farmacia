@@ -41,6 +41,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 const shortid_1 = __importDefault(require("shortid"));
 class StoreHome {
+  /* INSERT - CREAR - POST */
+  crear_access_code(tipo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `INSERT INTO access_code (code, tipo) VALUES ('${shortid_1.default.generate()}', '${tipo}')`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* MOSTRAR - CONSULTAR - SELECT */
   list_access_code() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -67,24 +82,12 @@ class StoreHome {
       });
     });
   }
+  /* ELIMINAR - BORRAR - DELETE */
   eliminar_access_code(removeID) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
           `DELETE FROM access_code WHERE id_access = ${removeID}`,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  crear_access_code(tipo) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `INSERT INTO access_code (code, tipo) VALUES ('${shortid_1.default.generate()}', '${tipo}')`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);

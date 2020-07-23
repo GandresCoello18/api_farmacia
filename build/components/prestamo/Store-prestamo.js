@@ -39,13 +39,13 @@ var __importDefault =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-class StoreFactura {
-  /* CREAR - INSERTAR - POST */
-  add_factura(Factura) {
+class StorePrestamos {
+  /* INSERTAR - POST - CREAR */
+  add_prestamos(Prestamo) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `INSERT INTO factura (id_factura, id_cliente, fecha_factura, descripcion_f, descuento, iva, total, efectivo, cambio) VALUES ('${Factura.id_factura}', '${Factura.id_cliente}', '${Factura.fecha_factura}', '${Factura.descripcion}', ${Factura.descuento}, ${Factura.iva}, ${Factura.total}, ${Factura.efectivo}, ${Factura.cambio})`,
+          `INSERT INTO prestamos (id_prestamo, descripcion_prestamo, fecha_prestamo, cantidad_prestamo) VALUES ('${Prestamo.id_prestamo}', '${Prestamo.descripcion_prestamo}', '${Prestamo.fecha_prestamo}', ${Prestamo.cantidad_prestamo})`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -54,12 +54,12 @@ class StoreFactura {
       });
     });
   }
-  /* SELECT - MOSTRAR - CONSULTA */
-  traer_facturas() {
+  /* SELECT - CONSULTA - MOSTRAR */
+  mostrar_prestamos() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.descuento, factura.iva, factura.total, cliente.correo, cliente.identificacion FROM factura INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente ORDER BY factura.id_factura DESC;`,
+          `SELECT * FROM prestamos ORDER BY id_prestamo DESC`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -68,11 +68,11 @@ class StoreFactura {
       });
     });
   }
-  monto_total_por_fecha(fecha) {
+  mostrar_prestamos_por_fecha(fecha) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT SUM(total) as total, COUNT(id_factura) as cantidad FROM factura WHERE fecha_factura LIKE "%${fecha}%"`,
+          `SELECT * FROM prestamos WHERE fecha_prestamo LIKE "%${fecha}%"`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -81,12 +81,39 @@ class StoreFactura {
       });
     });
   }
-  /* DELETE - ELIMINAR - BORRAR */
-  eliminar_factura(id_factura) {
+  mostrar_monto_total_por_fecha(fecha) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `DELETE FROM factura WHERE id_factura = '${id_factura}' `,
+          `SELECT SUM(cantidad_prestamo) as total, COUNT(id_prestamo) as count FROM prestamos WHERE fecha_prestamo LIKE "%${fecha}%";`,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* MODIFICAR - ACTUALIZAR - PUT */
+  edit_prestamos(Prestamo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE prestamos SET descripcion_prestamo = '${Prestamo.descripcion_prestamo}', cantidad_prestamo = ${Prestamo.cantidad_prestamo} WHERE id_prestamo = '${Prestamo.id_prestamo}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* DELETE - ELIMINAR - REMOVER */
+  eliminar_prestamos(id_prestamo) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `DELETE FROM prestamos WHERE id_prestamo = '${id_prestamo}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -96,5 +123,5 @@ class StoreFactura {
     });
   }
 }
-let Store = new StoreFactura();
+let Store = new StorePrestamos();
 exports.default = Store;

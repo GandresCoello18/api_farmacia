@@ -40,6 +40,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 class StoreClient {
+  /* CREAR - POST - INSERTAR  */
   add_cliente(Cliente) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -53,6 +54,7 @@ class StoreClient {
       });
     });
   }
+  /* CONSULTAS - SELECT - MOSTRAR - TRAER */
   listar_clientes() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -79,6 +81,21 @@ class StoreClient {
       });
     });
   }
+  /* EDITAR- ACTUALIZAR - MODIFICAR */
+  editar_cliente(Cliente) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE cliente SET nombres = '${Cliente.nombre}', apellidos = '${Cliente.apellido}', identificacion = '${Cliente.identificacion}', correo = '${Cliente.correo}' WHERE id_cliente = '${Cliente.id_cliente}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  /* ELIMINAR - BORRAR - DELETE */
   borrar_cliente(id_cliente) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {

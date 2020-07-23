@@ -39,13 +39,13 @@ var __importDefault =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-class StoreUsuario {
-  /* INSERTAR - POST - CREAR */
-  insertar_usuario(user) {
+class StoreProveedor {
+  /* CREAR - INSERTAR - POST */
+  add_proveedor(Proveedor) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `INSERT INTO usuarios (id_user, nombres, apellidos, foto, tipo_user, email, email_on, password) VALUES ('${user.id_user}', '${user.nombres}', '${user.apellidos}', '${user.foto}', '${user.tipo}', '${user.email}', ${user.email_on}, '${user.password}')`,
+          `INSERT INTO proveedores (id_proveedores, id_laboratorio, correo, telefono, nombres) VALUES ('${Proveedor.id_proveedor}', ${Proveedor.id_laboratorio}, '${Proveedor.correo}', ${Proveedor.telefono}, '${Proveedor.nombres}')`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -54,11 +54,11 @@ class StoreUsuario {
       });
     });
   }
-  create_history_session(History) {
+  add_product_proveedor(PP) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `INSERT INTO historial_session (id_user, fecha_session) VALUES ('${History.id_user}', '${History.fecha_session}') `,
+          `INSERT INTO producto_proveedor (id_product_proveedor, descripcion, fecha_pago, total, id_proveedor, fecha_ingreso, estado_pp, abonado) VALUES ('${PP.id_product_proveedor}', '${PP.descripcion}', '${PP.fecha_pago}', ${PP.total}, '${PP.id_proveedor}', '${PP.fecha_ingreso}', '${PP.estado_pp}', ${PP.abono})`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -67,12 +67,12 @@ class StoreUsuario {
       });
     });
   }
-  /* SELECT - MOSTRAR - CONSULTAR */
-  validar_usuario_existente(email) {
+  /* MOSTRAR - CONSULTAR - SELECT */
+  mostrar_proveedor() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT * FROM usuarios WHERE email = '${email}' `,
+          `SELECT * FROM proveedores INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = proveedores.id_laboratorio ORDER BY id_proveedores DESC`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -81,21 +81,11 @@ class StoreUsuario {
       });
     });
   }
-  consultar_usuarios() {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(`SELECT * FROM usuarios`, (err, data) => {
-          if (err) return reject(err);
-          resolve(data);
-        });
-      });
-    });
-  }
-  consulta_usuario(id) {
+  mostrar_product_proveedor() {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT * FROM usuarios WHERE id_user = '${id}' `,
+          `SELECT producto_proveedor.id_product_proveedor, producto_proveedor.descripcion, producto_proveedor.fecha_pago, producto_proveedor.total, producto_proveedor.fecha_ingreso, producto_proveedor.id_proveedor, producto_proveedor.estado_pp, producto_proveedor.abonado, proveedores.nombres, proveedores.correo, nombre_laboratorio.nombre_laboratorio FROM producto_proveedor INNER JOIN proveedores ON proveedores.id_proveedores = producto_proveedor.id_proveedor INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = proveedores.id_laboratorio;`,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -104,34 +94,11 @@ class StoreUsuario {
       });
     });
   }
-  listar_history_session(limite) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        if (limite) {
-          db_1.default.query(
-            `SELECT historial_session.id_historial_session, historial_session.fecha_session, usuarios.nombres, usuarios.apellidos, usuarios.foto, usuarios.tipo_user, usuarios.email FROM historial_session INNER JOIN usuarios on usuarios.id_user = historial_session.id_user ORDER BY historial_session.id_historial_session DESC LIMIT ${limite};`,
-            (err, data) => {
-              if (err) return reject(err);
-              resolve(data);
-            }
-          );
-        } else {
-          db_1.default.query(
-            `SELECT historial_session.id_historial_session, historial_session.fecha_session, usuarios.nombres, usuarios.apellidos, usuarios.foto, usuarios.tipo_user, usuarios.email FROM historial_session INNER JOIN usuarios on usuarios.id_user = historial_session.id_user ORDER BY historial_session.id_historial_session DESC;`,
-            (err, data) => {
-              if (err) return reject(err);
-              resolve(data);
-            }
-          );
-        }
-      });
-    });
-  }
-  traer_ultimo_historial() {
+  mostrar_unico_product_proveedor(id_product_proveedor) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT * FROM historial_session ORDER BY fecha_session DESC LIMIT 1;`,
+          `SELECT * FROM producto_proveedor WHERE id_product_proveedor = '${id_product_proveedor}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -140,12 +107,11 @@ class StoreUsuario {
       });
     });
   }
-  /* PUT - MODIFICAR - ACTUALIZAR */
-  editar_usuario(id, nombres, apellidos, email_on, tipo_user) {
+  mostrar_monto_total_product_proveedor(fecha) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `UPDATE usuarios SET nombres = '${nombres}', apellidos = '${apellidos}', email_on = ${email_on}, tipo_user = '${tipo_user}' WHERE id_user = '${id}' `,
+          `SELECT SUM(total) as total, COUNT(id_product_proveedor) as count FROM producto_proveedor WHERE fecha_pago LIKE '%${fecha}%' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -154,11 +120,12 @@ class StoreUsuario {
       });
     });
   }
-  verificar_email(id) {
+  /* DELETE - ELIMINAR - BORRAR */
+  eliminar_proveedor(id_proveedor) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `UPDATE usuarios SET email_on = 1 WHERE id_user = '${id}' `,
+          `DELETE FROM proveedores WHERE id_proveedores = '${id_proveedor}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -167,12 +134,11 @@ class StoreUsuario {
       });
     });
   }
-  /* DELETE - BORRAR - ELIMINAR */
-  eliminar_usuario(id) {
+  eliminar_product_proveedor(id_producto_proveedor) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `DELETE FROM usuarios WHERE id_user = '${id}' `,
+          `DELETE FROM producto_proveedor WHERE id_product_proveedor = '${id_producto_proveedor}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -181,11 +147,45 @@ class StoreUsuario {
       });
     });
   }
-  clean_history_session(id_historial_session) {
+  /* EDITAR - MODIFICAR - ACTUALIZAR */
+  editar_proveedor(Proveedor) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `DELETE FROM historial_session WHERE id_historial_session <> ${id_historial_session}`,
+          `UPDATE proveedores SET nombres = '${Proveedor.nombres}', id_laboratorio = ${Proveedor.id_laboratorio}, correo = '${Proveedor.correo}', telefono = '${Proveedor.telefono}'  WHERE id_proveedores = '${Proveedor.id_proveedor}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  editar_product_proveedor(
+    descripcion,
+    fecha_pago,
+    total,
+    estado_pp,
+    abonado,
+    id_producto_proveedor
+  ) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE producto_proveedor SET descripcion = '${descripcion}', fecha_pago = '${fecha_pago}', total = ${total}, estado_pp = '${estado_pp}', abonado = ${abonado} WHERE id_product_proveedor = '${id_producto_proveedor}' `,
+          (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+          }
+        );
+      });
+    });
+  }
+  pago_product_proveedor(id_producto_proveedor, total, fecha_pago) {
+    return __awaiter(this, void 0, void 0, function* () {
+      return yield new Promise((resolve, reject) => {
+        db_1.default.query(
+          `UPDATE producto_proveedor SET estado_pp = 'Pagado', abonado = ${total}, fecha_pago = '${fecha_pago}' WHERE id_product_proveedor = '${id_producto_proveedor}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -195,5 +195,5 @@ class StoreUsuario {
     });
   }
 }
-let store = new StoreUsuario();
-exports.default = store;
+let Store = new StoreProveedor();
+exports.default = Store;

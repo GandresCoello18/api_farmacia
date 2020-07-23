@@ -25,19 +25,35 @@ class Ventas {
       });
   }
   eliminar_venta(req, res) {
-    const { id_producto_factura } = req.params || null;
-    Store_ventas_1.default
-      .eliminar_venta(id_producto_factura)
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(req, res, err, 500, "Error en eliminar venta");
-      });
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_producto_factura } = req.params || null;
+      Store_ventas_1.default
+        .eliminar_venta(id_producto_factura)
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en eliminar venta"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
   }
   ruta() {
+    // VENTAS
     this.router.get("/", this.traer_venta);
-    this.router.delete("/:id_producto_factura", this.eliminar_venta);
+    this.router.delete("/:id_producto_factura", comprobar, this.eliminar_venta);
   }
 }
 let venta = new Ventas();

@@ -21,11 +21,14 @@ class Usuario {
     this.ruta();
   }
 
+  /* USUARIO */
+
   crear_usuario(req: Request, res: Response) {
     const { nombres, apellidos, email, password, tipo } = req.body || null;
 
     Store.validar_usuario_existente(email)
       .then((data: any) => {
+        /* valida si el usuario ya exite en la base de datos */
         if (data == 0) {
           encriptacion
             .hash(password, 10)
@@ -50,6 +53,7 @@ class Usuario {
                     hash: id.generate(),
                   };
 
+                  /* envia un email al destinatario para confirmar su cuenta */
                   StoreEmail.crear_hash(email)
                     .then(() => {
                       utilEmail
@@ -73,7 +77,7 @@ class Usuario {
                     })
                     .catch((err) =>
                       console.log(
-                        `Error al crear hash para ${email.id_user} ocacion: ${err}`
+                        `Error al crear hash para ${email.id_user} ocacion: ${err.message}`
                       )
                     );
                 })
@@ -127,29 +131,49 @@ class Usuario {
   }
 
   editar_usuario(req: Request, res: Response) {
-    const { id } = req.params || null;
-    const { nombres, apellidos, foto } = req.body || null;
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id } = req.params || null;
+      const { nombres, apellidos, email_on, tipo_user } = req.body || null;
 
-    Store.editar_usuario(id, nombres, apellidos, foto)
-      .then((data) => {
-        Respuestas.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuestas.error(req, res, err, 500, "Error al modificar usuarios");
-      });
+      Store.editar_usuario(id, nombres, apellidos, email_on, tipo_user)
+        .then((data) => {
+          Respuestas.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuestas.error(req, res, err, 500, "Error al modificar usuarios");
+        });
+    } else {
+      Respuestas.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion" },
+        200
+      );
+    }
   }
 
   eliminar_usuario(req: Request, res: Response) {
-    const { id } = req.params || null;
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id } = req.params || null;
 
-    Store.eliminar_usuario(id)
-      .then((data) => {
-        Respuestas.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        Respuestas.error(req, res, err, 500, "Error al eliminar usuarios");
-      });
+      Store.eliminar_usuario(id)
+        .then((data) => {
+          Respuestas.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          Respuestas.error(req, res, err, 500, "Error al eliminar usuarios");
+        });
+    } else {
+      Respuestas.success(
+        req,
+        res,
+        { feeback: "No tienes permisos aqui..!" },
+        200
+      );
+    }
   }
+
+  /* USER HISTORY */
 
   create_history(req: Request, res: Response) {
     const { id_user } = req.body || null;
@@ -241,11 +265,10 @@ class Usuario {
     this.router.get("/", this.obtener_usuarios);
     this.router.get("/:id", this.obtener_usuario);
     this.router.post("/", this.crear_usuario);
-    this.router.put("/:id", this.editar_usuario);
-    this.router.delete("/:id", this.eliminar_usuario);
+    this.router.put("/:id", comprobar, this.editar_usuario);
+    this.router.delete("/:id", comprobar, this.eliminar_usuario);
   }
 }
 
 let user = new Usuario();
-
 export default user.router;

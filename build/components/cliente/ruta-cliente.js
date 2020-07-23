@@ -30,6 +30,7 @@ class Cliente {
             correo,
             direccion,
           };
+          if (obj.correo == "") obj.correo = "no especificado";
           Store_cliente_1.default
             .add_cliente(obj)
             .then((data) => {
@@ -73,27 +74,74 @@ class Cliente {
         );
       });
   }
+  editar_cliente(req, res) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_cliente } = req.params || null;
+      const { nombre, apellido, identificacion, correo, direccion } =
+        req.body || null;
+      const obj = {
+        id_cliente,
+        nombre,
+        apellido,
+        identificacion,
+        correo,
+        direccion,
+      };
+      Store_cliente_1.default
+        .editar_cliente(obj)
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en editar cliente"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion." },
+        200
+      );
+    }
+  }
   eliminar_cliente(req, res) {
-    const { id_cliente } = req.params || null;
-    Store_cliente_1.default
-      .borrar_cliente(id_cliente)
-      .then((data) => {
-        response_1.default.success(req, res, data, 200);
-      })
-      .catch((err) => {
-        response_1.default.error(
-          req,
-          res,
-          err,
-          500,
-          "Error en eliminar cliente"
-        );
-      });
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_cliente } = req.params || null;
+      Store_cliente_1.default
+        .borrar_cliente(id_cliente)
+        .then((data) => {
+          response_1.default.success(req, res, data, 200);
+        })
+        .catch((err) => {
+          response_1.default.error(
+            req,
+            res,
+            err,
+            500,
+            "Error en eliminar cliente"
+          );
+        });
+    } else {
+      response_1.default.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para esta accion." },
+        200
+      );
+    }
   }
   ruta() {
+    // CLIENTES
     this.router.post("/", this.crear_cliente);
     this.router.get("/", this.mostrar_clientes);
-    this.router.delete("/:id_cliente", this.eliminar_cliente);
+    this.router.put("/:id_cliente", comprobar, this.editar_cliente);
+    this.router.delete("/:id_cliente", comprobar, this.eliminar_cliente);
   }
 }
 let cliente = new Cliente();

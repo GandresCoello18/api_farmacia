@@ -39,21 +39,17 @@ var __importDefault =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
-class Store {
-  /* SELECT - MOSTRAR - CONSULTA */
-  validar_credenciales(correo) {
+class StoreEstadisticas {
+  traer_ventas_por_dia(fecha) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `SELECT * FROM usuarios WHERE email = '${correo}' `,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
+        db_1.default.query(`SELECT * FROM factura`, (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        });
       });
     });
   }
 }
-let store = new Store();
-exports.default = store;
+let Store = new StoreEstadisticas();
+exports.default = Store;

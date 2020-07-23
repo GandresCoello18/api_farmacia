@@ -2,6 +2,8 @@ import database from "../../db";
 import { Cliente_INT } from "../../interface/index";
 
 class StoreClient {
+  /* CREAR - POST - INSERTAR  */
+
   async add_cliente(Cliente: Cliente_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -13,6 +15,8 @@ class StoreClient {
       );
     });
   }
+
+  /* CONSULTAS - SELECT - MOSTRAR - TRAER */
 
   async listar_clientes(): Promise<Cliente_INT> {
     return await new Promise((resolve, reject) => {
@@ -40,6 +44,22 @@ class StoreClient {
       );
     });
   }
+
+  /* EDITAR- ACTUALIZAR - MODIFICAR */
+
+  async editar_cliente(Cliente: Cliente_INT) {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `UPDATE cliente SET nombres = '${Cliente.nombre}', apellidos = '${Cliente.apellido}', identificacion = '${Cliente.identificacion}', correo = '${Cliente.correo}' WHERE id_cliente = '${Cliente.id_cliente}' `,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  /* ELIMINAR - BORRAR - DELETE */
 
   async borrar_cliente(id_cliente: string) {
     return await new Promise((resolve, reject) => {

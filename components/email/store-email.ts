@@ -2,6 +2,8 @@ import database from "../../db";
 import { Email_INT } from "../../interface/index";
 
 class StoreEmail {
+  /* INSERTAR - CREAR - POST */
+
   async crear_hash(Hash: Email_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
@@ -14,10 +16,12 @@ class StoreEmail {
     });
   }
 
-  async borrar_hash(id_user: string) {
+  /* MOSTRAR - CONSULTAR - SELECT */
+
+  async veridicar_email(email: string) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `DELETE FROM verificar_email WHERE id_user = '${id_user}' `,
+        `SELECT email_on FROM usuarios WHERE email = '${email}' `,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -50,10 +54,12 @@ class StoreEmail {
     });
   }
 
-  async veridicar_email(email: string) {
+  /* ELIMINAR - BORRAR - DELETE */
+
+  async borrar_hash(id_user: string) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT email_on FROM usuarios WHERE email = '${email}' `,
+        `DELETE FROM verificar_email WHERE id_user = '${id_user}' `,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

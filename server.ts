@@ -3,8 +3,11 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import path from "path";
 import helmet from "helmet";
+import expressPinoLogger from "express-pino-logger";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
 
+// puntos de entrada
 import IndexRouter from "./network/rutas";
 import Usuarios from "./components/user/ruta-usuario";
 import Email from "./components/email/ruta-email";
@@ -13,12 +16,16 @@ import Producto from "./components/producto/ruta-producto";
 import Cliente from "./components/cliente/ruta-cliente";
 import Factura from "./components/factura/ruta-factura";
 import Ventas from "./components/ventas/ruta-ventas";
+import Proveedores from "./components/proveedor/ruta-proveedor";
+import Prestamo from "./components/prestamo/ruta-prestamo";
 
 // vistas
 import viewHome from "./components/home/vista-home";
 import viewLogin from "./components/login/vista-login";
 
 const { config } = require("./config/index");
+const swaggerDoc = require("./swagger.json");
+import { logger } from "./components/util/logger";
 
 class Server {
   public app: express.Application;
@@ -33,6 +40,7 @@ class Server {
     this.app.set("port", config.port);
     this.app.use(helmet());
     this.app.use(cors());
+    this.app.use(expressPinoLogger({ logger: logger }));
     this.app.use(cookieParser());
     this.app.use(bodyParser.json());
     this.app.use("/static", express.static("public"));
@@ -43,6 +51,11 @@ class Server {
 
   routes() {
     // peticiones de datos con api rest
+    this.app.use(
+      "/api/swagger-doc",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDoc)
+    );
     this.app.use("/api", IndexRouter);
     this.app.use("/api/usuario", Usuarios);
     this.app.use("/api/email", Email);
@@ -51,6 +64,8 @@ class Server {
     this.app.use("/api/cliente", Cliente);
     this.app.use("/api/factura", Factura);
     this.app.use("/api/venta", Ventas);
+    this.app.use("/api/proveedor", Proveedores);
+    this.app.use("/api/prestamo", Prestamo);
     // vistas en backend
     this.app.use("/view/home", viewHome);
     this.app.use("/view/login", viewLogin);

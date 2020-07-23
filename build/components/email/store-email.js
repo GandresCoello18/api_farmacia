@@ -40,6 +40,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../db"));
 class StoreEmail {
+  /* INSERTAR - CREAR - POST */
   crear_hash(Hash) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
@@ -53,11 +54,12 @@ class StoreEmail {
       });
     });
   }
-  borrar_hash(id_user) {
+  /* MOSTRAR - CONSULTAR - SELECT */
+  veridicar_email(email) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `DELETE FROM verificar_email WHERE id_user = '${id_user}' `,
+          `SELECT email_on FROM usuarios WHERE email = '${email}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -92,11 +94,12 @@ class StoreEmail {
       });
     });
   }
-  veridicar_email(email) {
+  /* ELIMINAR - BORRAR - DELETE */
+  borrar_hash(id_user) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT email_on FROM usuarios WHERE email = '${email}' `,
+          `DELETE FROM verificar_email WHERE id_user = '${id_user}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);

@@ -62,6 +62,7 @@ class Login {
       .validar_credenciales(email)
       .then((data) =>
         __awaiter(this, void 0, void 0, function* () {
+          /* valida si el usuario ya exite en la base de datos */
           if (data == 0) {
             response_1.default.success(
               req,
@@ -78,6 +79,7 @@ class Login {
                 200
               );
             } else {
+              /* crea una serie de caracteres encriptados a partir de la clave ingresada */
               if (
                 yield bcryptjs_1.default.compare(password, data[0].password)
               ) {
@@ -85,6 +87,7 @@ class Login {
                   id_user: data[0].id_user,
                   tipo_user: data[0].tipo_user,
                 };
+                /* configura el token sin tiempo de expiracion */
                 const token = jsonwebtoken_1.default.sign(
                   save,
                   config.jwtSecret
@@ -119,6 +122,7 @@ class Login {
       });
   }
   ruta() {
+    // LOGIN
     this.router.post("/vida-token", comprobar, this.validar_vida_token);
     this.router.post("/autenticacion", this.autenticar);
   }

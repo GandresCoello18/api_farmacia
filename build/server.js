@@ -10,7 +10,10 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const helmet_1 = __importDefault(require("helmet"));
+const express_pino_logger_1 = __importDefault(require("express-pino-logger"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+// puntos de entrada
 const rutas_1 = __importDefault(require("./network/rutas"));
 const ruta_usuario_1 = __importDefault(
   require("./components/user/ruta-usuario")
@@ -29,12 +32,20 @@ const ruta_factura_1 = __importDefault(
 const ruta_ventas_1 = __importDefault(
   require("./components/ventas/ruta-ventas")
 );
+const ruta_proveedor_1 = __importDefault(
+  require("./components/proveedor/ruta-proveedor")
+);
+const ruta_prestamo_1 = __importDefault(
+  require("./components/prestamo/ruta-prestamo")
+);
 // vistas
 const vista_home_1 = __importDefault(require("./components/home/vista-home"));
 const vista_login_1 = __importDefault(
   require("./components/login/vista-login")
 );
 const { config } = require("./config/index");
+const swaggerDoc = require("./swagger.json");
+const logger_1 = require("./components/util/logger");
 class Server {
   constructor() {
     this.app = express_1.default();
@@ -45,6 +56,7 @@ class Server {
     this.app.set("port", config.port);
     this.app.use(helmet_1.default());
     this.app.use(cors_1.default());
+    this.app.use(express_pino_logger_1.default({ logger: logger_1.logger }));
     this.app.use(cookie_parser_1.default());
     this.app.use(body_parser_1.default.json());
     this.app.use("/static", express_1.default.static("public"));
@@ -54,6 +66,11 @@ class Server {
   }
   routes() {
     // peticiones de datos con api rest
+    this.app.use(
+      "/api/swagger-doc",
+      swagger_ui_express_1.default.serve,
+      swagger_ui_express_1.default.setup(swaggerDoc)
+    );
     this.app.use("/api", rutas_1.default);
     this.app.use("/api/usuario", ruta_usuario_1.default);
     this.app.use("/api/email", ruta_email_1.default);
@@ -62,6 +79,8 @@ class Server {
     this.app.use("/api/cliente", ruta_cliente_1.default);
     this.app.use("/api/factura", ruta_factura_1.default);
     this.app.use("/api/venta", ruta_ventas_1.default);
+    this.app.use("/api/proveedor", ruta_proveedor_1.default);
+    this.app.use("/api/prestamo", ruta_prestamo_1.default);
     // vistas en backend
     this.app.use("/view/home", vista_home_1.default);
     this.app.use("/view/login", vista_login_1.default);

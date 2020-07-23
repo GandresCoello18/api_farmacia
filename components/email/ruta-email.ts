@@ -106,10 +106,11 @@ class Email {
   }
 
   ruta() {
+    // EMAIL
     this.router.post("/", this.crearHash);
-    this.router.delete("/:id_user", this.borrarHash);
     this.router.get("/verificar/:hash", this.verificar_hash);
     this.router.get("/verificar/email/:email", this.verificar_email);
+    this.router.delete("/:id_user", this.borrarHash);
   }
 }
 
