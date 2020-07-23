@@ -12,11 +12,12 @@ class Mysql {
     this.conectar();
   }
   conectar() {
-    var connection = mysql_1.default.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "farmacia_juanito",
+    const connection = mysql_1.default.createConnection({
+      host: config.dbHost,
+      user: config.dbUser,
+      password: config.dbPassword,
+      database: config.dbName,
+      port: config.dbPort,
     });
     connection.connect((err) => {
       if (err) {

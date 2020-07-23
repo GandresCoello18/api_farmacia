@@ -300,6 +300,8 @@ class Producto {
         pvp,
         pvf,
         id_principio_activo,
+        cantidad_disponible,
+        veces_ingreso,
       } = req.body || null;
 
       let p = 0;
@@ -310,37 +312,40 @@ class Producto {
         p = id_principio_activo;
       }
 
-      const obj: Producto_INT = {
-        id_producto: uuidv4(),
-        id_name_product,
-        id_name_laboratorio,
-        cantidad,
-        presentacion,
-        lote,
-        registro_sanitario,
-        dosis,
-        tipo_dosis,
-        fecha_elaboracion,
-        fecha_caducidad,
-        pvp,
-        pvf,
-        estado: "Disponible",
-        id_principio_activo: p,
-      };
+      for (let i = 0; i < Number(veces_ingreso); i++) {
+        const obj: Producto_INT = {
+          id_producto: uuidv4(),
+          id_name_product,
+          id_name_laboratorio,
+          cantidad,
+          presentacion,
+          lote,
+          registro_sanitario,
+          dosis,
+          tipo_dosis,
+          fecha_elaboracion,
+          fecha_caducidad,
+          pvp,
+          pvf,
+          estado: "Disponible",
+          id_principio_activo: p,
+          cantidad_disponible,
+        };
 
-      Store.add_product(obj)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
-        })
-        .catch((err) => {
-          Respuesta.error(
-            req,
-            res,
-            err,
-            500,
-            `Error al crear producto: ${err}`
-          );
-        });
+        Store.add_product(obj)
+          .then((data) => {
+            Respuesta.success(req, res, data, 200);
+          })
+          .catch((err) => {
+            Respuesta.error(
+              req,
+              res,
+              err,
+              500,
+              `Error al crear producto: ${err}`
+            );
+          });
+      }
     } else {
       Respuesta.success(
         req,
@@ -399,6 +404,7 @@ class Producto {
         caducidad,
         pvp,
         pvf,
+        cantidad_disponible,
       } = req.body || null;
 
       const obj: Producto_INT = {
@@ -416,6 +422,7 @@ class Producto {
         fecha_caducidad: caducidad,
         pvp,
         pvf,
+        cantidad_disponible,
       };
 
       Store.editar_producto_complete(obj)
@@ -423,7 +430,13 @@ class Producto {
           Respuesta.success(req, res, data, 200);
         })
         .catch((err) => {
-          Respuesta.error(req, res, err, 500, "Error al editar producto");
+          Respuesta.error(
+            req,
+            res,
+            err,
+            500,
+            "Error al editar producto " + err
+          );
         });
     } else {
       Respuesta.success(

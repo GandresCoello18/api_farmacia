@@ -24,6 +24,7 @@ export interface Producto_INT {
   id_name_product: number;
   id_name_laboratorio: number;
   cantidad: number;
+  cantidad_disponible: number;
   presentacion: string;
   lote: string;
   registro_sanitario: string;
@@ -38,6 +39,7 @@ export interface Producto_INT {
   formato?: string;
   unidades?: number;
   item_total?: number;
+  iva?: number;
 }
 
 export interface Cliente_INT {
@@ -69,6 +71,7 @@ export interface Producto_Factura_INT {
   formato: string;
   cantidad: number;
   item_total: number;
+  iva: number;
 }
 
 export interface Proveedor_INT {

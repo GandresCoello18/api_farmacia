@@ -1,0 +1,1301 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "registros de las rutas en entrada en la api rest: (farmacia juanito)",
+    "version": "1.0.0",
+    "title": "Farmacia Juanito"
+  },
+  "host": "localhost:7000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "usuarios",
+      "description": "Operaciones y procesos acerca de usuarios"
+    },
+    {
+      "name": "Email",
+      "description": "Operaciones y procesos acerca de email"
+    },
+    {
+      "name": "Login",
+      "description": "Operaciones y procesos acerca de login"
+    },
+    {
+      "name": "Producto",
+      "description": "Operaciones y procesos acerca de productos"
+    },
+    {
+      "name": "Cliente",
+      "description": "Operaciones y procesos acerca de clientes"
+    },
+    {
+      "name": "Factura",
+      "description": "Operaciones y procesos acerca de factura"
+    },
+    {
+      "name": "Venta",
+      "description": "Operaciones y procesos acerca de ventas"
+    },
+    {
+      "name": "Proveedor",
+      "description": "Operaciones y procesos acerca de prveedores"
+    },
+    {
+      "name": "Prestamo",
+      "description": "Operaciones y procesos acerca de prestamo"
+    }
+  ],
+  "schemes": ["https", "http"],
+  "paths": {
+    "/usuario": {
+      "post": {
+        "tags": ["Usuario"],
+        "summary": "Crear usuario",
+        "description": "crea un nuevo usuario si no existe en la base de datos.",
+        "operationId": "createUser",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Usuario"],
+        "summary": "consulta de usuarios",
+        "description": "traer todo los usuarios de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/usuario/:id_user": {
+      "get": {
+        "tags": ["Usuario"],
+        "summary": "consulta un usuario en especifico",
+        "description": "traer todo los usuarios de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Usuario"],
+        "summary": "modifica usuarios",
+        "description": "modifica los usuarios de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Editar user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Usuario"],
+        "summary": "eliminar usuarios",
+        "description": "elimina los usuarios de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/usuario/history_session": {
+      "post": {
+        "tags": ["Usuario"],
+        "summary": "Crear el historial",
+        "description": "crear y guarda el historial de la session",
+        "operationId": "createHistory",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/History_Session"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Usuario"],
+        "summary": "consulta el historial de session del usuario",
+        "description": "muestra el historial de session del usuario",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Usuario"],
+        "summary": "eliminar las sessiones de usuarios",
+        "description": "elimina las session de user en la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/email": {
+      "post": {
+        "tags": ["Email"],
+        "summary": "enviar email en servicio GMAIL",
+        "description": "envia un sms a la direccion de correo del usuario",
+        "operationId": "sendEmail",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Email"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Email"],
+        "summary": "eliminar el hash del usuarios",
+        "description": "elimina el hash del user en la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/email/verificar/:hash": {
+      "get": {
+        "tags": ["Email"],
+        "summary": "consulta si el hash es valido",
+        "description": "verifica si el hash es valido para aprobar la direccion de correo",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/email/verificar/email/:email": {
+      "get": {
+        "tags": ["Email"],
+        "summary": "consulta la direccion de correo del usuario",
+        "description": "Al crear una cuenta, verifica si la direccion de correo ya existe o no esta aprobada",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/login/autenticacion": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "valida los datos para iniciar session",
+        "description": "valida si las credenciales son validar para el inicio de session",
+        "operationId": "auth",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto": {
+      "post": {
+        "tags": ["Producto"],
+        "summary": "valida los datos para iniciar session",
+        "description": "valida si las credenciales son validar para el inicio de session",
+        "operationId": "create producto",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Productos"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Producto"],
+        "summary": "consulta el producto completo",
+        "description": "Obtienes todos los productos relacionados con laboratorio, activo principio y nombre del product con sus caracteristicas",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto/:id_producto": {
+      "delete": {
+        "tags": ["Producto"],
+        "summary": "elimina el producto completo",
+        "description": "eliminas el producto de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Producto"],
+        "summary": "edita o actualiza el productos con sus caracteristicas",
+        "description": "actualiza los datos de productos en la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Productos"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto/principio_activo": {
+      "post": {
+        "tags": ["Producto"],
+        "summary": "crea el principio activo",
+        "description": "crea el principio activo y lo guarda en la base de datos",
+        "operationId": "create principio activo (producto)",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created principio activo object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrincipioActivo"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Producto"],
+        "summary": "consulta todo los principios activos",
+        "description": "obtienes todo los principios activos de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto/principio_activo/:id_principio": {
+      "delete": {
+        "tags": ["Producto"],
+        "summary": "elimina el principio activo",
+        "description": "eliminas el principio activo de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Producto"],
+        "summary": "edita el pricipio activo",
+        "description": "actualiza el nombre del principio de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrincipioActivo"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto/nombre_producto": {
+      "post": {
+        "tags": ["Producto"],
+        "summary": "crea el nombre del producto",
+        "description": "crea el nombre del producto y lo guarda en la base de datos",
+        "operationId": "create nombre del producto (producto)",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created nombre del producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductName"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Producto"],
+        "summary": "consulta todo los nombre de productos",
+        "description": "obtienes todo los nombres de producto de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto/nombre_producto/:id_name_producto": {
+      "delete": {
+        "tags": ["Producto"],
+        "summary": "elimina el nombre del producto",
+        "description": "eliminas el nombre del producto de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Producto"],
+        "summary": "edita el nombre del producto",
+        "description": "actualiza el nombre del producto de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductName"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto/nombre_laboratorio": {
+      "post": {
+        "tags": ["Producto"],
+        "summary": "crea el nombre del laboratorio",
+        "description": "crea el nombre del laboratorio y lo guarda en la base de datos",
+        "operationId": "create nombre del laboratorio (producto)",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created laboratorio object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductLaboratori"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Producto"],
+        "summary": "consulta todo los nombre de laboratorio",
+        "description": "obtienes todo los nombres de laboratorio de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/producto/nombre_laboratorio/:id_name_laboratorio": {
+      "delete": {
+        "tags": ["Producto"],
+        "summary": "elimina el nombre del laboratorio",
+        "description": "eliminas el nombre del laboratorio de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Producto"],
+        "summary": "edita el nombre del laboratorio",
+        "description": "actualiza el nombre del laboratorio de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductLaboratori"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/cliente": {
+      "post": {
+        "tags": ["Cliente"],
+        "summary": "crea un nuevo cliente",
+        "description": "crea un nuevo cliente y lo guarda en la base de datos",
+        "operationId": "create un cliente",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created laboratorio object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cliente"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Cliente"],
+        "summary": "consulta todo los clientes",
+        "description": "obtienes todo los clientes de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/cliente/:id_cliente": {
+      "delete": {
+        "tags": ["Cliente"],
+        "summary": "elimina el cliente",
+        "description": "eliminas el cliente de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Cliente"],
+        "summary": "edita los datos del cliente",
+        "description": "actualiza el cliente de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cliente"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/factura": {
+      "post": {
+        "tags": ["Factura"],
+        "summary": "crea un nueva factura",
+        "description": "crea un nueva factura y lo guarda en la base de datos",
+        "operationId": "create factura",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created factura object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Factura"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Factura"],
+        "summary": "consulta todo las facturas",
+        "description": "obtienes toda las factura de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/factura/monto_total/:fecha": {
+      "get": {
+        "tags": ["Factura"],
+        "summary": "consulta monto ganado por fecha",
+        "description": "obtienes el monto total de las ganacias por fecha",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/factura/:id_factura": {
+      "delete": {
+        "tags": ["Factura"],
+        "summary": "elimina la factura",
+        "description": "eliminas la factura de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/venta/:id_producto_factura": {
+      "delete": {
+        "tags": ["Venta"],
+        "summary": "elimina la venta",
+        "description": "eliminas la venta de la factura en la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/proveedor": {
+      "post": {
+        "tags": ["Proveedor"],
+        "summary": "crea un nuevo Proveedor",
+        "description": "crea un nuevo Proveedor y lo guarda en la base de datos",
+        "operationId": "create Proveedor",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created prveedor object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Proveedor"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Proveedor"],
+        "summary": "consulta todo los Proveedor",
+        "description": "obtienes toda los Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/proveedor/:id_proveedor": {
+      "delete": {
+        "tags": ["Proveedor"],
+        "summary": "elimina el Proveedor",
+        "description": "eliminas el Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Proveedor"],
+        "summary": "edita el Proveedor",
+        "description": "actualiza el Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Proveedor"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/proveedor/producto": {
+      "post": {
+        "tags": ["Proveedor"],
+        "summary": "crea un nuevo producto del Proveedor",
+        "description": "crea un nuevo producto del Proveedor y lo guarda en la base de datos",
+        "operationId": "create producto Proveedor",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created producto proveedor object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductoProveedor"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Proveedor"],
+        "summary": "consulta todo los Proveedor",
+        "description": "obtienes toda los Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/proveedor/producto/monto_total/:fecha": {
+      "get": {
+        "tags": ["Proveedor"],
+        "summary": "consulta el monto total a pagar del proveedor por fecha",
+        "description": "obtienes el monto total a pagar los productos del proveedor por fecha",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/proveedor/producto/:id_producto_proveedor": {
+      "put": {
+        "tags": ["Proveedor"],
+        "summary": "edita el producto del Proveedor",
+        "description": "actualiza el producto del Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductoProveedor"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Proveedor"],
+        "summary": "elimina el producto del Proveedor",
+        "description": "eliminas el producto del Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/proveedor/producto/estado/pagado/:id_producto_proveedor": {
+      "put": {
+        "tags": ["Proveedor"],
+        "summary": "edita el estado de producto del Proveedor",
+        "description": "actualiza el estado a pagado de producto del Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar producto object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductoProveedor"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/prestamo": {
+      "post": {
+        "tags": ["Prestamo"],
+        "summary": "crea un nuevo prestamo",
+        "description": "crea un nuevo prestamo y lo guarda en la base de datos",
+        "operationId": "create prestamo",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created un prestamo object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Prestamo"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Prestamo"],
+        "summary": "consulta todo los Proveedor",
+        "description": "obtienes toda los Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/prestamo/fecha/:fecha": {
+      "get": {
+        "tags": ["Prestamo"],
+        "summary": "consulta el prestamo por fecha",
+        "description": "obtienes toda los Proveedor de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/prestamo/:id_prestamo": {
+      "put": {
+        "tags": ["Prestamo"],
+        "summary": "edita el Prestamo",
+        "description": "actualiza el Prestamo de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "modificar Prestamo object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Prestamo"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Prestamo"],
+        "summary": "elimina el Prestamo",
+        "description": "eliminas el Prestamo de la base de datos",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "nombres": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        },
+        "foto": {
+          "type": "string"
+        },
+        "tipo": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "email_on": {
+          "type": "boolean"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "History_Session": {
+      "type": "object",
+      "properties": {
+        "id_user": {
+          "type": "string"
+        },
+        "fecha_session": {
+          "type": "string"
+        }
+      }
+    },
+    "Email": {
+      "type": "object",
+      "properties": {
+        "id_user": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Productos": {
+      "type": "object",
+      "properties": {
+        "id_name_product": {
+          "type": "number"
+        },
+        "id_name_laboratorio": {
+          "type": "number"
+        },
+        "cantidad": {
+          "type": "number"
+        },
+        "cantidad_disponible": {
+          "type": "number"
+        },
+        "presentacion": {
+          "type": "string"
+        },
+        "lote": {
+          "type": "string"
+        },
+        "registro_sanitario": {
+          "type": "string"
+        },
+        "dosis": {
+          "type": "number"
+        },
+        "tipo_dosis": {
+          "type": "string"
+        },
+        "fecha_elaboracion": {
+          "type": "string"
+        },
+        "fecha_caducidad": {
+          "type": "string"
+        },
+        "pvp": {
+          "type": "number"
+        },
+        "pvf": {
+          "type": "number"
+        },
+        "estado": {
+          "type": "string"
+        },
+        "id_principio_activo": {
+          "type": "number"
+        },
+        "formato?": {
+          "type": "string"
+        },
+        "unidades?": {
+          "type": "number"
+        },
+        "item_total?": {
+          "type": "number"
+        },
+        "iva?": {
+          "type": "number"
+        }
+      }
+    },
+    "PrincipioActivo": {
+      "type": "object",
+      "properties": {
+        "name_principio_activo": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductName": {
+      "type": "object",
+      "properties": {
+        "name_product": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductLaboratori": {
+      "type": "object",
+      "properties": {
+        "name_laboratorio": {
+          "type": "string"
+        }
+      }
+    },
+    "Cliente": {
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string"
+        },
+        "apellido": {
+          "type": "string"
+        },
+        "identificacion": {
+          "type": "number"
+        },
+        "correo": {
+          "type": "string"
+        },
+        "direccion": {
+          "type": "string"
+        }
+      }
+    },
+    "Factura": {
+      "type": "object",
+      "properties": {
+        "id_cliente": {
+          "type": "string"
+        },
+        "fecha_factura": {
+          "type": "string"
+        },
+        "descripcion": {
+          "type": "string"
+        },
+        "descuento": {
+          "type": "number"
+        },
+        "iva": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "efectivo": {
+          "type": "number"
+        },
+        "cambio": {
+          "type": "number"
+        },
+        "productos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id_name_product": {
+                "type": "number"
+              },
+              "id_name_laboratorio": {
+                "type": "number"
+              },
+              "cantidad": {
+                "type": "number"
+              },
+              "cantidad_disponible": {
+                "type": "number"
+              },
+              "presentacion": {
+                "type": "string"
+              },
+              "lote": {
+                "type": "string"
+              },
+              "registro_sanitario": {
+                "type": "string"
+              },
+              "dosis": {
+                "type": "number"
+              },
+              "tipo_dosis": {
+                "type": "string"
+              },
+              "fecha_elaboracion": {
+                "type": "string"
+              },
+              "fecha_caducidad": {
+                "type": "string"
+              },
+              "pvp": {
+                "type": "number"
+              },
+              "pvf": {
+                "type": "number"
+              },
+              "estado": {
+                "type": "string"
+              },
+              "id_principio_activo": {
+                "type": "number"
+              },
+              "formato?": {
+                "type": "string"
+              },
+              "unidades?": {
+                "type": "number"
+              },
+              "item_total?": {
+                "type": "number"
+              },
+              "iva?": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Proveedor": {
+      "type": "object",
+      "properties": {
+        "nombres": {
+          "type": "string"
+        },
+        "id_laboratorio": {
+          "type": "number"
+        },
+        "correo": {
+          "type": "string"
+        },
+        "telefono": {
+          "type": "number"
+        }
+      }
+    },
+    "ProductoProveedor": {
+      "type": "object",
+      "properties": {
+        "descripcion": {
+          "type": "string"
+        },
+        "fecha_pago": {
+          "type": "string"
+        },
+        "fecha_ingreso": {
+          "type": "string"
+        },
+        "total": {
+          "type": "number"
+        },
+        "id_proveedor": {
+          "type": "string"
+        },
+        "estado_pp": {
+          "type": "string"
+        },
+        "abono": {
+          "type": "number"
+        }
+      }
+    },
+    "Prestamo": {
+      "type": "object",
+      "properties": {
+        "descripcion_prestamo": {
+          "type": "string"
+        },
+        "fecha_prestamo?": {
+          "type": "string"
+        },
+        "cantidad_prestamo": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

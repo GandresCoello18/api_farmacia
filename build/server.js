@@ -12,6 +12,7 @@ const path_1 = __importDefault(require("path"));
 const helmet_1 = __importDefault(require("helmet"));
 const express_pino_logger_1 = __importDefault(require("express-pino-logger"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 // puntos de entrada
 const rutas_1 = __importDefault(require("./network/rutas"));
 const ruta_usuario_1 = __importDefault(
@@ -43,6 +44,7 @@ const vista_login_1 = __importDefault(
   require("./components/login/vista-login")
 );
 const { config } = require("./config/index");
+const swaggerDoc = require("./swagger.json");
 const logger_1 = require("./components/util/logger");
 class Server {
   constructor() {
@@ -64,6 +66,11 @@ class Server {
   }
   routes() {
     // peticiones de datos con api rest
+    this.app.use(
+      "/api/swagger-doc",
+      swagger_ui_express_1.default.serve,
+      swagger_ui_express_1.default.setup(swaggerDoc)
+    );
     this.app.use("/api", rutas_1.default);
     this.app.use("/api/usuario", ruta_usuario_1.default);
     this.app.use("/api/email", ruta_email_1.default);
