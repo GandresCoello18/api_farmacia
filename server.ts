@@ -37,7 +37,11 @@ class Server {
   config() {
     this.app.set("port", config.port);
     this.app.use(helmet());
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: ["https://farmacia-juanito.now.sh/", "http://localhost:3000"],
+      })
+    );
     this.app.use(expressPinoLogger({ logger: logger }));
     this.app.use(cookieParser());
     this.app.use(bodyParser.json());

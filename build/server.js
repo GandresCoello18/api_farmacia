@@ -53,7 +53,11 @@ class Server {
   config() {
     this.app.set("port", config.port);
     this.app.use(helmet_1.default());
-    this.app.use(cors_1.default());
+    this.app.use(
+      cors_1.default({
+        origin: ["https://farmacia-juanito.now.sh/", "http://localhost:3000"],
+      })
+    );
     this.app.use(express_pino_logger_1.default({ logger: logger_1.logger }));
     this.app.use(cookie_parser_1.default());
     this.app.use(body_parser_1.default.json());
