@@ -12,7 +12,7 @@ class Mysql {
       user: config.dbUser,
       password: config.dbPassword,
       database: config.dbName,
-      //port: config.dbPort,
+      port: config.dbPort,
     });
 
     connection.connect((err: any) => {
