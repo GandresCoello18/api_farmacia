@@ -8,11 +8,11 @@ class Mysql {
 
   conectar() {
     const connection = mysql.createConnection({
-      host: config.dbHost,
-      user: config.dbUser,
-      password: config.dbPassword,
-      database: config.dbName,
-      port: config.dbPort,
+      host: "localhost", //config.dbHost,
+      user: "root", //config.dbUser,
+      password: "", //config.dbPassword,
+      database: "farmacia_juanito", //config.dbName,
+      //port: config.dbPort,
     });
 
     connection.connect((err: any) => {

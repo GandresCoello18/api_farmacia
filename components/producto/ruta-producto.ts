@@ -1,7 +1,9 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-producto";
 import Respuesta from "../../network/response";
-import multer from "multer";
+// import multer from "multer";
+import RespuestaTable from "./response-table/propiedades-producto";
+import RespuestaTableProduct from "./response-table/producto";
 import { Producto_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
 import { v4 as uuidv4 } from "uuid";
@@ -15,7 +17,7 @@ class Producto {
   }
 
   /* configuracion para la subida de imagnes */
-  store_file() {
+  /*store_file() {
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "./public/productos");
@@ -48,7 +50,7 @@ class Producto {
     });
 
     return upload;
-  }
+  }*/
   /* NOMBRE DEL PRODUCTO */
 
   async create_name_product(req: Request, res: Response) {
@@ -59,8 +61,11 @@ class Producto {
         .then((data: any) => {
           if (data == 0) {
             Store.add_name_product(name_product)
-              .then((data) => {
-                Respuesta.success(req, res, data, 201);
+              .then(async () => {
+                const responseTble = await RespuestaTable.responder_nombre_producto(
+                  name_product
+                );
+                Respuesta.success(req, res, responseTble, 200);
               })
               .catch((err) => {
                 Respuesta.error(
@@ -168,8 +173,11 @@ class Producto {
         .then((data: any) => {
           if (data == 0) {
             Store.add_name_laboratorio(name_laboratorio)
-              .then((data) => {
-                Respuesta.success(req, res, data, 201);
+              .then(async () => {
+                const responseTble = await RespuestaTable.responder_nombre_laboratorio(
+                  name_laboratorio
+                );
+                Respuesta.success(req, res, responseTble, 200);
               })
               .catch((err) => {
                 Respuesta.error(
@@ -306,46 +314,47 @@ class Producto {
 
       let p = 0;
       if (id_principio_activo == "") {
-        let r: any = await Store.search_princt_activ_none();
-        p = Number(r[0].id_principio_activo);
+        let none: any = await Store.search_princt_activ_none();
+        p = Number(none[0].id_principio_activo);
       } else {
         p = id_principio_activo;
       }
 
-      for (let i = 0; i < Number(veces_ingreso); i++) {
-        const obj: Producto_INT = {
-          id_producto: uuidv4(),
-          id_name_product,
-          id_name_laboratorio,
-          cantidad,
-          presentacion,
-          lote,
-          registro_sanitario,
-          dosis,
-          tipo_dosis,
-          fecha_elaboracion,
-          fecha_caducidad,
-          pvp,
-          pvf,
-          estado: "Disponible",
-          id_principio_activo: p,
-          cantidad_disponible,
-        };
+      const obj: Producto_INT = {
+        id_producto: uuidv4(),
+        id_name_product,
+        id_name_laboratorio,
+        cantidad,
+        presentacion,
+        lote,
+        registro_sanitario,
+        dosis,
+        tipo_dosis,
+        fecha_elaboracion,
+        fecha_caducidad,
+        pvp,
+        pvf,
+        estado: "Disponible",
+        id_principio_activo: p,
+        cantidad_disponible,
+      };
 
-        Store.add_product(obj)
-          .then((data) => {
-            Respuesta.success(req, res, data, 200);
-          })
-          .catch((err) => {
-            Respuesta.error(
-              req,
-              res,
-              err,
-              500,
-              `Error al crear producto: ${err}`
-            );
-          });
-      }
+      Store.add_product(obj)
+        .then(async () => {
+          const respuestaProduct = await RespuestaTableProduct.responder_producto(
+            obj.id_producto
+          );
+          Respuesta.success(req, res, respuestaProduct, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(
+            req,
+            res,
+            err,
+            500,
+            `Error al crear producto: ${err}`
+          );
+        });
     } else {
       Respuesta.success(
         req,
@@ -458,8 +467,11 @@ class Producto {
         .then((data: any) => {
           if (data == 0) {
             Store.add_principio_activo(name_principio_activo)
-              .then((data) => {
-                Respuesta.success(req, res, data, 200);
+              .then(async () => {
+                const responseTble = await RespuestaTable.responder_principio_activo(
+                  name_principio_activo
+                );
+                Respuesta.success(req, res, responseTble, 200);
               })
               .catch((err) => {
                 Respuesta.error(
