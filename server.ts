@@ -39,7 +39,11 @@ class Server {
     this.app.use(helmet());
     this.app.use(
       cors({
-        origin: ["https://farmacia-juanito.now.sh", "http://localhost:3000"],
+        origin: [
+          "https://farmacia-juanito.now.sh",
+          "http://localhost:3000",
+          "https://farmacia-juanito-response.vercel.app",
+        ],
       })
     );
     this.app.use(expressPinoLogger({ logger: logger }));
