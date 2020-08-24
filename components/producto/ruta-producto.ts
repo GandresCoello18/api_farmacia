@@ -380,8 +380,8 @@ class Producto {
       const { id_producto } = req.params || null;
 
       Store.eliminar_producto(id_producto)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar producto");
