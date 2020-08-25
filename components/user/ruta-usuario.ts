@@ -218,13 +218,9 @@ class Usuario {
             console.log("no hay historial de session");
           } else {
             Store.clean_history_session(Number(data[0].id_historial_session))
-              .then(() => {
-                Respuestas.success(
-                  req,
-                  res,
-                  { feeback: "Se limpio el historial de session" },
-                  200
-                );
+              .then(async () => {
+                const response = await Store.listar_history_session(6);
+                Respuestas.success(req, res, { data: response }, 200);
               })
               .catch((err) => {
                 Respuestas.error(
