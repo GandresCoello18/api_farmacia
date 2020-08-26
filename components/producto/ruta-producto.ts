@@ -119,8 +119,8 @@ class Producto {
       const { id_name_producto } = req.params || null;
 
       Store.eliminar_name_product(Number(id_name_producto))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar product name");
@@ -237,8 +237,8 @@ class Producto {
       const { id_name_laboratorio } = req.params || null;
 
       Store.eliminar_name_laboratorio(Number(id_name_laboratorio))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(
@@ -531,8 +531,8 @@ class Producto {
       const { id_principio } = req.params || null;
 
       Store.eliminar_principio_activo(Number(id_principio))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(
