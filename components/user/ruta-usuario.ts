@@ -98,7 +98,7 @@ class Usuario {
           Respuestas.success(
             req,
             res,
-            { feeback: "El usuario ya existe" },
+            { feeback: "El usuario ya existe, intente con otros datos" },
             200
           );
         }
@@ -157,8 +157,8 @@ class Usuario {
       const { id } = req.params || null;
 
       Store.eliminar_usuario(id)
-        .then((data) => {
-          Respuestas.success(req, res, data, 200);
+        .then(() => {
+          Respuestas.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuestas.error(req, res, err, 500, "Error al eliminar usuarios");
