@@ -21,7 +21,6 @@ class Login {
     console.log("validando el tiempo de vida del token, TOKEN ACTIVO");
     StoreUser.consulta_usuario(res.locals.datos_user.id_user)
       .then((user) => {
-        delete user[0].password;
         Respuesta.success(req, res, { myUser: user }, 200);
       })
       .catch((err) => {
