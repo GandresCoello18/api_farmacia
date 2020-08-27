@@ -18,8 +18,15 @@ class Login {
   }
 
   validar_vida_token(req: Request, res: Response) {
-    console.log("validando el tiempo de vida del token, token activo");
-    Respuesta.success(req, res, { feeback: "Token activo" }, 200);
+    console.log("validando el tiempo de vida del token, TOKEN ACTIVO");
+    StoreUser.consulta_usuario(res.locals.datos_user.id_user)
+      .then((user) => {
+        delete user[0].password;
+        Respuesta.success(req, res, { myUser: user }, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "error en pedir datos unico user");
+      });
   }
 
   autenticar(req: Request, res: Response) {
