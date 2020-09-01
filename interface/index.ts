@@ -57,11 +57,10 @@ export interface Factura_INT {
   fecha_factura: string;
   descripcion: string;
   descuento: number;
-  iva: number;
   total: number;
   efectivo: number;
   cambio: number;
-  productos: Array<Producto_INT>;
+  carrito: Array<Carrito_INT>;
 }
 
 export interface Producto_Factura_INT {
@@ -98,4 +97,13 @@ export interface Prestamo_INT {
   descripcion_prestamo: string;
   fecha_prestamo?: string;
   cantidad_prestamo: number;
+}
+
+export interface Carrito_INT {
+  producto: Producto_INT;
+  formato: string;
+  precio_unidad: number;
+  cantidad: number;
+  iva: boolean;
+  total: number;
 }

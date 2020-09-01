@@ -1,4 +1,37 @@
 "use strict";
+var __awaiter =
+  (this && this.__awaiter) ||
+  function (thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P
+        ? value
+        : new P(function (resolve) {
+            resolve(value);
+          });
+    }
+    return new (P || (P = Promise))(function (resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done
+          ? resolve(result.value)
+          : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  };
 var __importDefault =
   (this && this.__importDefault) ||
   function (mod) {
@@ -7,6 +40,7 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Store_cliente_1 = __importDefault(require("./Store-cliente"));
+const cliente_1 = __importDefault(require("./response/cliente"));
 const response_1 = __importDefault(require("../../network/response"));
 const { comprobar } = require("../util/util-login");
 const uuid_1 = require("uuid");
@@ -31,11 +65,17 @@ class Cliente {
             direccion,
           };
           if (obj.correo == "") obj.correo = "no especificado";
+          if (obj.direccion == "") obj.direccion = "no especificado";
           Store_cliente_1.default
             .add_cliente(obj)
-            .then((data) => {
-              response_1.default.success(req, res, data, 200);
-            })
+            .then(() =>
+              __awaiter(this, void 0, void 0, function* () {
+                const resClient = yield cliente_1.default.responder_cliente(
+                  obj.id_cliente
+                );
+                response_1.default.success(req, res, resClient, 200);
+              })
+            )
             .catch((err) => {
               response_1.default.error(
                 req,
@@ -115,8 +155,8 @@ class Cliente {
       const { id_cliente } = req.params || null;
       Store_cliente_1.default
         .borrar_cliente(id_cliente)
-        .then((data) => {
-          response_1.default.success(req, res, data, 200);
+        .then(() => {
+          response_1.default.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           response_1.default.error(

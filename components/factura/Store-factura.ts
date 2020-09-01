@@ -7,7 +7,7 @@ class StoreFactura {
   async add_factura(Factura: Factura_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `INSERT INTO factura (id_factura, id_cliente, fecha_factura, descripcion_f, descuento, iva, total, efectivo, cambio) VALUES ('${Factura.id_factura}', '${Factura.id_cliente}', '${Factura.fecha_factura}', '${Factura.descripcion}', ${Factura.descuento}, ${Factura.iva}, ${Factura.total}, ${Factura.efectivo}, ${Factura.cambio})`,
+        `INSERT INTO factura (id_factura, id_cliente, fecha_factura, descripcion_f, descuento, total, efectivo, cambio) VALUES ('${Factura.id_factura}', '${Factura.id_cliente}', '${Factura.fecha_factura}', '${Factura.descripcion}', ${Factura.descuento}, ${Factura.total}, ${Factura.efectivo}, ${Factura.cambio})`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

@@ -23,11 +23,10 @@ class Factura {
       id_cliente,
       descripcion,
       descuento,
-      iva,
       total,
       efectivo = 0,
       cambio = 0,
-      productos,
+      carrito,
     } = req.body || null;
     const obj = {
       id_factura: uuid_1.v4(),
@@ -35,11 +34,10 @@ class Factura {
       fecha_factura: util_fecha_1.default.fecha_con_hora_actual(),
       descripcion,
       descuento,
-      iva,
       total,
       efectivo,
       cambio,
-      productos,
+      carrito,
     };
     if (obj.id_cliente == "") {
       obj.id_cliente = "b1fd154a-d4a2-42a0-b7a1-e4e6b0ffa479";
@@ -48,15 +46,15 @@ class Factura {
     Store_factura_1.default
       .add_factura(obj)
       .then((data) => {
-        for (let i = 0; i < obj.productos.length; i++) {
+        for (let i = 0; i < obj.carrito.length; i++) {
           let objVenta = {
             id_producto_fac: uuid_1.v4(),
-            id_producto: obj.productos[i].id_producto,
+            id_producto: obj.carrito[i].producto.id_producto,
             id_factura: obj.id_factura,
-            formato: `${obj.productos[i].formato}`,
-            cantidad: Number(obj.productos[i].unidades),
-            item_total: Number(obj.productos[i].item_total),
-            iva: Number(obj.productos[i].iva),
+            formato: `${obj.carrito[i].formato}`,
+            cantidad: Number(obj.carrito[i].cantidad),
+            item_total: Number(obj.carrito[i].total),
+            iva: Number(obj.carrito[i].iva),
           };
           Store_ventas_1.default
             .add_venta(objVenta)
@@ -66,60 +64,69 @@ class Factura {
             .catch((err) => {
               console.log("Error al crear venta: " + err.message);
             });
-          if (obj.productos[i].formato == "Por Unidad") {
-            Store_producto_1.default
-              .producto_unico(obj.productos[i].id_producto)
-              .then((data) => {
-                if (data == 0) {
-                  console.log("No hay productos para modificar las unidades");
-                } else {
-                  let estado = "";
-                  let nueva_cantidad =
+          Store_producto_1.default
+            .producto_unico(obj.carrito[i].producto.id_producto)
+            .then((data) => {
+              if (data == 0) {
+                console.log("No hay productos para modificar las unidades");
+              } else {
+                let estado = "";
+                let nueva_cantidad = 0;
+                console.log(obj.carrito[i].formato);
+                if (obj.carrito[i].formato === "paquete") {
+                  nueva_cantidad =
                     Number(data[0].cantidad_disponible) -
-                    Number(obj.productos[i].unidades);
-                  if (nueva_cantidad == 0) {
-                    estado = "Vendido";
-                  } else {
-                    estado = "Aun disponible";
-                  }
-                  Store_producto_1.default
-                    .cambiar_status_producto(
-                      obj.productos[i].id_producto,
-                      estado
-                    )
-                    .then((data) => {
-                      return response_1.default.success(req, res, data, 200);
-                    })
-                    .catch((err) => {
-                      console.log(
-                        "Error al cambiar estado producto: " + err.message
-                      );
-                    });
-                  Store_producto_1.default
-                    .cambiar_cantidad_de_unidades_producto(
-                      obj.productos[i].id_producto,
-                      nueva_cantidad
-                    )
-                    .then(() => {
-                      console.log(
-                        "Se cambio la cantidad de unidades en producto"
-                      );
-                    })
-                    .catch((err) => {
-                      console.log(`Error: ${err.message}`);
-                    });
+                    Number(obj.carrito[i].producto.cantidad);
+                } else {
+                  nueva_cantidad =
+                    Number(data[0].cantidad_disponible) -
+                    Number(obj.carrito[i].cantidad);
                 }
-              });
-          } else {
-            Store_producto_1.default
-              .cambiar_status_producto(obj.productos[i].id_producto, "Vendido")
-              .then((data) => {
-                return response_1.default.success(req, res, data, 200);
-              })
-              .catch((err) => {
-                console.log("Error al cambiar estado producto: " + err.message);
-              });
-          }
+                if (nueva_cantidad == 0) {
+                  estado = "Vendido";
+                } else {
+                  estado = "Aun disponible";
+                }
+                Store_producto_1.default
+                  .cambiar_status_producto(
+                    obj.carrito[i].producto.id_producto,
+                    estado
+                  )
+                  .then((data) => {
+                    return response_1.default.success(req, res, data, 200);
+                  })
+                  .catch((err) => {
+                    console.log(
+                      "Error al cambiar estado producto: " + err.message
+                    );
+                  });
+                Store_producto_1.default
+                  .cambiar_cantidad_de_unidades_producto(
+                    obj.carrito[i].producto.id_producto,
+                    nueva_cantidad
+                  )
+                  .then(() => {
+                    console.log(
+                      "Se cambio la cantidad de unidades en producto"
+                    );
+                  })
+                  .catch((err) => {
+                    console.log(`Error: ${err.message}`);
+                  });
+              }
+            });
+          /*else {
+                StoreProduct.cambiar_status_producto(
+                  obj.carrito[i].producto.id_producto,
+                  "Vendido"
+                )
+                  .then((data) => {
+                    return Respuesta.success(req, res, data, 200);
+                  })
+                  .catch((err) => {
+                    console.log("Error al cambiar estado producto: " + err.message);
+                  });
+              }*/
         }
         response_1.default.success(req, res, data, 200);
       })

@@ -53,8 +53,21 @@ class Login {
     this.ruta();
   }
   validar_vida_token(req, res) {
-    console.log("validando el tiempo de vida del token, token activo");
-    response_1.default.success(req, res, { feeback: "Token activo" }, 200);
+    console.log("validando el tiempo de vida del token, TOKEN ACTIVO");
+    store_usuario_1.default
+      .consulta_usuario(res.locals.datos_user.id_user)
+      .then((user) => {
+        response_1.default.success(req, res, { myUser: user }, 200);
+      })
+      .catch((err) => {
+        response_1.default.error(
+          req,
+          res,
+          err,
+          500,
+          "error en pedir datos unico user"
+        );
+      });
   }
   autenticar(req, res) {
     const { email, password } = req.body || null;

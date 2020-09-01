@@ -1,4 +1,37 @@
 "use strict";
+var __awaiter =
+  (this && this.__awaiter) ||
+  function (thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P
+        ? value
+        : new P(function (resolve) {
+            resolve(value);
+          });
+    }
+    return new (P || (P = Promise))(function (resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done
+          ? resolve(result.value)
+          : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  };
 var __importDefault =
   (this && this.__importDefault) ||
   function (mod) {
@@ -93,7 +126,7 @@ class Usuario {
           response_1.default.success(
             req,
             res,
-            { feeback: "El usuario ya existe" },
+            { feeback: "El usuario ya existe, intente con otros datos" },
             200
           );
         }
@@ -167,8 +200,8 @@ class Usuario {
       const { id } = req.params || null;
       store_usuario_1.default
         .eliminar_usuario(id)
-        .then((data) => {
-          response_1.default.success(req, res, data, 200);
+        .then(() => {
+          response_1.default.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           response_1.default.error(
@@ -237,14 +270,14 @@ class Usuario {
           } else {
             store_usuario_1.default
               .clean_history_session(Number(data[0].id_historial_session))
-              .then(() => {
-                response_1.default.success(
-                  req,
-                  res,
-                  { feeback: "Se limpio el historial de session" },
-                  200
-                );
-              })
+              .then(() =>
+                __awaiter(this, void 0, void 0, function* () {
+                  const response = yield store_usuario_1.default.listar_history_session(
+                    6
+                  );
+                  response_1.default.success(req, res, { data: response }, 200);
+                })
+              )
               .catch((err) => {
                 response_1.default.error(
                   req,
