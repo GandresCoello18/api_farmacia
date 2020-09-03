@@ -1,7 +1,9 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-factura";
+import { obtener_facturas_ventas } from "./hooks";
 import StoreVenta from "../ventas/Store-ventas";
 import StoreProduct from "../producto/Store-producto";
+import ResponseFact from "../factura/response/factura";
 import Respuesta from "../../network/response";
 import { Factura_INT, Producto_Factura_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
@@ -45,7 +47,7 @@ class Factura {
     if (obj.descripcion == "") obj.descripcion = "Sin descripcion";
 
     Store.add_factura(obj)
-      .then((data) => {
+      .then(async () => {
         for (let i = 0; i < obj.carrito.length; i++) {
           let objVenta: Producto_Factura_INT = {
             id_producto_fac: uuidv4(),
@@ -58,8 +60,9 @@ class Factura {
           };
 
           StoreVenta.add_venta(objVenta)
-            .then((data) => {
-              Respuesta.success(req, res, data, 200);
+            .then(() => {
+              //Respuesta.success(req, res, data, 200);
+              console.log("Venta Registrada");
             })
             .catch((err) => {
               console.log("Error al crear venta: " + err.message);
@@ -93,8 +96,9 @@ class Factura {
                   obj.carrito[i].producto.id_producto,
                   estado
                 )
-                  .then((data) => {
-                    return Respuesta.success(req, res, data, 200);
+                  .then(() => {
+                    console.log("Se cambio el estado del producto");
+                    //return Respuesta.success(req, res, data, 200);
                   })
                   .catch((err) => {
                     console.log(
@@ -117,21 +121,11 @@ class Factura {
               }
             }
           );
-          /*else {
-            StoreProduct.cambiar_status_producto(
-              obj.carrito[i].producto.id_producto,
-              "Vendido"
-            )
-              .then((data) => {
-                return Respuesta.success(req, res, data, 200);
-              })
-              .catch((err) => {
-                console.log("Error al cambiar estado producto: " + err.message);
-              });
-          }*/
         }
 
-        Respuesta.success(req, res, data, 200);
+        const resFact = await ResponseFact.responder_factura(obj.id_factura);
+        const factura = await obtener_facturas_ventas(resFact);
+        Respuesta.success(req, res, factura, 200);
       })
       .catch((err) => {
         Respuesta.error(
@@ -145,14 +139,11 @@ class Factura {
   }
 
   traer_facturas(req: Request, res: Response) {
-    Store.traer_facturas()
+    const { fecha_factura } = req.params || null;
+
+    Store.traer_facturas(fecha_factura)
       .then(async (data) => {
-        let factura: Array<any> = [];
-        for (let i = 0; i < data.length; i++) {
-          const ventas = await StoreVenta.traer_venta(data[i].id_factura);
-          let fac = data[i];
-          factura.push({ ...fac, carrito: ventas });
-        }
+        const factura = await obtener_facturas_ventas(data);
         Respuesta.success(req, res, factura, 200);
       })
       .catch((err) => {
@@ -184,7 +175,7 @@ class Factura {
 
       Store.eliminar_factura(id_factura)
         .then((data) => {
-          Respuesta.success(req, res, data, 200);
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar factura");
@@ -202,7 +193,7 @@ class Factura {
   ruta() {
     this.router.post("/", this.crear_factura);
     this.router.get("/monto_total/:fecha", this.monto_total_por_fecha);
-    this.router.get("/", this.traer_facturas);
+    this.router.get("/:fecha_factura", this.traer_facturas);
     this.router.delete("/:id_factura", comprobar, this.eliminar_factura);
   }
 }
