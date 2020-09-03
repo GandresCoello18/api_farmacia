@@ -73,8 +73,6 @@ class Factura {
                 let estado: string = "";
                 let nueva_cantidad = 0;
 
-                console.log(obj.carrito[i].formato);
-
                 if (obj.carrito[i].formato === "paquete") {
                   nueva_cantidad =
                     Number(data[0].cantidad_disponible) -
@@ -148,8 +146,14 @@ class Factura {
 
   traer_facturas(req: Request, res: Response) {
     Store.traer_facturas()
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
+      .then(async (data) => {
+        let factura: Array<any> = [];
+        for (let i = 0; i < data.length; i++) {
+          const ventas = await StoreVenta.traer_venta(data[i].id_factura);
+          let fac = data[i];
+          factura.push({ ...fac, carrito: ventas });
+        }
+        Respuesta.success(req, res, factura, 200);
       })
       .catch((err) => {
         Respuesta.error(req, res, err, 500, "Error en traer facturas");

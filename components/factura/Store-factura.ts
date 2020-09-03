@@ -18,10 +18,10 @@ class StoreFactura {
 
   /* SELECT - MOSTRAR - CONSULTA */
 
-  async traer_facturas(): Promise<Factura_INT> {
+  async traer_facturas(): Promise<Factura_INT[]> {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.descuento, factura.iva, factura.total, cliente.correo, cliente.identificacion FROM factura INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente ORDER BY factura.id_factura DESC;`,
+        `SELECT factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.descuento, factura.total, factura.efectivo, factura.cambio, cliente.nombres, cliente.apellidos, cliente.correo, cliente.identificacion FROM factura INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente ORDER BY factura.id_factura DESC;`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
