@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-proveedor";
+import ResponseProveedor from "./response/proveedor";
 import Respuesta from "../../network/response";
 import Fecha from "../util/util-fecha";
 import { Proveedor_INT, Producto_proveedor_INT } from "../../interface/index";
@@ -38,8 +39,11 @@ class Proveedor {
     };
 
     Store.add_proveedor(obj)
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
+      .then(async () => {
+        const resProveedor = await ResponseProveedor.responder_proveedor(
+          obj.id_proveedor
+        );
+        Respuesta.success(req, res, resProveedor, 200);
       })
       .catch((err) => {
         Respuesta.error(req, res, err, 500, "Error al crear proveedor");
@@ -51,8 +55,8 @@ class Proveedor {
       const { id_proveedor } = req.params || null;
 
       Store.eliminar_proveedor(id_proveedor)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error al eliminar proveedor");
