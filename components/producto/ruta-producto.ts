@@ -375,6 +375,16 @@ class Producto {
       });
   }
 
+  mostrar_productos_caducados(req: Request, res: Response) {
+    Store.listar_producto_caducados()
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en mostrar productos");
+      });
+  }
+
   eliminar_producto(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_producto } = req.params || null;
@@ -636,6 +646,7 @@ class Producto {
     this.router.post("/", comprobar, this.create_product);
     this.router.put("/:id_producto", comprobar, this.editar_producto);
     this.router.get("/", this.mostrar_productos);
+    this.router.get("/caducados", this.mostrar_productos_caducados);
   }
 }
 
