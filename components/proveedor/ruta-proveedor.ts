@@ -140,7 +140,9 @@ class Proveedor {
   }
 
   mostrar_productos_proveedore(req: Request, res: Response) {
-    Store.mostrar_product_proveedor()
+    const { id_proveedor } = req.params || null;
+
+    Store.mostrar_product_proveedor(id_proveedor)
       .then((data) => {
         Respuesta.success(req, res, data, 200);
       })
@@ -266,7 +268,10 @@ class Proveedor {
     this.router.put("/:id_proveedor", comprobar, this.editar_proveedor);
     ////////  NEW PRODUCT PROVEEDORES
     this.router.post("/producto", this.nuevo_producto_proveedor);
-    this.router.get("/producto", this.mostrar_productos_proveedore);
+    this.router.get(
+      "/producto/:id_proveedor",
+      this.mostrar_productos_proveedore
+    );
     this.router.get(
       "/producto/monto_total/:fecha",
       this.mostrar_monto_total_por_fecha_pp
