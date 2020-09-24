@@ -110,7 +110,7 @@ class Proveedor {
       total,
       id_proveedor,
       estado_pp,
-      abono,
+      abonado,
     } = req.body;
 
     const obj: Producto_proveedor_INT = {
@@ -121,8 +121,10 @@ class Proveedor {
       total,
       id_proveedor,
       estado_pp,
-      abono,
+      abonado,
     };
+
+    console.log(obj);
 
     Store.add_product_proveedor(obj)
       .then((data) => {
@@ -174,8 +176,8 @@ class Proveedor {
       const { id_producto_proveedor } = req.params || null;
 
       Store.eliminar_product_proveedor(id_producto_proveedor)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(
@@ -236,24 +238,23 @@ class Proveedor {
     const { id_producto_proveedor } = req.params || null;
 
     Store.mostrar_unico_product_proveedor(id_producto_proveedor)
-      .then((data: any) => {
-        Store.pago_product_proveedor(
-          id_producto_proveedor,
-          data[0].total,
-          Fecha.fecha_actual()
-        )
-          .then((data) => {
-            Respuesta.success(req, res, data, 200);
-          })
-          .catch((err) => {
-            Respuesta.error(
-              req,
-              res,
-              err,
-              500,
-              "Error en pago de producto del proveedor"
-            );
-          });
+      .then(async (data: any) => {
+        try {
+          await Store.pago_product_proveedor(
+            id_producto_proveedor,
+            data[0].total,
+            Fecha.fecha_actual()
+          );
+          Respuesta.success(req, res, { update: true }, 200);
+        } catch (error) {
+          Respuesta.error(
+            req,
+            res,
+            error,
+            500,
+            "Error en pago de producto del proveedor"
+          );
+        }
       })
       .catch((err) => {
         console.log(`Error en traer producto unico ${err.message}`);

@@ -19,7 +19,7 @@ class StoreProveedor {
   async add_product_proveedor(PP: Producto_proveedor_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `INSERT INTO producto_proveedor (id_product_proveedor, descripcion, fecha_pago, total, id_proveedor, fecha_ingreso, estado_pp, abonado) VALUES ('${PP.id_product_proveedor}', '${PP.descripcion}', '${PP.fecha_pago}', ${PP.total}, '${PP.id_proveedor}', '${PP.fecha_ingreso}', '${PP.estado_pp}', ${PP.abono})`,
+        `INSERT INTO producto_proveedor (id_product_proveedor, descripcion, fecha_pago, total, id_proveedor, fecha_ingreso, estado_pp, abonado) VALUES ('${PP.id_product_proveedor}', '${PP.descripcion}', '${PP.fecha_pago}', ${PP.total}, '${PP.id_proveedor}', '${PP.fecha_ingreso}', '${PP.estado_pp}', ${PP.abonado})`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
