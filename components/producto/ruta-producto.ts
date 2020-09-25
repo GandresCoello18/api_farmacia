@@ -6,6 +6,8 @@ import RespuestaTable from "./response-table/propiedades-producto";
 import RespuestaTableProduct from "./response-table/producto";
 import { Producto_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
+import Colors from "colors";
+import { csvWriter } from "../../csv/generate-csv";
 import { v4 as uuidv4 } from "uuid";
 
 class Producto {
@@ -385,6 +387,28 @@ class Producto {
       });
   }
 
+  reporte_producto(req: Request, res: Response) {
+    Store.listar_producto()
+      .then((data) => {
+        csvWriter.writeRecords(data).then(() => {
+          console.log(
+            Colors.bgGreen(
+              Colors.white("The CSV file was written successfully")
+            )
+          );
+          Respuesta.success(
+            req,
+            res,
+            { feeback: "The CSV file was written successfully" },
+            200
+          );
+        });
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en mostrar productos");
+      });
+  }
+
   eliminar_producto(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_producto } = req.params || null;
@@ -647,6 +671,8 @@ class Producto {
     this.router.put("/:id_producto", comprobar, this.editar_producto);
     this.router.get("/", this.mostrar_productos);
     this.router.get("/caducados", this.mostrar_productos_caducados);
+    ////////////// Reportes CSV
+    this.router.get("/reporte", this.reporte_producto);
   }
 }
 
