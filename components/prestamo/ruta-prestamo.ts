@@ -63,6 +63,8 @@ class Proveedor {
         descripcion_prestamo,
         fecha_prestamo: Fecha.fecha_con_hora_actual(),
         cantidad_prestamo: Number(cantidad_prestamo),
+        estado_prestamo: "Prestado",
+        abono_prestamo: 0,
       };
 
       Store.add_prestamos(obj)
@@ -85,12 +87,19 @@ class Proveedor {
   editar_prestamo(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_prestamo } = req.params || null;
-      const { descripcion_prestamo, cantidad_prestamo } = req.body || null;
+      const {
+        descripcion_prestamo,
+        cantidad_prestamo,
+        estado_prestamo,
+        abono_prestamo,
+      } = req.body || null;
 
       let obj: Prestamo_INT = {
         id_prestamo,
         cantidad_prestamo: Number(cantidad_prestamo),
         descripcion_prestamo,
+        estado_prestamo,
+        abono_prestamo,
       };
 
       console.log(obj);
@@ -124,7 +133,7 @@ class Proveedor {
 
       Store.eliminar_prestamos(id_prestamo)
         .then((data) => {
-          Respuesta.success(req, res, data, 200);
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar prestamo");

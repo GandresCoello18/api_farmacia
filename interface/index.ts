@@ -97,6 +97,8 @@ export interface Prestamo_INT {
   descripcion_prestamo: string;
   fecha_prestamo?: string;
   cantidad_prestamo: number;
+  estado_prestamo: string;
+  abono_prestamo: number;
 }
 
 export interface Carrito_INT {
