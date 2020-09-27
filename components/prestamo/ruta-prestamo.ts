@@ -127,6 +127,73 @@ class Proveedor {
     }
   }
 
+  incrementar_abono(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      const { id_prestamo } = req.params || null;
+      const { incremento_abono } = req.body || null;
+
+      Store.mostrar_unico_prestamos(id_prestamo)
+        .then((unico) => {
+          if (unico[0].estado_prestamo !== "Pagado") {
+            let estado_abono = "";
+            if (Number(incremento_abono) < Number(unico[0].cantidad_prestamo)) {
+              estado_abono = "Saldo pendiente";
+            }
+
+            if (
+              Number(incremento_abono) === Number(unico[0].cantidad_prestamo)
+            ) {
+              estado_abono = "Pagado";
+            }
+
+            Store.incrementar_abono_prestamos(
+              id_prestamo,
+              estado_abono,
+              incremento_abono
+            )
+              .then(async () => {
+                const resPrestamo = await Store.mostrar_unico_prestamos(
+                  id_prestamo
+                );
+
+                Respuesta.success(
+                  req,
+                  res,
+                  { update: true, prestamo: resPrestamo },
+                  200
+                );
+              })
+              .catch((err) => {
+                Respuesta.error(
+                  req,
+                  res,
+                  err,
+                  500,
+                  "Error en incrementar el abono del prestamo"
+                );
+              });
+          } else {
+            Respuesta.success(
+              req,
+              res,
+              { feeback: "Este prestamo ya fue cancelado" },
+              200
+            );
+          }
+        })
+        .catch((err) => {
+          Respuesta.error(req, res, err, 500, "Error en prestamo unico");
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+
   eliminar_prestamo(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_prestamo } = req.params || null;
@@ -149,14 +216,19 @@ class Proveedor {
   }
 
   ruta() {
+    this.router.get("/fecha/:fecha", this.mostrar_prestamo_por_fecha);
     this.router.get(
       "/monto_total/fecha/:fecha",
       this.mostrar_monto_total_por_fecha
     );
-    this.router.get("/fecha/:fecha", this.mostrar_prestamo_por_fecha);
     this.router.get("/", this.mostrar_prestamos);
     this.router.post("/", comprobar, this.crear_prestamo);
     this.router.put("/:id_prestamo", comprobar, this.editar_prestamo);
+    this.router.put(
+      "/incrementar_abono/:id_prestamo",
+      comprobar,
+      this.incrementar_abono
+    );
     this.router.delete("/:id_prestamo", comprobar, this.eliminar_prestamo);
   }
 }
