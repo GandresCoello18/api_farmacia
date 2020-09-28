@@ -30,6 +30,18 @@ class StoreFactura {
     });
   }
 
+  async traer_solo_facturas(): Promise<Factura_INT[]> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT fecha_factura, total FROM factura;`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
   async monto_total_por_fecha(fecha: string) {
     return await new Promise((resolve, reject) => {
       database.query(

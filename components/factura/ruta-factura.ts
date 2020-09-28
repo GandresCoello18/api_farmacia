@@ -169,6 +169,29 @@ class Factura {
       });
   }
 
+  monto_venta_por_mes(req: Request, res: Response) {
+    Store.traer_solo_facturas()
+      .then((data) => {
+        let ventas_por_mes = [];
+        let mes: Factura_INT[] = [];
+
+        for (let i = 0; i < 12; i++) {
+          for (let j = 0; j < data.length; j++) {
+            if (new Date(data[j].fecha_factura).getMonth() === i) {
+              mes.push(data[j]);
+            }
+          }
+          ventas_por_mes.push(mes);
+          mes = [];
+        }
+
+        Respuesta.success(req, res, ventas_por_mes, 200);
+      })
+      .catch((error) => {
+        Respuesta.error(req, res, error, 500, "Error en traer solo facturas");
+      });
+  }
+
   eliminar_factura(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_factura } = req.params || null;
@@ -193,6 +216,7 @@ class Factura {
   ruta() {
     this.router.post("/", this.crear_factura);
     this.router.get("/monto_total/:fecha", this.monto_total_por_fecha);
+    this.router.get("/ventas_por_mes", this.monto_venta_por_mes);
     this.router.get("/:fecha_factura", this.traer_facturas);
     this.router.delete("/:id_factura", comprobar, this.eliminar_factura);
   }
