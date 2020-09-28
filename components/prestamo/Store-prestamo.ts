@@ -21,7 +21,7 @@ class StorePrestamos {
   async mostrar_prestamos(): Promise<Prestamo_INT[]> {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT * FROM prestamos ORDER BY fecha_prestamo ASC LIMIT 20`,
+        `SELECT * FROM prestamos ORDER BY fecha_prestamo ASC;`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

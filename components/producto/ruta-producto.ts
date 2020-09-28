@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import Store from "./Store-producto";
 import Respuesta from "../../network/response";
 // import multer from "multer";
+import Fecha from "../util/util-fecha";
 import RespuestaTable from "./response-table/propiedades-producto";
 import RespuestaTableProduct from "./response-table/producto";
 import { Producto_INT } from "../../interface/index";
@@ -387,6 +388,31 @@ class Producto {
       });
   }
 
+  verificar_posibles_productos_caducados(req: Request, res: Response) {
+    Store.solo_producto()
+      .then((data) => {
+        data.map(async (producto) => {
+          if (
+            new Date(Fecha.fecha_actual()) >= new Date(producto.fecha_caducidad)
+          ) {
+            console.log(
+              Colors.bgRed(
+                Colors.white(`Producto caducado: ${producto.id_producto}`)
+              )
+            );
+            return await Store.cambiar_status_producto(
+              producto.id_producto,
+              "Caducado"
+            );
+          }
+        });
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en mostrar productos");
+      });
+  }
+
   reporte_producto(req: Request, res: Response) {
     Store.listar_producto()
       .then((data) => {
@@ -668,6 +694,10 @@ class Producto {
     /////////////// producto completo
     this.router.delete("/:id_producto", comprobar, this.eliminar_producto);
     this.router.post("/", comprobar, this.create_product);
+    this.router.put(
+      "/verificar_posibles_caducados",
+      this.verificar_posibles_productos_caducados
+    );
     this.router.put("/:id_producto", comprobar, this.editar_producto);
     this.router.get("/", this.mostrar_productos);
     this.router.get("/caducados", this.mostrar_productos_caducados);

@@ -102,8 +102,6 @@ class Proveedor {
         abono_prestamo,
       };
 
-      console.log(obj);
-
       Store.edit_prestamos(obj)
         .then((data) => {
           Respuesta.success(req, res, data, 200);
@@ -199,11 +197,48 @@ class Proveedor {
       const { id_prestamo } = req.params || null;
 
       Store.eliminar_prestamos(id_prestamo)
-        .then((data) => {
+        .then(() => {
           Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar prestamo");
+        });
+    } else {
+      Respuesta.success(
+        req,
+        res,
+        { feeback: "No tienes permisos para estan accion" },
+        200
+      );
+    }
+  }
+
+  limpiar_prestamo(req: Request, res: Response) {
+    if (res.locals.datos_user.tipo_user == "Administrador") {
+      Store.mostrar_prestamos()
+        .then((data) => {
+          const prestamos = data;
+
+          data.map(async (prestamo, index) => {
+            const fecha_prestamo: string | any = prestamo.fecha_prestamo;
+            if (
+              new Date(fecha_prestamo).getMonth() !==
+              new Date(Fecha.fecha_actual()).getMonth()
+            ) {
+              await Store.eliminar_prestamos(prestamo.id_prestamo);
+              return prestamos.splice(index, 1);
+            }
+          });
+
+          Respuesta.success(
+            req,
+            res,
+            { removed: true, prestamos: prestamos },
+            200
+          );
+        })
+        .catch((error) => {
+          Respuesta.error(req, res, error, 500, "Error en limpiar prestamo");
         });
     } else {
       Respuesta.success(
@@ -229,6 +264,7 @@ class Proveedor {
       comprobar,
       this.incrementar_abono
     );
+    this.router.delete("/limpiar_prestamos", comprobar, this.limpiar_prestamo);
     this.router.delete("/:id_prestamo", comprobar, this.eliminar_prestamo);
   }
 }
