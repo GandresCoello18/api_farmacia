@@ -1,9 +1,14 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-producto";
 import Respuesta from "../../network/response";
-import multer from "multer";
+// import multer from "multer";
+import Fecha from "../util/util-fecha";
+import RespuestaTable from "./response-table/propiedades-producto";
+import RespuestaTableProduct from "./response-table/producto";
 import { Producto_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
+import Colors from "colors";
+import { csvWriter } from "../../csv/generate-csv";
 import { v4 as uuidv4 } from "uuid";
 
 class Producto {
@@ -15,7 +20,7 @@ class Producto {
   }
 
   /* configuracion para la subida de imagnes */
-  store_file() {
+  /*store_file() {
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "./public/productos");
@@ -48,7 +53,7 @@ class Producto {
     });
 
     return upload;
-  }
+  }*/
   /* NOMBRE DEL PRODUCTO */
 
   async create_name_product(req: Request, res: Response) {
@@ -59,8 +64,11 @@ class Producto {
         .then((data: any) => {
           if (data == 0) {
             Store.add_name_product(name_product)
-              .then((data) => {
-                Respuesta.success(req, res, data, 201);
+              .then(async () => {
+                const responseTble = await RespuestaTable.responder_nombre_producto(
+                  name_product
+                );
+                Respuesta.success(req, res, responseTble, 200);
               })
               .catch((err) => {
                 Respuesta.error(
@@ -114,8 +122,8 @@ class Producto {
       const { id_name_producto } = req.params || null;
 
       Store.eliminar_name_product(Number(id_name_producto))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar product name");
@@ -168,8 +176,11 @@ class Producto {
         .then((data: any) => {
           if (data == 0) {
             Store.add_name_laboratorio(name_laboratorio)
-              .then((data) => {
-                Respuesta.success(req, res, data, 201);
+              .then(async () => {
+                const responseTble = await RespuestaTable.responder_nombre_laboratorio(
+                  name_laboratorio
+                );
+                Respuesta.success(req, res, responseTble, 200);
               })
               .catch((err) => {
                 Respuesta.error(
@@ -229,8 +240,8 @@ class Producto {
       const { id_name_laboratorio } = req.params || null;
 
       Store.eliminar_name_laboratorio(Number(id_name_laboratorio))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(
@@ -306,46 +317,47 @@ class Producto {
 
       let p = 0;
       if (id_principio_activo == "") {
-        let r: any = await Store.search_princt_activ_none();
-        p = Number(r[0].id_principio_activo);
+        let none: any = await Store.search_princt_activ_none();
+        p = Number(none[0].id_principio_activo);
       } else {
         p = id_principio_activo;
       }
 
-      for (let i = 0; i < Number(veces_ingreso); i++) {
-        const obj: Producto_INT = {
-          id_producto: uuidv4(),
-          id_name_product,
-          id_name_laboratorio,
-          cantidad,
-          presentacion,
-          lote,
-          registro_sanitario,
-          dosis,
-          tipo_dosis,
-          fecha_elaboracion,
-          fecha_caducidad,
-          pvp,
-          pvf,
-          estado: "Disponible",
-          id_principio_activo: p,
-          cantidad_disponible,
-        };
+      const obj: Producto_INT = {
+        id_producto: uuidv4(),
+        id_name_product,
+        id_name_laboratorio,
+        cantidad,
+        presentacion,
+        lote,
+        registro_sanitario,
+        dosis,
+        tipo_dosis,
+        fecha_elaboracion,
+        fecha_caducidad,
+        pvp,
+        pvf,
+        estado: "Disponible",
+        id_principio_activo: p,
+        cantidad_disponible,
+      };
 
-        Store.add_product(obj)
-          .then((data) => {
-            Respuesta.success(req, res, data, 200);
-          })
-          .catch((err) => {
-            Respuesta.error(
-              req,
-              res,
-              err,
-              500,
-              `Error al crear producto: ${err}`
-            );
-          });
-      }
+      Store.add_product(obj)
+        .then(async () => {
+          const respuestaProduct = await RespuestaTableProduct.responder_producto(
+            obj.id_producto
+          );
+          Respuesta.success(req, res, respuestaProduct, 200);
+        })
+        .catch((err) => {
+          Respuesta.error(
+            req,
+            res,
+            err,
+            500,
+            `Error al crear producto: ${err}`
+          );
+        });
     } else {
       Respuesta.success(
         req,
@@ -366,13 +378,70 @@ class Producto {
       });
   }
 
+  mostrar_productos_caducados(req: Request, res: Response) {
+    Store.listar_producto_caducados()
+      .then((data) => {
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en mostrar productos");
+      });
+  }
+
+  verificar_posibles_productos_caducados(req: Request, res: Response) {
+    Store.solo_producto()
+      .then((data) => {
+        data.map(async (producto) => {
+          if (
+            new Date(Fecha.fecha_actual()) >= new Date(producto.fecha_caducidad)
+          ) {
+            console.log(
+              Colors.bgRed(
+                Colors.white(`Producto caducado: ${producto.id_producto}`)
+              )
+            );
+            return await Store.cambiar_status_producto(
+              producto.id_producto,
+              "Caducado"
+            );
+          }
+        });
+        Respuesta.success(req, res, data, 200);
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en mostrar productos");
+      });
+  }
+
+  reporte_producto(req: Request, res: Response) {
+    Store.listar_producto()
+      .then((data) => {
+        csvWriter.writeRecords(data).then(() => {
+          console.log(
+            Colors.bgGreen(
+              Colors.white("The CSV file was written successfully")
+            )
+          );
+          Respuesta.success(
+            req,
+            res,
+            { feeback: "The CSV file was written successfully" },
+            200
+          );
+        });
+      })
+      .catch((err) => {
+        Respuesta.error(req, res, err, 500, "Error en mostrar productos");
+      });
+  }
+
   eliminar_producto(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_producto } = req.params || null;
 
       Store.eliminar_producto(id_producto)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar producto");
@@ -458,8 +527,11 @@ class Producto {
         .then((data: any) => {
           if (data == 0) {
             Store.add_principio_activo(name_principio_activo)
-              .then((data) => {
-                Respuesta.success(req, res, data, 200);
+              .then(async () => {
+                const responseTble = await RespuestaTable.responder_principio_activo(
+                  name_principio_activo
+                );
+                Respuesta.success(req, res, responseTble, 200);
               })
               .catch((err) => {
                 Respuesta.error(
@@ -519,8 +591,8 @@ class Producto {
       const { id_principio } = req.params || null;
 
       Store.eliminar_principio_activo(Number(id_principio))
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(
@@ -622,8 +694,15 @@ class Producto {
     /////////////// producto completo
     this.router.delete("/:id_producto", comprobar, this.eliminar_producto);
     this.router.post("/", comprobar, this.create_product);
+    this.router.put(
+      "/verificar_posibles_caducados",
+      this.verificar_posibles_productos_caducados
+    );
     this.router.put("/:id_producto", comprobar, this.editar_producto);
     this.router.get("/", this.mostrar_productos);
+    this.router.get("/caducados", this.mostrar_productos_caducados);
+    ////////////// Reportes CSV
+    this.router.get("/reporte", this.reporte_producto);
   }
 }
 

@@ -41,7 +41,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Store_producto_1 = __importDefault(require("./Store-producto"));
 const response_1 = __importDefault(require("../../network/response"));
-const multer_1 = __importDefault(require("multer"));
+// import multer from "multer";
+const propiedades_producto_1 = __importDefault(
+  require("./response-table/propiedades-producto")
+);
+const producto_1 = __importDefault(require("./response-table/producto"));
 const { comprobar } = require("../util/util-login");
 const uuid_1 = require("uuid");
 class Producto {
@@ -50,33 +54,40 @@ class Producto {
     this.ruta();
   }
   /* configuracion para la subida de imagnes */
-  store_file() {
-    const storage = multer_1.default.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, "./public/productos");
-      },
-      filename: function (req, file, cb) {
-        cb(null, file.originalname);
-      },
-    });
-    const fileFilter = (req, file, cb) => {
-      if (
-        file.mimetype === "image/jpg" ||
-        file.mimetype === "image/jpeg" ||
-        file.mimetype === "image/png"
-      ) {
-        cb(null, true);
-      } else {
-        cb(null, false);
-      }
-    };
-    const upload = multer_1.default({
-      storage: storage,
-      limits: { fileSize: 1024 * 1024 * 5 },
-      fileFilter: fileFilter,
-    });
-    return upload;
-  }
+  /*store_file() {
+      const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, "./public/productos");
+        },
+        filename: function (req, file, cb) {
+          cb(null, file.originalname);
+        },
+      });
+  
+      const fileFilter = (
+        req: any,
+        file: { mimetype: string },
+        cb: (arg0: null, arg1: boolean) => void
+      ) => {
+        if (
+          file.mimetype === "image/jpg" ||
+          file.mimetype === "image/jpeg" ||
+          file.mimetype === "image/png"
+        ) {
+          cb(null, true);
+        } else {
+          cb(null, false);
+        }
+      };
+  
+      const upload = multer({
+        storage: storage,
+        limits: { fileSize: 1024 * 1024 * 5 },
+        fileFilter: fileFilter,
+      });
+  
+      return upload;
+    }*/
   /* NOMBRE DEL PRODUCTO */
   create_name_product(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -88,9 +99,14 @@ class Producto {
             if (data == 0) {
               Store_producto_1.default
                 .add_name_product(name_product)
-                .then((data) => {
-                  response_1.default.success(req, res, data, 201);
-                })
+                .then(() =>
+                  __awaiter(this, void 0, void 0, function* () {
+                    const responseTble = yield propiedades_producto_1.default.responder_nombre_producto(
+                      name_product
+                    );
+                    response_1.default.success(req, res, responseTble, 200);
+                  })
+                )
                 .catch((err) => {
                   response_1.default.error(
                     req,
@@ -151,8 +167,8 @@ class Producto {
       const { id_name_producto } = req.params || null;
       Store_producto_1.default
         .eliminar_name_product(Number(id_name_producto))
-        .then((data) => {
-          response_1.default.success(req, res, data, 200);
+        .then(() => {
+          response_1.default.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           response_1.default.error(
@@ -210,9 +226,14 @@ class Producto {
             if (data == 0) {
               Store_producto_1.default
                 .add_name_laboratorio(name_laboratorio)
-                .then((data) => {
-                  response_1.default.success(req, res, data, 201);
-                })
+                .then(() =>
+                  __awaiter(this, void 0, void 0, function* () {
+                    const responseTble = yield propiedades_producto_1.default.responder_nombre_laboratorio(
+                      name_laboratorio
+                    );
+                    response_1.default.success(req, res, responseTble, 200);
+                  })
+                )
                 .catch((err) => {
                   response_1.default.error(
                     req,
@@ -273,8 +294,8 @@ class Producto {
       const { id_name_laboratorio } = req.params || null;
       Store_producto_1.default
         .eliminar_name_laboratorio(Number(id_name_laboratorio))
-        .then((data) => {
-          response_1.default.success(req, res, data, 200);
+        .then(() => {
+          response_1.default.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           response_1.default.error(
@@ -344,45 +365,48 @@ class Producto {
         } = req.body || null;
         let p = 0;
         if (id_principio_activo == "") {
-          let r = yield Store_producto_1.default.search_princt_activ_none();
-          p = Number(r[0].id_principio_activo);
+          let none = yield Store_producto_1.default.search_princt_activ_none();
+          p = Number(none[0].id_principio_activo);
         } else {
           p = id_principio_activo;
         }
-        for (let i = 0; i < Number(veces_ingreso); i++) {
-          const obj = {
-            id_producto: uuid_1.v4(),
-            id_name_product,
-            id_name_laboratorio,
-            cantidad,
-            presentacion,
-            lote,
-            registro_sanitario,
-            dosis,
-            tipo_dosis,
-            fecha_elaboracion,
-            fecha_caducidad,
-            pvp,
-            pvf,
-            estado: "Disponible",
-            id_principio_activo: p,
-            cantidad_disponible,
-          };
-          Store_producto_1.default
-            .add_product(obj)
-            .then((data) => {
-              response_1.default.success(req, res, data, 200);
-            })
-            .catch((err) => {
-              response_1.default.error(
-                req,
-                res,
-                err,
-                500,
-                `Error al crear producto: ${err}`
+        const obj = {
+          id_producto: uuid_1.v4(),
+          id_name_product,
+          id_name_laboratorio,
+          cantidad,
+          presentacion,
+          lote,
+          registro_sanitario,
+          dosis,
+          tipo_dosis,
+          fecha_elaboracion,
+          fecha_caducidad,
+          pvp,
+          pvf,
+          estado: "Disponible",
+          id_principio_activo: p,
+          cantidad_disponible,
+        };
+        Store_producto_1.default
+          .add_product(obj)
+          .then(() =>
+            __awaiter(this, void 0, void 0, function* () {
+              const respuestaProduct = yield producto_1.default.responder_producto(
+                obj.id_producto
               );
-            });
-        }
+              response_1.default.success(req, res, respuestaProduct, 200);
+            })
+          )
+          .catch((err) => {
+            response_1.default.error(
+              req,
+              res,
+              err,
+              500,
+              `Error al crear producto: ${err}`
+            );
+          });
       } else {
         response_1.default.success(
           req,
@@ -414,8 +438,8 @@ class Producto {
       const { id_producto } = req.params || null;
       Store_producto_1.default
         .eliminar_producto(id_producto)
-        .then((data) => {
-          response_1.default.success(req, res, data, 200);
+        .then(() => {
+          response_1.default.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           response_1.default.error(
@@ -504,9 +528,14 @@ class Producto {
           if (data == 0) {
             Store_producto_1.default
               .add_principio_activo(name_principio_activo)
-              .then((data) => {
-                response_1.default.success(req, res, data, 200);
-              })
+              .then(() =>
+                __awaiter(this, void 0, void 0, function* () {
+                  const responseTble = yield propiedades_producto_1.default.responder_principio_activo(
+                    name_principio_activo
+                  );
+                  response_1.default.success(req, res, responseTble, 200);
+                })
+              )
               .catch((err) => {
                 response_1.default.error(
                   req,
@@ -564,8 +593,8 @@ class Producto {
       const { id_principio } = req.params || null;
       Store_producto_1.default
         .eliminar_principio_activo(Number(id_principio))
-        .then((data) => {
-          response_1.default.success(req, res, data, 200);
+        .then(() => {
+          response_1.default.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           response_1.default.error(

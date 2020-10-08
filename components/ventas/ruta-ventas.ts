@@ -12,7 +12,9 @@ class Ventas {
   }
 
   traer_venta(req: Request, res: Response) {
-    Store.traer_venta()
+    const { id_factura } = req.params;
+
+    Store.traer_venta(id_factura)
       .then((data) => {
         Respuesta.success(req, res, data, 200);
       })
@@ -44,7 +46,7 @@ class Ventas {
 
   ruta() {
     // VENTAS
-    this.router.get("/", this.traer_venta);
+    this.router.get("/:id_factura", this.traer_venta);
     this.router.delete("/:id_producto_factura", comprobar, this.eliminar_venta);
   }
 }

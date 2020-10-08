@@ -1,0 +1,283 @@
+id_producto,cantidad,cantidad_disponible,presentacion,estado,lote,pvp,pvf,registro_sanitario,medida,tipo_medidad,fecha_elaboracion,fecha_caducidad,product_name,nombre_laboratorio,principio_activo
+2c878f3f-8e13-4b62-b2cf-3d050f2f22a7,1,1,Cremas,Disponible,11902,5,4.17,26.009-10-04,15,Gramos,2018-12-18,2021-12-21,4-DERM Crema,Acromax,Betametasona + Clioquinol + Tolnaftato + Gentamicina
+a2edbe59-5fcb-4ee3-890b-1d54c3242408,1,7,Tabletas,Disponible,200443D,8.46,7.05,0391-MAN-09-05,500,Miligramos,2020-04-28,2023-04-28,Abanix Tabletas 500mg,	ACROMAX,NITAZOXANIDA
+58673d41-d0da-4565-a48c-69434ee10c71,1,8,Cremas,Disponible,9GC5118C,4.04,3.37,03179-MAE-08-04,15,Gramos,2019-10-15,2022-09-15,Aciclovir 5% unguento,Genfar,Aciclovir
+d9f40531-7241-44b0-8516-93408adf2ea2,1,2,Jarabe,Aun disponible,8GC0047D,3.81,3.05,GE-377-01-11,90,Mililitros,2018-01-17,2020-12-17,Aciclovir Sus100mg/5ml,Genfar,Aciclovir
+22358855-baee-4777-9385-3b8a6cd0b5f9,1,14,Ampollas,Disponible,191422L,1.06,0.88,03930-MAN-10-05,2,Mililitros,2019-12-28,2022-12-28,Acro B1-6-12,	ACROMAX,Complejo B 
+0c9d1901-cb10-4e3e-8fcf-cfc0ba62d2b2,30,142,Tabletas,Disponible,2000548,8.1,6.75,5893-1-MAN-11-10,250,Miligramos,2020-02-28,2023-02-28,Acro B1-6-12,	ACROMAX,Complejo B 
+1718c9fe-7567-462d-bf79-b0c820f23e59,1,5,Jarabe,Disponible,200447D,2.5,2.08,03894-MAN-09-05,120,Mililitros,2020-04-28,2022-04-28,Acro B1-6-12,	ACROMAX,Complejo B 
+68627cc4-9f45-4064-b723-90b186c75b7c,30,10,Tabletas,Disponible,191206J,12,10,363481212,325,Miligramos,2019-10-28,2021-10-28,Acrogésico NF ,	ACROMAX,"Tramadol, Paracetamol"
+b5f53d64-2c27-4635-9f08-f6bec17410eb,30,10,Tabletas,Disponible,191206J,12,10,363481212,325,Miligramos,2019-10-28,2021-10-28,Acrogésico NF ,	ACROMAX,"Tramadol, Paracetamol"
+37cd7726-be82-49af-97c6-a4c20806fd7e,100,106,Capsula,Disponible,191409L,9.38,7.82,545-MEN-0915,500,Miligramos,2019-12-28,2023-12-28,Acrogrip,	ACROMAX,"Paracetamol, Pseudoefedrina, Clorfeniramina"
+70876f15-c156-496c-8e16-3ece96b63336,1,1,Ampollas,Disponible,02004,4.2,3.5,28776-03-09,1,Gramos,2019-02-28,2023-02-28,Acromaxfenicol 1gr ,	ACROMAX,"Cloranfenicol succinato, Cloranfenicol base"
+8fd26965-b669-45a4-b4c5-b842f60afc90,50,30,Capsula,Disponible,191461L,7.25,6.04,7.114-2-12-03,500,Miligramos,2019-12-28,2023-12-28,Acromaxfenicol 500mg,	ACROMAX,"Cloranfenicol succinato, Cloranfenicol base"
+c1084e69-d788-494d-ac4c-29e57908b6ce,3,2,Ovulos,Disponible,181351L,3.9,3.25,7.239-2-05-04,400,Miligramos,2018-12-28,2023-12-28,Acromizol Ovulo,	ACROMAX,Nitrato de Miconazole
+7d0b1838-d95e-4a73-94a0-84a76088ca7b,10,6,Ovulos,Disponible,190880H,8.55,7.12,956-MEN-1216,150,Miligramos,2019-08-28,2021-08-28,Acromizol Plus Ovulo,	ACROMAX,Nitrato de Miconazole + Tinidazol
+064c32f8-a164-4b53-9f16-5a26b97b31d7,60,36,Ovulos,Disponible,190820H,21.6,18,2.437-6-02-12,500,Miligramos,2019-08-28,2022-08-28,Acromona Ovulo,	ACROMAX,"Metronidazol, Nystatina"
+3a03b664-3cf9-4113-91ba-22e3cad9f1bb,1,1,Jarabe,Disponible,190901H,9,7.5,8077-1-06-04,120,Mililitros,2019-08-28,2022-08-28,Acronistina ,Acromax,Nistatina
+53b5125a-74f0-4de8-986b-f5bceba9e636,1,1,Jarabe,Disponible,190724G,2.15,1.79,8077-1-06-04,3,Mililitros,2019-07-28,2022-07-28,Acronistina ,Acromax,Nistatina
+7a476141-c947-4201-847c-c1e120eef027,1,3,Ampollas,Disponible,190201C,7.1,5.92,04918-MAN-1-02-12,4,Mililitros,2019-02-28,2023-03-28,Akim 1gr,Acromax,Amikacina
+a3970853-74db-4435-8fc1-4fa7f9b2f505,2,4,Tabletas,Disponible,9GC2028D,0.43,0.36,07150-MAC-1-02-12,200,Miligramos,2019-05-01,2024-04-01,Albendazol 200mgx2Tab,Genfar,Albendazol
+70c274bb-effa-47cb-9cb0-b8fb7c9ab629,1,5,Jarabe,Disponible,9GC1408D,1.15,0.99,01752-MAC-1-10-11,20,Mililitros,2019-04-01,2024-03-01,Albendazol Susx100mg/5ml/20ml,Genfar,Albendazol
+b5896117-850b-4bc6-b7ff-252ad6169ad2,10,13,Capsula,Disponible,191302k,5,4.17,1167-MEN-0717,10,Miligramos,2019-11-28,2021-11-28,Altrom Advance ,	ACROMAX,	Ketorolaco + Tramadol
+ace8fd29-e120-41a2-aabe-f9460b95f1c0,50,200,Capsula,Disponible,1770819,7.5,6,2242-MEE-0616,500,Miligramos,2019-08-10,2021-07-15,Amoxacilina 500mgx50Cap,Genfar,Amoxacilina
+9015e68b-b196-47d5-926b-81387958415e,48,71,Capsula,Disponible,2001183,9.6,8,6010-1-MAN-02-11,500,Miligramos,2020-03-28,2023-03-28,Ampibex 500 capsulas,Life,Ampicilina 
+9a03ac65-69cb-474a-af8d-cd5201b56143,1,15,Tabletas,Disponible,191252K,18,15,6194-MAN-10-11,0,Miligramos,2019-11-30,2021-11-30,Ampliurina Plus,Acromax,"Ciprofloxacina 500mg, Fenazopiridina 100mg"
+0adc591d-006a-4cfc-ae3b-2612ed37e298,20,90,Tabletas,Disponible,1909851,8.3,6.92,881-MEN-0616,550,Miligramos,2019-09-28,2023-08-28,Apronax 550mg,BAYER  S.A.,Naproxeno Sodico
+1cf7eb87-f2b5-4402-bda7-7fa0915f4cdd,100,836,Tabletas,Disponible,GU13560,14.15,11.79,360450612,100,Gramos,2020-05-28,2022-05-28,Aspirina 100mg,BAYER  S.A.,Acido Acetilsalicilico
+3f3dedc5-e5cc-476b-b8b2-08b366f3dfd3,1,2,Jarabe,Disponible,9GC1675D,6.36,5.09,04273-MAE-06-06,15,Mililitros,2019-04-27,2022-03-27,Azitromicina susp 200mg,Genfar,Azitromicina
+f17726c2-037c-4583-a99a-b59129f74a4f,1,6,Jarabe,Disponible,2001161,4.5,3.75,03789-MAN-07-05,100,Mililitros,2020-04-28,2022-04-28,Bemin jarabe,Life,Salbutamol 1 mg + guaifenesina 50 mg
+df102f0b-a559-4a0d-98d1-f2eca141e98b,1,6,Ampollas,Disponible,96C5104C,0.87,0.67,04844-MAE-05-07,4,Miligramos,2019-10-27,2022-09-27,Betametasona 4mg amp,Genfar,Betametasona
+2788bd83-77ec-4410-b839-e7ecb77ac0b4,20,20,Capsula,Disponible,13425,15,12.5,893-MEE-0415,200,Miligramos,2019-11-28,2021-11-28,Beverin ,	ACROMAX,Mebeverina
+f1450ff3-cf49-4777-ab76-b16ed5ee6ce7,2,16,Ampollas,Disponible,2000563,4.74,3.95,04071-MAN-01-06,10,Mililitros,2020-03-30,2024-03-30,Biconcilina BZ 2400.000 U.I.,Life,Benzatina bencilpenicilina
+7a5f83d7-1f8c-4af4-9b04-20a598b5d63a,20,58,Tabletas,Disponible,200298C,3.2,3.83,04813-MAN-1-02-12,30,Miligramos,2020-03-28,2023-03-28,Broxolam,Acromax,Ambroxol Clorhidrato
+a37826e1-3581-4871-adba-91b12fae0008,10,10,Ampollas,Disponible,200483E,10,8.33,7.756-2-06-11,15,Miligramos,2020-05-28,2024-05-28,Broxolam Ampolla 15mg,	ACROMAX,Ambroxol
+26904366-f90f-4062-8def-06da2fa99475,1,9,Jarabe,Disponible,200040A,5.6,4.67,03082-MAN-05-04,120,Mililitros,2020-01-28,2023-01-28,Broxolam Compuesto Adulto,	ACROMAX,Ambroxol + Clembuterol
+e9b54aae-f6a6-435d-9110-53ed520b2da1,1,7,Jarabe,Disponible,2003640,2.84,2.37,7.075-2-11-03,120,Mililitros,2020-04-28,2024-04-28,Broxolam JRB 15 MG,	ACROMAX,Ambroxol
+0a2ccf33-f270-4b36-a9e8-5564229ceef9,1,3,Jarabe,Disponible,02041,5.5,4.58,26.286-03-05,200,Mililitros,2019-07-13,2022-01-13,Buenox Suspensión,Acromax,Magaldrato + Simeticona
+05e5d90b-35ac-47ea-ba2c-48c0a708f2d1,8,9,Jarabe,Disponible,2000067,3.99,3.33,01295-MAC-1-05-11,120,Mililitros,2020-01-28,2023-01-28,Buprex 100mg,Life,Ibuprofeno 
+8e5c8b5a-1aa2-4eed-b7eb-ed96bf9bcc61,2,9,Jarabe,Disponible,2000422,5.88,4.9,02490-MAC-03-03,120,Mililitros,2020-03-28,2023-03-28,Buprex 200mg,Life,Ibuprofeno 
+6297a5b1-3046-410d-9dec-cc899b023462,20,116,Tabletas,Disponible,2000494,11.1,9.25,04991-MAN-10-07,500,Miligramos,2020-02-28,2022-02-28,Buprex migra ,Life,ibuprofeno+cafeina+ergotamina
+4ae3781b-f62c-4b48-bcba-df5761a21165,1,255,Tabletas,Disponible,9GC3132C,3.63,2.65,02664-MAC-05-03,25,Miligramos,2019-07-02,2021-06-02,Captopril 25mgx30tab,Genfar,Captopril
+cb7a27e9-9ecb-4e96-94e2-318a974ae1bc,1,168,Tabletas,Disponible,9GC3070A,6.34,5.27,02976-MAE-02-04,50,Miligramos,2019-07-06,2023-06-06,Captopril 50mgx30 tab,Genfar,Captopril
+979237ab-cc2e-477a-8b5b-c84f29eaff98,1,3,Jarabe,Disponible,20GE001,2.22,1.78,HG2960113,60,Mililitros,2020-01-10,2021-12-10,Cefalexina Sus250mg/5ml,Genfar,Cefalexina
+7953fbef-45fd-494e-8d7c-ee0afe95ad35,10,30,Ampollas,Disponible,658181204,3,0.9,4327-MEE-0818,1,Gramos,2018-11-28,2021-11-28,Ceftriaxona 1gr ampolla ,Caplin Point,Ceftriaxona
+9b702307-035e-4123-a10f-0243535c6561,10,259,Ampollas,Disponible,20000633,12.5,4.49,01182-MAC-1-04-11,500,Miligramos,2020-04-29,2022-04-29,Cemin 500 ampolla,Life,Acido Ascorbico(Vitamina C)
+2f6e92b3-bb2d-492f-a5da-0cafe2719e16,9,9,Gotas,Disponible,2001168,1.99,1.66,02530-MAC-04-03,30,Mililitros,2020-04-28,2021-10-28,Cemin gotas ,Life,Acido Ascorbico(Vitamina C)
+b495d524-db8f-4751-b8da-31c3efd3cd4b,1,10,Ampollas,Disponible,2191920,3.75,1.5,481-MEE-1014,100,Mililitros,2019-09-30,2022-08-30,Ciprofloxacina 200 mg ampolla,acuLIFE,Ciprofloxacina
+fdb96c5f-1a62-497d-b42d-f3ef4f7432e3,8,28,Tabletas,Disponible,080719,7.76,2.5,1888-MEE-0316,500,Miligramos,2019-07-28,2022-06-28,Claritromicina 500mg,Caplin Point,Claritromicina 
+342ab869-e05b-4178-9d24-64164fcc13c0,8,28,Tabletas,Disponible,080719,7.76,2.5,1888-MEE-0316,500,Miligramos,2019-07-28,2022-06-28,Claritromicina 500mg,Caplin Point,Claritromicina 
+9d439135-53b2-42a1-aada-560eba1d4816,10,2,Capsula,Disponible,230819,5.4,4,1910-MEE-0316,300,Miligramos,2019-08-28,2022-07-28,Clindamicina 300mg,Caplin Point,Clindamicina 
+94146aac-63fd-4e76-8b67-f1193fe4d98a,1,20,Suero,Disponible,2001282,1,0.82,01911-MAC-04-02,100,Mililitros,2020-04-28,2023-04-28,"Cloruro de Sodio al 0,9% 100ml",Life,Suero Fisiologico
+a771f954-2c86-43db-8c7b-da0935bc49b5,1,101,Suero,Disponible,SB20Cl1,1,0.82,16.1322-3-10-06,100,Mililitros,2020-03-28,2022-03-28,"Cloruro de Sodio al 0,9% 100ml",Baxter,Suero Fisiologico
+0dc1c324-fe59-4ee4-a1ec-665fb32efd79,1,8,Suero,Disponible,1108859,2,1.25,3148-MEE-1217,1000,Litros,2019-10-28,2022-10-28,Cloruro de Sodio al 9% 1000ml,Medifarma,Suero Fisiologico
+1613f61d-3227-40b3-b753-6028b8e2319d,1,34,Suero,Disponible,2001065,2.38,1.9,01911-MAC-04-02,1000,Litros,2020-04-28,2023-04-28,Cloruro de Sodio al 9% 1000ml,Life,Suero Fisiologico
+a4613bdb-a39a-4c3a-8d16-ba92aeacb57c,1,17,Suero,Disponible,SB20EF7,1.75,1.25,16.132-3-10-08,1000,Litros,2020-05-28,2022-05-28,Cloruro de Sodio al 9% 1000ml,Baxter,Suero Fisiologico
+5dcc6521-1fc6-46b8-a046-1cde043f3932,1,56,Suero,Disponible,SB20DC0,1.25,0.67,16.132-3-10-06,200,Mililitros,2020-04-28,2022-04-28,Cloruro de sodio al 9% 250ml,Baxter,Suero Fisiologico
+5fef0bc8-1995-42d0-9146-78e932c2d3e2,1,10,Suero,Disponible,5S2001301,1.25,1,2108-MEE-0516,250,Mililitros,2020-01-28,2024-01-28,Cloruro de sodio al 9% 250ml,Alfa,Suero Fisiologico
+1b1ffb06-db17-4d09-9604-dea4bf95f740,1,1,Cremas,Disponible,0GC0036A,1.37,1.2,GBE-0284-01-03,40,Gramos,2020-01-01,2023-12-01,Clotrimazol 1% topicx40g,Genfar,Clotrimazol
+5f4522d0-4112-4963-951e-b076da9bdd6b,1,3,Cremas,Disponible,0GC0593A,2.78,2.3,02022-MAC-06-02,40,Gramos,2020-02-02,2023-01-03,Clotrimazol 1%Cre-Vag+1 Aplic,Genfar,Clotrimazol
+f2f0b571-9979-4097-81e5-7333dee8a60a,46,2,Jarabe,Disponible,2001249,2.9,2.32,02358-MAC-0103,120,Mililitros,2020-05-28,2023-05-28,Complejo B ,Life,Complejo B 
+28932aed-213e-476c-8145-66f56b8d21cd,250,840,Tabletas,Disponible,0GC0884A,9.81,8.01,GE-373-01-11,250,Miligramos,2020-02-29,2022-01-29,Complejo B Tabx250,Genfar,Complejo B 
+c3f23f4a-0b1e-4073-829a-bfd90c2bc819,1,77,Ampollas,Disponible,339020,3.16,2.63,965-MEN-0117,10,Mililitros,2020-05-28,2023-05-28,Complexigeme ampolla,LGM,Complejo B 
+28749055-b028-48f5-8727-5eec457d7f49,50,100,Tabletas,Disponible,030718,14,3.5,2907-MEE-0717,800,Miligramos,2018-07-28,2021-06-28,Cotrimoxazol,Caplin Point,Sulfametoxazol+Trimetoprima
+8fe59e8d-d662-476c-9b5d-1d16302c57c3,10,90,Ampollas,Disponible,06C0059A,3.76,3.13,GBE-1005-1-11-11,4,Miligramos,2020-01-27,2022-12-27,Dexametasona 4mg Amp/1ml,Genfar,Dexametasona
+a53fb385-94a2-447d-9935-c709d08a6b0e,1,194,Ampollas,Disponible,96C3275A,1,0.58,GBE-0991-1-01-12,8,Mililitros,2019-07-28,2022-06-28,Dexametasona 8mg/2ml,Genfar,Dexametasona
+be2658e6-78a8-4331-beb6-b8e72d55ab1a,1,15,Suero,Disponible,SB19ET3,2,0.86,16.211-2-04-07,1000,Litros,2019-05-28,2021-05-28,Dextrosa 10% 1000ml,Baxter,Glucosa Hidratada
+1ca847e3-d6dc-454e-85cf-aef98ea06fdc,1,20,Suero,Disponible,SB19KQ1,2.5,1.32,16.133-2-11-06,1000,Litros,2019-02-28,2021-02-28,Dextrosa al 5% 1000ml,Baxter,Glucosa Hidratada
+646d25ba-b251-4859-b572-d81052a5e424,30,13,Capsula,Disponible,221017,14.1,7,2481-MEE-1216,50,Miligramos,2017-10-28,2020-09-28,Diclo Azul,Caplin Point,Diclofenaco Potasico 
+2d1630fb-923e-42b5-abd6-9cf016c3b14a,1,48,Tabletas,Disponible,9GC4720A,2.8,2,03571-MAE-04-05,100,Miligramos,2019-09-01,2021-08-01,Diclofenaco 100mgx20Tab,Genfar,Diclofenaco sodico
+eeb55b6c-fe9f-442e-b03a-acdd55a6ef99,50,53,Capsula,Disponible,2211119,10,8,2129-MEE-0516,500,Miligramos,2019-11-29,2021-10-29,Dicloxacilina 500mgx50Cap,Genfar,Dicloxacilina
+3ce7df5c-3267-4f33-95ce-d8a7b16674d2,1,2,Cremas,Disponible,S010428,2.37,1.98,362701012,15,Gramos,2019-04-05,2021-04-01,Diprogenta,Schering-Plough,Betametasona/Gentamicina
+deecfaf3-59f6-4513-9483-a2afb1a0b5ea,1,2,Cremas,Disponible,S023527,4.62,3.85,367310813,30,Gramos,2019-07-28,2022-06-28,Diprosalic Unguento,Schering-Plough,Betametasona/Acido Salicilico
+3041793e-6d49-4fea-9dcd-7039d9dc0a28,1,5,Ampollas,Disponible,92146,4.5,3.75,GE2721213,2,Mililitros,2020-01-28,2023-01-28,Dolo-medox ampolla ,Unipharm,Vitamina V/ Diclofenaco de sodio 
+3357c426-533b-44d3-9d93-2243aaa6606b,2,6,Ampollas,Disponible,C92094,19.22,10,4723-MEE-0519,40,Miligramos,2020-04-28,2022-04-28,Enoxaparina 40 mg ,Lab Farmaco Uruguayo,Enoxaparina
+80494d2a-2228-479b-83db-9af802adf42b,2,2,Ampollas,Disponible,10719,19.2,16,5492-MAE-05-09,60,Miligramos,2019-11-28,2022-11-28,Enoxpar 60 mg,Chalver,Enoxaparina
+a5ac2a21-2221-4666-b5fd-56351d9e8fb7,20,23,Tabletas,Disponible,02024,18,15,1865-MEE-0316,75,Miligramos,2020-02-28,2022-02-28,Equil,Acromax,Extracto de tilia - passiflora-valeriana-clorhidrato
+6d2b37d9-1a35-4e00-9490-4595c5b09b28,1,3,Ampollas,Disponible,FLU8010,11.25,4,GE1110313,200,Mililitros,2018-10-28,2021-09-28,Fluconazol 200mg/100ml Ampolla,Medicam,Fluconazol
+b5363f19-bb39-44a6-9e7d-9871143fd5f0,20,27,Tabletas,Disponible,1002BT,19.2,16,704-MEE-0115,600,Miligramos,2020-02-28,2022-03-28,Fluidine 600mg,Life,Acetilcisteina
+fa950146-a8e4-4ab3-8cab-f72c04316bc2,20,446,Tabletas,Disponible,371507,21.2,17.67,28700-12-08,600,Miligramos,2020-03-27,2023-03-27,Fluimucil 600 mg,Zambon ,Acetilcisteina
+bd80fb0b-9c6b-461f-a340-854654a7935e,5,18,Ampollas,Disponible,28005064,9.49,7.91,12.760-3-03-02,300,Mililitros,2020-02-28,2025-02-28,Fluimucil ampolla 300mg,Zambon ,Acetilcisteina
+89ae0e7b-a578-49a3-9bf0-da78528627f2,30,28,Sobres,Disponible,367836,12.6,10.5,24.029-1-09-11,100,Miligramos,2020-05-28,2022-05-28,Fluimucil oral 100mg,Zambon ,Acetilcisteina
+90dcae6a-1684-4fd8-a0f6-ff277601e042,60,48,Sobres,Disponible,367904,34.2,28.5,24.030--1-09-11,200,Miligramos,2019-09-28,2022-09-28,Fluimucil oral 200 mg,Zambon ,Acetilcisteina
+d0fb9878-2a62-4b73-92fe-005c46e6764d,2,2,Jarabe,Disponible,1903558,20.26,16.88,03597-MAN-05-05,100,Mililitros,2019-08-28,2021-08-28,Furacam 250 mg/5 ml,Life,Cefuroxima
+8bad4923-25b4-47f3-a2b4-c631691bbcc4,2,2,Jarabe,Disponible,1903895,15.36,12.8,03597-MAN-05-05,70,Mililitros,2019-08-28,2021-08-28,Furacam 250 mg/5 ml,Life,Cefuroxima
+7b5eb04f-1555-4ac9-b7ad-4fd27f5530f8,15,2,Tabletas,Disponible,1903445,23.78,19.82,03642-MAN-05-05,500,Miligramos,2019-08-28,2021-08-28,Furacam 500 mg,Life,Cefuroxima
+92bec9c5-7557-4b69-ad67-8525035a2452,10,47,Ampollas,Disponible,06C1454C,3.1,2.68,GBE-1008-1-11-11,2,Mililitros,2020-03-28,2023-02-28,Furosemida 20mg ampolla,Genfar,Furosemida
+3169ed67-e1a2-4556-a578-8fbb167176b6,100,109,Tabletas,Disponible,9GC1403C,1.97,1.64,GBE-0308-04-03,40,Miligramos,2019-03-28,2021-02-28,Furosemida 40mg tabletasx100,Genfar,Furosemida
+d6847db0-4737-4b66-b7cf-248381034d3e,1,4,Ampollas,Disponible,190481E,0.68,0.57,3.577-4-05-03,80,Mililitros,2019-05-28,2022-05-28,Gentamax  Ampolla,	ACROMAX,Gentamicina
+493b79e9-dffc-4266-9926-b2a3d520cd3a,1,8,Ampollas,Disponible,191110J,1.1,0.92,01979-MAC-1-03-12,280,Mililitros,2019-10-28,2022-10-28,Gentamax  Ampolla,	ACROMAX,Gentamicina
+e31a3fb0-ff40-4f14-a179-ebfa9daa8060,1,7,Cremas,Disponible,190800H,0.55,0.46,7.833-1-10-02,15,Gramos,2019-08-25,2023-08-25,Gentamax 0.1% crema,Acromax,Gentamicina
+acc014a3-bf85-480f-99cc-cb42606210ff,1,4,Ampollas,Disponible,96312,5.45,4.55,22.140-1-07-05,2000,Centimetros,2019-08-28,2021-08-28,Hemax 2.000UI,Biosidus S.A,Eritropoyetina Humana 
+86a5d816-ac41-4878-9bd0-ae0928b58ace,5,15,Ampollas,Disponible,TRN1 051802,19.65,16.38,1207-MEE-0815,500,Mililitros,2018-05-28,2021-05-28,Hemoblock,Julpharma,Acido Tranexanico
+791d74f0-8ae6-4821-a248-a11c0d8fa7bd,100,92,Tabletas,Disponible,9GC2850A,6,4.8,02640-MAC-05-03,400,Miligramos,2019-07-04,2021-06-04,Ibuprofeno 400mgx100Tab,Genfar,Ibuprofeno 
+af1a3730-bb45-4984-815e-ed9fe849c57d,50,88,Tabletas,Disponible,9GC4813G,6,5.37,HG4380413,800,Gramos,2019-10-03,2022-09-03,Ibuprofeno 800mgx50Tab,Genfar,Ibuprofeno 
+7e778ec4-af16-4eb4-972d-cde001da29f2,30,40,Capsula,Disponible,080319,12,8,2503-MEE-0117,400,Miligramos,2019-03-28,2022-02-28,Ibuwin 400mg,Caplin Point,Ibuprofeno 
+230fc89b-311a-4038-ab0d-c52eb206ae18,10,18,Capsula,Disponible,330319,7.8,5,2581-MEE-0317,800,Miligramos,2019-02-28,2022-02-28,Ibuwin Forte 800mg,Caplin Point,Ibuprofeno 
+f36a1cf4-0d1d-408a-95c8-83c6b192b7ec,30,56,Capsula,Disponible,050319,16.2,10,2485-MEE-1216,600,Miligramos,2019-03-28,2022-02-28,Ibuwin Plus 600mg,Caplin Point,Ibuprofeno 
+c124cde8-e8b6-4b18-a548-13e6bfbf6461,10,2,Tabletas,Disponible,L1912073,3.7,3.08,7.245-2-03-04,200,Miligramos,2019-10-28,2021-10-28,Ketocon 200mg,Acromax,Ketoconazol
+ae32af28-ad0c-45a0-a433-87bb6dff5ffa,5,27,Ampollas,Disponible,96C2467A,1,2.55,04756-MAN-04-07,30,Miligramos,2019-05-28,2022-04-28,Ketorolaco 30 mg,Genfar,Ketorolaco
+c20ff413-5996-495b-a44c-f806e6f2305b,10,43,Ampollas,Disponible,350719,17.75,5.5,1931-MEE-0316,60,Miligramos,2019-07-28,2021-06-28,Ketorolaco 60 mg/2ml,Caplin Point,Ketorolaco
+ebdfef79-0d34-49a3-9239-636aebc1fbd8,2,13,Suero,Disponible,SB20CA4,1.75,1.28,16.106-3-11-06,1000,Mililitros,2020-03-28,2022-03-28,Lactato de Ringer 1000ml,Baxter,Lactato de Ringer
+b06aa1f7-eb62-442d-897a-84e09acf36c9,13,13,Suero,Disponible,2000759,2.06,1.72,03444-MAN-02-05,1000,Mililitros,2020-03-28,2024-03-28,Lactato de Ringer 1000ml,Life,Lactato de Ringer
+572a07c2-402f-4c40-afab-fb6bb069a91e,1,1,Jarabe,Disponible,200051B,9.89,8.24,GBN-1239-02-09,220,Mililitros,2020-02-10,2023-02-10,Lactulosa  65% Frasco,Acromax,Lactulosa 65 %
+8dc4e108-8318-4348-828b-41f88fc5a4a3,8,26,Tabletas,Disponible,100419,12.08,5,1384-MEE-0915,500,Miligramos,2019-04-28,2022-03-28,Levofloxacina 500mg,Caplin Point,Levofloxacina 
+d33969f1-be2d-4640-acbf-69ba99565468,10,104,Tabletas,Disponible,1292352,1.25,1,GBE-0544-02-05,10,Miligramos,2020-02-25,2023-02-25,Loratadina tabx10,Genetia,Loratadina
+480927ca-5340-4646-bd52-c74167b24df8,100,62,Tabletas,Disponible,090219,82,10,1950-MEE-0316,100,Miligramos,2019-02-28,2022-01-28,Losartan 100mg,Caplin Point,Losartan 
+52e10e24-f802-4e39-9ae1-3bec05f29fdd,1,4,Cremas,Disponible,S026696,1.77,1.48,367460813,20,Gramos,2019-08-28,2022-08-28,Lotriderm Crema,Schering-Plough,Betametasona/Clotrimazol
+e0fabfbb-d633-46de-8f3b-887ad9bf9036,1,3,Cremas,Disponible,190987I,4.5,3.75,04506-MAN-11-06,15,Gramos,2019-09-05,2024-09-05,Maxiderm Crema Tubo x 1,Acromax,Desonide (Prednacinolona) 
+69f7ef1f-baf1-4ace-86ad-cba96d7f52e4,105,142,Tabletas,Disponible,20032,12,8,GBN-1641-01-12,850,Miligramos,2020-01-28,2022-01-28,Metformina 850mg,LimerickPharma,Metformina
+9669d177-0f37-4098-87eb-35358c486b88,1,3,Ampollas,Disponible,M511219,15,10,2960-MEE-0817,125,Miligramos,2019-12-28,2021-11-28,Metilprednisolona Succinato 125mg,Caplin Point,Merilprednisolona Succinato Sodico 
+eb767a39-533e-47b7-9587-58c9c03beb64,1,2,Jarabe,Disponible,9GC2119D,2.68,2.14,02975-MAE-02-04,120,Mililitros,2019-05-05,2023-04-05,Metronidazol 250mg/5mlSus,Genfar,Metronidazol
+0ec0742b-98e2-4b83-bebb-35e9597fe9da,1,10,Ampollas,Disponible,2C90714,3.75,1.5,194-MEE-0314,100,Mililitros,2020-03-28,2022-02-28,Metronidazol 500 mg ampolla,acuLIFE,Metronidazol
+9d0007f9-b2e5-4adb-8ccf-e6c769ab3e88,1,80,Tabletas,Disponible,GC0451A,4.8,3.99,GBE-0384-12-03,500,Miligramos,2020-01-15,2021-12-15,Metronidazol 500mgx100Tab,Genfar,Metronidazol
+9ccf46bb-5056-432e-bf60-d8e9db8f4b88,10,10,Tabletas,Disponible,9CL3115,7,5.77,GE-399-02-11,10,Miligramos,2019-09-28,2021-08-28,Montelukast 10 mg ,Genfar,Montelukast
+1da08f60-dd86-4e9b-bb95-12c2362099b9,10,40,Tabletas,Disponible,ACL0070,3.97,3.24,GE-398-02-11,5,Miligramos,2020-01-28,2021-12-28,Montelukast 5mg,Genfar,Montelukast
+3cbc6978-1377-4ab9-bc85-6bad5d3f200e,1,5,Cremas,Disponible,190687G,3.4,2.83,04414-MAN-09-06,15,Gramos,2019-07-20,2022-07-20,Neo-Nystasolona crema,Acromax,"Prednacinolona, Nistatina, Neomicina"
+eb3ac4b4-6b24-43f4-9794-507902592eb3,1,3,Cremas,Disponible,S04746,6,5,351-MEE-0614,30,Gramos,2019-10-10,2021-10-10,Nistaderm crema,Acromax,"Nistatina 10,000,000 UI / Oxido de Zinc"
+e2f69cdd-0465-4c8a-b111-df911c103719,10,16,Tabletas,Disponible,2003011,2.8,2.33,04287-MAN-06-06,5,Miligramos,2020-03-28,2022-03-28,Normolax ,Provenco,Picosulfato de Sodio
+2bfb4096-d422-49b2-a6ea-5800961a7cf4,1,4,Cremas,Disponible,191424L,2.8,2.33,3.122-4-06-02,15,Gramos,2019-12-05,2022-12-05,Nystasolona crema,Acromax,"Nistatina, Prednacinolona"
+00d15998-108a-4d5c-8b11-764122d77072,60,44,Ovulos,Disponible,191301k,18,15,04018-MAN-12-05,250,Gramos,2019-11-28,2022-11-28,Nystasolona Ovulo,	ACROMAX,"Metronidazol, Nystatina"
+d7761e01-5ab5-480b-80fa-601c969e5a4c,10,53,Capsula,Disponible,9GC4474C,3.6,3.03,GE-356-11-10,20,Miligramos,2019-09-01,2021-08-01,Omeprazol 20mgx10Cap,Genfar,Omeprazol
+d0f85e0b-ec88-45a6-b04a-b6a6b29b9bac,20,21,Ampollas,Disponible,BH109E,3.5,30,2312-MEE-0716,40,Miligramos,2019-09-28,2022-08-28,Omeprazol 40mg ampolla,Medicam,Omeprazol
+57cc7292-b03b-4b05-9bd3-bccd4e32a414,30,200,Capsula,Disponible,9KP09675,19.2,16,4575-MEE-0219,40,Miligramos,2019-07-01,2021-06-01,Omeprazol 40mgx30caps,Genfar,Omeprazol
+6bca3b96-a6e1-4b4f-b313-21ab9373038d,10,140,Tabletas,Disponible,H1908872,7.2,6,922-MEN-0816,90,Gramos,2019-08-28,2022-08-28,Oralyte Sobres ,GrupoFarma Del Ecuador ,Sales de rehidratacion 
+24a692d7-4505-4358-8bfc-6ffc11840851,1,4,Gotas,Disponible,86C0425A,1.4,1.15,GBE-1429-12-10,30,Mililitros,2018-03-02,2021-02-02,Paracetamol 100mg/30mlGotas,Genfar,Paracetamol
+0f8c6e25-74a9-4f3d-b244-0df16a0b7b60,1,42,Cremas,Disponible,0160CO1021,1.25,0.97,002.958-VE.,60,Centimetros,2020-06-28,2022-06-28,Pasta Dental Colgate Triple Accion ,Colgate,Floruro de Sodio 
+7b4d5ba9-be46-432d-b9bb-27979d8fcae3,1,3,Tabletas,Disponible,191407K,9.02,7.52,02950-MAN-01-04,20,Miligramos,2019-11-20,2021-11-20,Presacor 20,LGM,Prednisona
+359e9f98-6ff9-4398-9e64-f64d52fc2666,1,4,Cremas,Disponible,9YNCZ071,6.48,5.4,1827-MEE-0216,30,Gramos,2019-07-28,2021-07-28,Quadriderm,Schering-Plough,"	Betamesona, Gentamicina, Tolnaftato, Clioquinol"
+d8955955-83a7-4cd6-882a-59a4045143b2,100,161,Tabletas,Disponible,M18279019,19,5,958-MEE-0415,300,Miligramos,2018-12-28,2021-11-28,Ranitidina 300mg,Caplin Point,Ranitidina
+c97afb5f-55d5-41ce-8762-3b3278c65b50,1,1,Jarabe,Disponible,200051B,9.34,7.78,34-MEN-0214,220,Mililitros,2020-02-02,2023-02-02,Rebland ,Acromax,Lactulosa 65 %
+6f83d654-7058-453c-8054-b98062544e09,1,6,Tabletas,Disponible,03174,16.2,13.5,166-MEE-0314,0,Miligramos,2019-10-05,2022-10-05,Sisdial,Acromax,"Cinitaprida, Pancreatina, Simeticona"
+ebf74618-1239-48e7-a026-f26100e62950,10,27,Ampollas,Disponible,20000412,5.6,4.67,02384-MAC-01-03,10,Mililitros,2020-03-30,2025-03-30,Soletrol Na,Life,Solución de cloruro de sodio al 20%
+d9460f13-ffd2-42e5-8477-a2c98e949e5a,2,2,Jarabe,Disponible,2000262,8.55,7.13,5214-MAN-05-08,60,Mililitros,2020-02-28,2022-02-28,Sultamix 250mg/5ml,Life,Ampicilina + Sulbactam (Sultamicilina)
+df8f66b1-1d36-4446-b3a4-dfa926bea5f3,20,28,Tabletas,Disponible,200453D,5,4.17,8.154-1-08-04,500,Miligramos,2020-04-28,2024-04-28,Termax 500mg,Acromax,Paracetamol
+c24bcaf8-b0f5-4962-9415-b2fcb60091e9,20,21,Cremas,Aun disponible,415145,50,10,efec33,200,Gramos,2020-09-08,2020-09-17,test-product-name,test-laboratorio,test-activo
+5330d960-ba1b-4fb7-82bf-ffd995bd2c95,10,6,Gotas,Aun disponible,42205,10,5,efec33,400,Gramos,2020-09-01,2020-09-25,test-product-name,test-laboratorio,test-activo
+9f1e304b-cf49-4921-b095-08629e2995fd,1,101,Capsula,Disponible,9GC5279A,8.98,7.41,GBE-1031-04-07,100,Miligramos,2019-10-05,2022-09-16,Tetraciclina 500mgx100Cap,Genfar,Tetraciclina
+2f5ee8e3-f7a2-41a4-9785-bbfa248f9216,1,2,Cremas,Disponible,S011876,5.73,4.78,362281012,40,Gramos,2019-04-16,2022-04-01,Triderm,Schering-Plough,"Betametazona, Clotrimazol, Gentamicina"
+d9bf463e-a3d9-4f79-b19f-d41c5a5eb82d,1,1,Cremas,Disponible,2319,8.34,5.88,19.882-2-12-11,40,Gramos,2019-07-28,2023-07-28,Trigentax,Chalver,"Clotrimazol, Neomicina, Betametasona"
+8c12c752-f589-4bc4-a646-5e283547e72f,1,8,Tabletas,Disponible,0E7407,5.69,3.6,10514-ALE-0619,1,Gramos,2020-05-28,2022-05-28,Vita C+ Zinc Efervescente,MK,Vitamina C + Zinc
+7374df76-0b98-4615-a284-4575b2db7f3d,12,162,Tabletas,Disponible,0E1807,26.9,15.6,10321-ALE-0519,500,Miligramos,2020-05-28,2022-05-28,Vita C+Zinc Masticable,MK,Vitamina C + Zinc
+15eb97bf-adf2-4471-9aba-3581896f8ef4,30,22,Capsula,Disponible,19017,16.8,14,24.932-02-03,500,Miligramos,2019-08-28,2022-08-28,Vitacap G cap.blandasx30,Life,"Ginseng, aloe, multivitaminas y minerales"
+2c878f3f-8e13-4b62-b2cf-3d050f2f22a7,1,1,Cremas,Disponible,11902,5,4.17,26.009-10-04,15,Gramos,2018-12-18,2021-12-21,4-DERM Crema,Acromax,Betametasona + Clioquinol + Tolnaftato + Gentamicina
+a2edbe59-5fcb-4ee3-890b-1d54c3242408,1,7,Tabletas,Disponible,200443D,8.46,7.05,0391-MAN-09-05,500,Miligramos,2020-04-28,2023-04-28,Abanix Tabletas 500mg,	ACROMAX,NITAZOXANIDA
+58673d41-d0da-4565-a48c-69434ee10c71,1,8,Cremas,Disponible,9GC5118C,4.04,3.37,03179-MAE-08-04,15,Gramos,2019-10-15,2022-09-15,Aciclovir 5% unguento,Genfar,Aciclovir
+d9f40531-7241-44b0-8516-93408adf2ea2,1,2,Jarabe,Aun disponible,8GC0047D,3.81,3.05,GE-377-01-11,90,Mililitros,2018-01-17,2020-12-17,Aciclovir Sus100mg/5ml,Genfar,Aciclovir
+22358855-baee-4777-9385-3b8a6cd0b5f9,1,14,Ampollas,Disponible,191422L,1.06,0.88,03930-MAN-10-05,2,Mililitros,2019-12-28,2022-12-28,Acro B1-6-12,	ACROMAX,Complejo B 
+0c9d1901-cb10-4e3e-8fcf-cfc0ba62d2b2,30,142,Tabletas,Disponible,2000548,8.1,6.75,5893-1-MAN-11-10,250,Miligramos,2020-02-28,2023-02-28,Acro B1-6-12,	ACROMAX,Complejo B 
+1718c9fe-7567-462d-bf79-b0c820f23e59,1,5,Jarabe,Disponible,200447D,2.5,2.08,03894-MAN-09-05,120,Mililitros,2020-04-28,2022-04-28,Acro B1-6-12,	ACROMAX,Complejo B 
+68627cc4-9f45-4064-b723-90b186c75b7c,30,10,Tabletas,Disponible,191206J,12,10,363481212,325,Miligramos,2019-10-28,2021-10-28,Acrogésico NF ,	ACROMAX,"Tramadol, Paracetamol"
+b5f53d64-2c27-4635-9f08-f6bec17410eb,30,10,Tabletas,Disponible,191206J,12,10,363481212,325,Miligramos,2019-10-28,2021-10-28,Acrogésico NF ,	ACROMAX,"Tramadol, Paracetamol"
+37cd7726-be82-49af-97c6-a4c20806fd7e,100,106,Capsula,Disponible,191409L,9.38,7.82,545-MEN-0915,500,Miligramos,2019-12-28,2023-12-28,Acrogrip,	ACROMAX,"Paracetamol, Pseudoefedrina, Clorfeniramina"
+70876f15-c156-496c-8e16-3ece96b63336,1,1,Ampollas,Disponible,02004,4.2,3.5,28776-03-09,1,Gramos,2019-02-28,2023-02-28,Acromaxfenicol 1gr ,	ACROMAX,"Cloranfenicol succinato, Cloranfenicol base"
+8fd26965-b669-45a4-b4c5-b842f60afc90,50,30,Capsula,Disponible,191461L,7.25,6.04,7.114-2-12-03,500,Miligramos,2019-12-28,2023-12-28,Acromaxfenicol 500mg,	ACROMAX,"Cloranfenicol succinato, Cloranfenicol base"
+c1084e69-d788-494d-ac4c-29e57908b6ce,3,2,Ovulos,Disponible,181351L,3.9,3.25,7.239-2-05-04,400,Miligramos,2018-12-28,2023-12-28,Acromizol Ovulo,	ACROMAX,Nitrato de Miconazole
+7d0b1838-d95e-4a73-94a0-84a76088ca7b,10,6,Ovulos,Disponible,190880H,8.55,7.12,956-MEN-1216,150,Miligramos,2019-08-28,2021-08-28,Acromizol Plus Ovulo,	ACROMAX,Nitrato de Miconazole + Tinidazol
+064c32f8-a164-4b53-9f16-5a26b97b31d7,60,36,Ovulos,Disponible,190820H,21.6,18,2.437-6-02-12,500,Miligramos,2019-08-28,2022-08-28,Acromona Ovulo,	ACROMAX,"Metronidazol, Nystatina"
+3a03b664-3cf9-4113-91ba-22e3cad9f1bb,1,1,Jarabe,Disponible,190901H,9,7.5,8077-1-06-04,120,Mililitros,2019-08-28,2022-08-28,Acronistina ,Acromax,Nistatina
+53b5125a-74f0-4de8-986b-f5bceba9e636,1,1,Jarabe,Disponible,190724G,2.15,1.79,8077-1-06-04,3,Mililitros,2019-07-28,2022-07-28,Acronistina ,Acromax,Nistatina
+7a476141-c947-4201-847c-c1e120eef027,1,3,Ampollas,Disponible,190201C,7.1,5.92,04918-MAN-1-02-12,4,Mililitros,2019-02-28,2023-03-28,Akim 1gr,Acromax,Amikacina
+a3970853-74db-4435-8fc1-4fa7f9b2f505,2,4,Tabletas,Disponible,9GC2028D,0.43,0.36,07150-MAC-1-02-12,200,Miligramos,2019-05-01,2024-04-01,Albendazol 200mgx2Tab,Genfar,Albendazol
+70c274bb-effa-47cb-9cb0-b8fb7c9ab629,1,5,Jarabe,Disponible,9GC1408D,1.15,0.99,01752-MAC-1-10-11,20,Mililitros,2019-04-01,2024-03-01,Albendazol Susx100mg/5ml/20ml,Genfar,Albendazol
+b5896117-850b-4bc6-b7ff-252ad6169ad2,10,13,Capsula,Disponible,191302k,5,4.17,1167-MEN-0717,10,Miligramos,2019-11-28,2021-11-28,Altrom Advance ,	ACROMAX,	Ketorolaco + Tramadol
+ace8fd29-e120-41a2-aabe-f9460b95f1c0,50,200,Capsula,Disponible,1770819,7.5,6,2242-MEE-0616,500,Miligramos,2019-08-10,2021-07-15,Amoxacilina 500mgx50Cap,Genfar,Amoxacilina
+9015e68b-b196-47d5-926b-81387958415e,48,71,Capsula,Disponible,2001183,9.6,8,6010-1-MAN-02-11,500,Miligramos,2020-03-28,2023-03-28,Ampibex 500 capsulas,Life,Ampicilina 
+9a03ac65-69cb-474a-af8d-cd5201b56143,1,15,Tabletas,Disponible,191252K,18,15,6194-MAN-10-11,0,Miligramos,2019-11-30,2021-11-30,Ampliurina Plus,Acromax,"Ciprofloxacina 500mg, Fenazopiridina 100mg"
+0adc591d-006a-4cfc-ae3b-2612ed37e298,20,90,Tabletas,Disponible,1909851,8.3,6.92,881-MEN-0616,550,Miligramos,2019-09-28,2023-08-28,Apronax 550mg,BAYER  S.A.,Naproxeno Sodico
+1cf7eb87-f2b5-4402-bda7-7fa0915f4cdd,100,836,Tabletas,Disponible,GU13560,14.15,11.79,360450612,100,Gramos,2020-05-28,2022-05-28,Aspirina 100mg,BAYER  S.A.,Acido Acetilsalicilico
+3f3dedc5-e5cc-476b-b8b2-08b366f3dfd3,1,2,Jarabe,Disponible,9GC1675D,6.36,5.09,04273-MAE-06-06,15,Mililitros,2019-04-27,2022-03-27,Azitromicina susp 200mg,Genfar,Azitromicina
+f17726c2-037c-4583-a99a-b59129f74a4f,1,6,Jarabe,Disponible,2001161,4.5,3.75,03789-MAN-07-05,100,Mililitros,2020-04-28,2022-04-28,Bemin jarabe,Life,Salbutamol 1 mg + guaifenesina 50 mg
+df102f0b-a559-4a0d-98d1-f2eca141e98b,1,6,Ampollas,Disponible,96C5104C,0.87,0.67,04844-MAE-05-07,4,Miligramos,2019-10-27,2022-09-27,Betametasona 4mg amp,Genfar,Betametasona
+2788bd83-77ec-4410-b839-e7ecb77ac0b4,20,20,Capsula,Disponible,13425,15,12.5,893-MEE-0415,200,Miligramos,2019-11-28,2021-11-28,Beverin ,	ACROMAX,Mebeverina
+f1450ff3-cf49-4777-ab76-b16ed5ee6ce7,2,16,Ampollas,Disponible,2000563,4.74,3.95,04071-MAN-01-06,10,Mililitros,2020-03-30,2024-03-30,Biconcilina BZ 2400.000 U.I.,Life,Benzatina bencilpenicilina
+7a5f83d7-1f8c-4af4-9b04-20a598b5d63a,20,58,Tabletas,Disponible,200298C,3.2,3.83,04813-MAN-1-02-12,30,Miligramos,2020-03-28,2023-03-28,Broxolam,Acromax,Ambroxol Clorhidrato
+a37826e1-3581-4871-adba-91b12fae0008,10,10,Ampollas,Disponible,200483E,10,8.33,7.756-2-06-11,15,Miligramos,2020-05-28,2024-05-28,Broxolam Ampolla 15mg,	ACROMAX,Ambroxol
+26904366-f90f-4062-8def-06da2fa99475,1,9,Jarabe,Disponible,200040A,5.6,4.67,03082-MAN-05-04,120,Mililitros,2020-01-28,2023-01-28,Broxolam Compuesto Adulto,	ACROMAX,Ambroxol + Clembuterol
+e9b54aae-f6a6-435d-9110-53ed520b2da1,1,7,Jarabe,Disponible,2003640,2.84,2.37,7.075-2-11-03,120,Mililitros,2020-04-28,2024-04-28,Broxolam JRB 15 MG,	ACROMAX,Ambroxol
+0a2ccf33-f270-4b36-a9e8-5564229ceef9,1,3,Jarabe,Disponible,02041,5.5,4.58,26.286-03-05,200,Mililitros,2019-07-13,2022-01-13,Buenox Suspensión,Acromax,Magaldrato + Simeticona
+05e5d90b-35ac-47ea-ba2c-48c0a708f2d1,8,9,Jarabe,Disponible,2000067,3.99,3.33,01295-MAC-1-05-11,120,Mililitros,2020-01-28,2023-01-28,Buprex 100mg,Life,Ibuprofeno 
+8e5c8b5a-1aa2-4eed-b7eb-ed96bf9bcc61,2,9,Jarabe,Disponible,2000422,5.88,4.9,02490-MAC-03-03,120,Mililitros,2020-03-28,2023-03-28,Buprex 200mg,Life,Ibuprofeno 
+6297a5b1-3046-410d-9dec-cc899b023462,20,116,Tabletas,Disponible,2000494,11.1,9.25,04991-MAN-10-07,500,Miligramos,2020-02-28,2022-02-28,Buprex migra ,Life,ibuprofeno+cafeina+ergotamina
+4ae3781b-f62c-4b48-bcba-df5761a21165,1,255,Tabletas,Disponible,9GC3132C,3.63,2.65,02664-MAC-05-03,25,Miligramos,2019-07-02,2021-06-02,Captopril 25mgx30tab,Genfar,Captopril
+cb7a27e9-9ecb-4e96-94e2-318a974ae1bc,1,168,Tabletas,Disponible,9GC3070A,6.34,5.27,02976-MAE-02-04,50,Miligramos,2019-07-06,2023-06-06,Captopril 50mgx30 tab,Genfar,Captopril
+979237ab-cc2e-477a-8b5b-c84f29eaff98,1,3,Jarabe,Disponible,20GE001,2.22,1.78,HG2960113,60,Mililitros,2020-01-10,2021-12-10,Cefalexina Sus250mg/5ml,Genfar,Cefalexina
+7953fbef-45fd-494e-8d7c-ee0afe95ad35,10,30,Ampollas,Disponible,658181204,3,0.9,4327-MEE-0818,1,Gramos,2018-11-28,2021-11-28,Ceftriaxona 1gr ampolla ,Caplin Point,Ceftriaxona
+9b702307-035e-4123-a10f-0243535c6561,10,259,Ampollas,Disponible,20000633,12.5,4.49,01182-MAC-1-04-11,500,Miligramos,2020-04-29,2022-04-29,Cemin 500 ampolla,Life,Acido Ascorbico(Vitamina C)
+2f6e92b3-bb2d-492f-a5da-0cafe2719e16,9,9,Gotas,Disponible,2001168,1.99,1.66,02530-MAC-04-03,30,Mililitros,2020-04-28,2021-10-28,Cemin gotas ,Life,Acido Ascorbico(Vitamina C)
+b495d524-db8f-4751-b8da-31c3efd3cd4b,1,10,Ampollas,Disponible,2191920,3.75,1.5,481-MEE-1014,100,Mililitros,2019-09-30,2022-08-30,Ciprofloxacina 200 mg ampolla,acuLIFE,Ciprofloxacina
+fdb96c5f-1a62-497d-b42d-f3ef4f7432e3,8,28,Tabletas,Disponible,080719,7.76,2.5,1888-MEE-0316,500,Miligramos,2019-07-28,2022-06-28,Claritromicina 500mg,Caplin Point,Claritromicina 
+342ab869-e05b-4178-9d24-64164fcc13c0,8,28,Tabletas,Disponible,080719,7.76,2.5,1888-MEE-0316,500,Miligramos,2019-07-28,2022-06-28,Claritromicina 500mg,Caplin Point,Claritromicina 
+9d439135-53b2-42a1-aada-560eba1d4816,10,2,Capsula,Disponible,230819,5.4,4,1910-MEE-0316,300,Miligramos,2019-08-28,2022-07-28,Clindamicina 300mg,Caplin Point,Clindamicina 
+94146aac-63fd-4e76-8b67-f1193fe4d98a,1,20,Suero,Disponible,2001282,1,0.82,01911-MAC-04-02,100,Mililitros,2020-04-28,2023-04-28,"Cloruro de Sodio al 0,9% 100ml",Life,Suero Fisiologico
+a771f954-2c86-43db-8c7b-da0935bc49b5,1,101,Suero,Disponible,SB20Cl1,1,0.82,16.1322-3-10-06,100,Mililitros,2020-03-28,2022-03-28,"Cloruro de Sodio al 0,9% 100ml",Baxter,Suero Fisiologico
+0dc1c324-fe59-4ee4-a1ec-665fb32efd79,1,8,Suero,Disponible,1108859,2,1.25,3148-MEE-1217,1000,Litros,2019-10-28,2022-10-28,Cloruro de Sodio al 9% 1000ml,Medifarma,Suero Fisiologico
+1613f61d-3227-40b3-b753-6028b8e2319d,1,34,Suero,Disponible,2001065,2.38,1.9,01911-MAC-04-02,1000,Litros,2020-04-28,2023-04-28,Cloruro de Sodio al 9% 1000ml,Life,Suero Fisiologico
+a4613bdb-a39a-4c3a-8d16-ba92aeacb57c,1,17,Suero,Disponible,SB20EF7,1.75,1.25,16.132-3-10-08,1000,Litros,2020-05-28,2022-05-28,Cloruro de Sodio al 9% 1000ml,Baxter,Suero Fisiologico
+5dcc6521-1fc6-46b8-a046-1cde043f3932,1,56,Suero,Disponible,SB20DC0,1.25,0.67,16.132-3-10-06,200,Mililitros,2020-04-28,2022-04-28,Cloruro de sodio al 9% 250ml,Baxter,Suero Fisiologico
+5fef0bc8-1995-42d0-9146-78e932c2d3e2,1,10,Suero,Disponible,5S2001301,1.25,1,2108-MEE-0516,250,Mililitros,2020-01-28,2024-01-28,Cloruro de sodio al 9% 250ml,Alfa,Suero Fisiologico
+1b1ffb06-db17-4d09-9604-dea4bf95f740,1,1,Cremas,Disponible,0GC0036A,1.37,1.2,GBE-0284-01-03,40,Gramos,2020-01-01,2023-12-01,Clotrimazol 1% topicx40g,Genfar,Clotrimazol
+5f4522d0-4112-4963-951e-b076da9bdd6b,1,3,Cremas,Disponible,0GC0593A,2.78,2.3,02022-MAC-06-02,40,Gramos,2020-02-02,2023-01-03,Clotrimazol 1%Cre-Vag+1 Aplic,Genfar,Clotrimazol
+f2f0b571-9979-4097-81e5-7333dee8a60a,46,2,Jarabe,Disponible,2001249,2.9,2.32,02358-MAC-0103,120,Mililitros,2020-05-28,2023-05-28,Complejo B ,Life,Complejo B 
+28932aed-213e-476c-8145-66f56b8d21cd,250,840,Tabletas,Disponible,0GC0884A,9.81,8.01,GE-373-01-11,250,Miligramos,2020-02-29,2022-01-29,Complejo B Tabx250,Genfar,Complejo B 
+c3f23f4a-0b1e-4073-829a-bfd90c2bc819,1,77,Ampollas,Disponible,339020,3.16,2.63,965-MEN-0117,10,Mililitros,2020-05-28,2023-05-28,Complexigeme ampolla,LGM,Complejo B 
+28749055-b028-48f5-8727-5eec457d7f49,50,100,Tabletas,Disponible,030718,14,3.5,2907-MEE-0717,800,Miligramos,2018-07-28,2021-06-28,Cotrimoxazol,Caplin Point,Sulfametoxazol+Trimetoprima
+8fe59e8d-d662-476c-9b5d-1d16302c57c3,10,90,Ampollas,Disponible,06C0059A,3.76,3.13,GBE-1005-1-11-11,4,Miligramos,2020-01-27,2022-12-27,Dexametasona 4mg Amp/1ml,Genfar,Dexametasona
+a53fb385-94a2-447d-9935-c709d08a6b0e,1,194,Ampollas,Disponible,96C3275A,1,0.58,GBE-0991-1-01-12,8,Mililitros,2019-07-28,2022-06-28,Dexametasona 8mg/2ml,Genfar,Dexametasona
+be2658e6-78a8-4331-beb6-b8e72d55ab1a,1,15,Suero,Disponible,SB19ET3,2,0.86,16.211-2-04-07,1000,Litros,2019-05-28,2021-05-28,Dextrosa 10% 1000ml,Baxter,Glucosa Hidratada
+1ca847e3-d6dc-454e-85cf-aef98ea06fdc,1,20,Suero,Disponible,SB19KQ1,2.5,1.32,16.133-2-11-06,1000,Litros,2019-02-28,2021-02-28,Dextrosa al 5% 1000ml,Baxter,Glucosa Hidratada
+646d25ba-b251-4859-b572-d81052a5e424,30,13,Capsula,Disponible,221017,14.1,7,2481-MEE-1216,50,Miligramos,2017-10-28,2020-09-28,Diclo Azul,Caplin Point,Diclofenaco Potasico 
+2d1630fb-923e-42b5-abd6-9cf016c3b14a,1,48,Tabletas,Disponible,9GC4720A,2.8,2,03571-MAE-04-05,100,Miligramos,2019-09-01,2021-08-01,Diclofenaco 100mgx20Tab,Genfar,Diclofenaco sodico
+eeb55b6c-fe9f-442e-b03a-acdd55a6ef99,50,53,Capsula,Disponible,2211119,10,8,2129-MEE-0516,500,Miligramos,2019-11-29,2021-10-29,Dicloxacilina 500mgx50Cap,Genfar,Dicloxacilina
+3ce7df5c-3267-4f33-95ce-d8a7b16674d2,1,2,Cremas,Disponible,S010428,2.37,1.98,362701012,15,Gramos,2019-04-05,2021-04-01,Diprogenta,Schering-Plough,Betametasona/Gentamicina
+deecfaf3-59f6-4513-9483-a2afb1a0b5ea,1,2,Cremas,Disponible,S023527,4.62,3.85,367310813,30,Gramos,2019-07-28,2022-06-28,Diprosalic Unguento,Schering-Plough,Betametasona/Acido Salicilico
+3041793e-6d49-4fea-9dcd-7039d9dc0a28,1,5,Ampollas,Disponible,92146,4.5,3.75,GE2721213,2,Mililitros,2020-01-28,2023-01-28,Dolo-medox ampolla ,Unipharm,Vitamina V/ Diclofenaco de sodio 
+3357c426-533b-44d3-9d93-2243aaa6606b,2,6,Ampollas,Disponible,C92094,19.22,10,4723-MEE-0519,40,Miligramos,2020-04-28,2022-04-28,Enoxaparina 40 mg ,Lab Farmaco Uruguayo,Enoxaparina
+80494d2a-2228-479b-83db-9af802adf42b,2,2,Ampollas,Disponible,10719,19.2,16,5492-MAE-05-09,60,Miligramos,2019-11-28,2022-11-28,Enoxpar 60 mg,Chalver,Enoxaparina
+a5ac2a21-2221-4666-b5fd-56351d9e8fb7,20,23,Tabletas,Disponible,02024,18,15,1865-MEE-0316,75,Miligramos,2020-02-28,2022-02-28,Equil,Acromax,Extracto de tilia - passiflora-valeriana-clorhidrato
+6d2b37d9-1a35-4e00-9490-4595c5b09b28,1,3,Ampollas,Disponible,FLU8010,11.25,4,GE1110313,200,Mililitros,2018-10-28,2021-09-28,Fluconazol 200mg/100ml Ampolla,Medicam,Fluconazol
+b5363f19-bb39-44a6-9e7d-9871143fd5f0,20,27,Tabletas,Disponible,1002BT,19.2,16,704-MEE-0115,600,Miligramos,2020-02-28,2022-03-28,Fluidine 600mg,Life,Acetilcisteina
+fa950146-a8e4-4ab3-8cab-f72c04316bc2,20,446,Tabletas,Disponible,371507,21.2,17.67,28700-12-08,600,Miligramos,2020-03-27,2023-03-27,Fluimucil 600 mg,Zambon ,Acetilcisteina
+bd80fb0b-9c6b-461f-a340-854654a7935e,5,18,Ampollas,Disponible,28005064,9.49,7.91,12.760-3-03-02,300,Mililitros,2020-02-28,2025-02-28,Fluimucil ampolla 300mg,Zambon ,Acetilcisteina
+89ae0e7b-a578-49a3-9bf0-da78528627f2,30,28,Sobres,Disponible,367836,12.6,10.5,24.029-1-09-11,100,Miligramos,2020-05-28,2022-05-28,Fluimucil oral 100mg,Zambon ,Acetilcisteina
+90dcae6a-1684-4fd8-a0f6-ff277601e042,60,48,Sobres,Disponible,367904,34.2,28.5,24.030--1-09-11,200,Miligramos,2019-09-28,2022-09-28,Fluimucil oral 200 mg,Zambon ,Acetilcisteina
+d0fb9878-2a62-4b73-92fe-005c46e6764d,2,2,Jarabe,Disponible,1903558,20.26,16.88,03597-MAN-05-05,100,Mililitros,2019-08-28,2021-08-28,Furacam 250 mg/5 ml,Life,Cefuroxima
+8bad4923-25b4-47f3-a2b4-c631691bbcc4,2,2,Jarabe,Disponible,1903895,15.36,12.8,03597-MAN-05-05,70,Mililitros,2019-08-28,2021-08-28,Furacam 250 mg/5 ml,Life,Cefuroxima
+7b5eb04f-1555-4ac9-b7ad-4fd27f5530f8,15,2,Tabletas,Disponible,1903445,23.78,19.82,03642-MAN-05-05,500,Miligramos,2019-08-28,2021-08-28,Furacam 500 mg,Life,Cefuroxima
+92bec9c5-7557-4b69-ad67-8525035a2452,10,47,Ampollas,Disponible,06C1454C,3.1,2.68,GBE-1008-1-11-11,2,Mililitros,2020-03-28,2023-02-28,Furosemida 20mg ampolla,Genfar,Furosemida
+3169ed67-e1a2-4556-a578-8fbb167176b6,100,109,Tabletas,Disponible,9GC1403C,1.97,1.64,GBE-0308-04-03,40,Miligramos,2019-03-28,2021-02-28,Furosemida 40mg tabletasx100,Genfar,Furosemida
+d6847db0-4737-4b66-b7cf-248381034d3e,1,4,Ampollas,Disponible,190481E,0.68,0.57,3.577-4-05-03,80,Mililitros,2019-05-28,2022-05-28,Gentamax  Ampolla,	ACROMAX,Gentamicina
+493b79e9-dffc-4266-9926-b2a3d520cd3a,1,8,Ampollas,Disponible,191110J,1.1,0.92,01979-MAC-1-03-12,280,Mililitros,2019-10-28,2022-10-28,Gentamax  Ampolla,	ACROMAX,Gentamicina
+e31a3fb0-ff40-4f14-a179-ebfa9daa8060,1,7,Cremas,Disponible,190800H,0.55,0.46,7.833-1-10-02,15,Gramos,2019-08-25,2023-08-25,Gentamax 0.1% crema,Acromax,Gentamicina
+acc014a3-bf85-480f-99cc-cb42606210ff,1,4,Ampollas,Disponible,96312,5.45,4.55,22.140-1-07-05,2000,Centimetros,2019-08-28,2021-08-28,Hemax 2.000UI,Biosidus S.A,Eritropoyetina Humana 
+86a5d816-ac41-4878-9bd0-ae0928b58ace,5,15,Ampollas,Disponible,TRN1 051802,19.65,16.38,1207-MEE-0815,500,Mililitros,2018-05-28,2021-05-28,Hemoblock,Julpharma,Acido Tranexanico
+791d74f0-8ae6-4821-a248-a11c0d8fa7bd,100,92,Tabletas,Disponible,9GC2850A,6,4.8,02640-MAC-05-03,400,Miligramos,2019-07-04,2021-06-04,Ibuprofeno 400mgx100Tab,Genfar,Ibuprofeno 
+af1a3730-bb45-4984-815e-ed9fe849c57d,50,88,Tabletas,Disponible,9GC4813G,6,5.37,HG4380413,800,Gramos,2019-10-03,2022-09-03,Ibuprofeno 800mgx50Tab,Genfar,Ibuprofeno 
+7e778ec4-af16-4eb4-972d-cde001da29f2,30,40,Capsula,Disponible,080319,12,8,2503-MEE-0117,400,Miligramos,2019-03-28,2022-02-28,Ibuwin 400mg,Caplin Point,Ibuprofeno 
+230fc89b-311a-4038-ab0d-c52eb206ae18,10,18,Capsula,Disponible,330319,7.8,5,2581-MEE-0317,800,Miligramos,2019-02-28,2022-02-28,Ibuwin Forte 800mg,Caplin Point,Ibuprofeno 
+f36a1cf4-0d1d-408a-95c8-83c6b192b7ec,30,56,Capsula,Disponible,050319,16.2,10,2485-MEE-1216,600,Miligramos,2019-03-28,2022-02-28,Ibuwin Plus 600mg,Caplin Point,Ibuprofeno 
+c124cde8-e8b6-4b18-a548-13e6bfbf6461,10,2,Tabletas,Disponible,L1912073,3.7,3.08,7.245-2-03-04,200,Miligramos,2019-10-28,2021-10-28,Ketocon 200mg,Acromax,Ketoconazol
+ae32af28-ad0c-45a0-a433-87bb6dff5ffa,5,27,Ampollas,Disponible,96C2467A,1,2.55,04756-MAN-04-07,30,Miligramos,2019-05-28,2022-04-28,Ketorolaco 30 mg,Genfar,Ketorolaco
+c20ff413-5996-495b-a44c-f806e6f2305b,10,43,Ampollas,Disponible,350719,17.75,5.5,1931-MEE-0316,60,Miligramos,2019-07-28,2021-06-28,Ketorolaco 60 mg/2ml,Caplin Point,Ketorolaco
+ebdfef79-0d34-49a3-9239-636aebc1fbd8,2,13,Suero,Disponible,SB20CA4,1.75,1.28,16.106-3-11-06,1000,Mililitros,2020-03-28,2022-03-28,Lactato de Ringer 1000ml,Baxter,Lactato de Ringer
+b06aa1f7-eb62-442d-897a-84e09acf36c9,13,13,Suero,Disponible,2000759,2.06,1.72,03444-MAN-02-05,1000,Mililitros,2020-03-28,2024-03-28,Lactato de Ringer 1000ml,Life,Lactato de Ringer
+572a07c2-402f-4c40-afab-fb6bb069a91e,1,1,Jarabe,Disponible,200051B,9.89,8.24,GBN-1239-02-09,220,Mililitros,2020-02-10,2023-02-10,Lactulosa  65% Frasco,Acromax,Lactulosa 65 %
+8dc4e108-8318-4348-828b-41f88fc5a4a3,8,26,Tabletas,Disponible,100419,12.08,5,1384-MEE-0915,500,Miligramos,2019-04-28,2022-03-28,Levofloxacina 500mg,Caplin Point,Levofloxacina 
+d33969f1-be2d-4640-acbf-69ba99565468,10,104,Tabletas,Disponible,1292352,1.25,1,GBE-0544-02-05,10,Miligramos,2020-02-25,2023-02-25,Loratadina tabx10,Genetia,Loratadina
+480927ca-5340-4646-bd52-c74167b24df8,100,62,Tabletas,Disponible,090219,82,10,1950-MEE-0316,100,Miligramos,2019-02-28,2022-01-28,Losartan 100mg,Caplin Point,Losartan 
+52e10e24-f802-4e39-9ae1-3bec05f29fdd,1,4,Cremas,Disponible,S026696,1.77,1.48,367460813,20,Gramos,2019-08-28,2022-08-28,Lotriderm Crema,Schering-Plough,Betametasona/Clotrimazol
+e0fabfbb-d633-46de-8f3b-887ad9bf9036,1,3,Cremas,Disponible,190987I,4.5,3.75,04506-MAN-11-06,15,Gramos,2019-09-05,2024-09-05,Maxiderm Crema Tubo x 1,Acromax,Desonide (Prednacinolona) 
+69f7ef1f-baf1-4ace-86ad-cba96d7f52e4,105,142,Tabletas,Disponible,20032,12,8,GBN-1641-01-12,850,Miligramos,2020-01-28,2022-01-28,Metformina 850mg,LimerickPharma,Metformina
+9669d177-0f37-4098-87eb-35358c486b88,1,3,Ampollas,Disponible,M511219,15,10,2960-MEE-0817,125,Miligramos,2019-12-28,2021-11-28,Metilprednisolona Succinato 125mg,Caplin Point,Merilprednisolona Succinato Sodico 
+eb767a39-533e-47b7-9587-58c9c03beb64,1,2,Jarabe,Disponible,9GC2119D,2.68,2.14,02975-MAE-02-04,120,Mililitros,2019-05-05,2023-04-05,Metronidazol 250mg/5mlSus,Genfar,Metronidazol
+0ec0742b-98e2-4b83-bebb-35e9597fe9da,1,10,Ampollas,Disponible,2C90714,3.75,1.5,194-MEE-0314,100,Mililitros,2020-03-28,2022-02-28,Metronidazol 500 mg ampolla,acuLIFE,Metronidazol
+9d0007f9-b2e5-4adb-8ccf-e6c769ab3e88,1,80,Tabletas,Disponible,GC0451A,4.8,3.99,GBE-0384-12-03,500,Miligramos,2020-01-15,2021-12-15,Metronidazol 500mgx100Tab,Genfar,Metronidazol
+9ccf46bb-5056-432e-bf60-d8e9db8f4b88,10,10,Tabletas,Disponible,9CL3115,7,5.77,GE-399-02-11,10,Miligramos,2019-09-28,2021-08-28,Montelukast 10 mg ,Genfar,Montelukast
+1da08f60-dd86-4e9b-bb95-12c2362099b9,10,40,Tabletas,Disponible,ACL0070,3.97,3.24,GE-398-02-11,5,Miligramos,2020-01-28,2021-12-28,Montelukast 5mg,Genfar,Montelukast
+3cbc6978-1377-4ab9-bc85-6bad5d3f200e,1,5,Cremas,Disponible,190687G,3.4,2.83,04414-MAN-09-06,15,Gramos,2019-07-20,2022-07-20,Neo-Nystasolona crema,Acromax,"Prednacinolona, Nistatina, Neomicina"
+eb3ac4b4-6b24-43f4-9794-507902592eb3,1,3,Cremas,Disponible,S04746,6,5,351-MEE-0614,30,Gramos,2019-10-10,2021-10-10,Nistaderm crema,Acromax,"Nistatina 10,000,000 UI / Oxido de Zinc"
+e2f69cdd-0465-4c8a-b111-df911c103719,10,16,Tabletas,Disponible,2003011,2.8,2.33,04287-MAN-06-06,5,Miligramos,2020-03-28,2022-03-28,Normolax ,Provenco,Picosulfato de Sodio
+2bfb4096-d422-49b2-a6ea-5800961a7cf4,1,4,Cremas,Disponible,191424L,2.8,2.33,3.122-4-06-02,15,Gramos,2019-12-05,2022-12-05,Nystasolona crema,Acromax,"Nistatina, Prednacinolona"
+00d15998-108a-4d5c-8b11-764122d77072,60,44,Ovulos,Disponible,191301k,18,15,04018-MAN-12-05,250,Gramos,2019-11-28,2022-11-28,Nystasolona Ovulo,	ACROMAX,"Metronidazol, Nystatina"
+d7761e01-5ab5-480b-80fa-601c969e5a4c,10,53,Capsula,Disponible,9GC4474C,3.6,3.03,GE-356-11-10,20,Miligramos,2019-09-01,2021-08-01,Omeprazol 20mgx10Cap,Genfar,Omeprazol
+d0f85e0b-ec88-45a6-b04a-b6a6b29b9bac,20,21,Ampollas,Disponible,BH109E,3.5,30,2312-MEE-0716,40,Miligramos,2019-09-28,2022-08-28,Omeprazol 40mg ampolla,Medicam,Omeprazol
+57cc7292-b03b-4b05-9bd3-bccd4e32a414,30,200,Capsula,Disponible,9KP09675,19.2,16,4575-MEE-0219,40,Miligramos,2019-07-01,2021-06-01,Omeprazol 40mgx30caps,Genfar,Omeprazol
+6bca3b96-a6e1-4b4f-b313-21ab9373038d,10,140,Tabletas,Disponible,H1908872,7.2,6,922-MEN-0816,90,Gramos,2019-08-28,2022-08-28,Oralyte Sobres ,GrupoFarma Del Ecuador ,Sales de rehidratacion 
+24a692d7-4505-4358-8bfc-6ffc11840851,1,4,Gotas,Disponible,86C0425A,1.4,1.15,GBE-1429-12-10,30,Mililitros,2018-03-02,2021-02-02,Paracetamol 100mg/30mlGotas,Genfar,Paracetamol
+0f8c6e25-74a9-4f3d-b244-0df16a0b7b60,1,42,Cremas,Disponible,0160CO1021,1.25,0.97,002.958-VE.,60,Centimetros,2020-06-28,2022-06-28,Pasta Dental Colgate Triple Accion ,Colgate,Floruro de Sodio 
+7b4d5ba9-be46-432d-b9bb-27979d8fcae3,1,3,Tabletas,Disponible,191407K,9.02,7.52,02950-MAN-01-04,20,Miligramos,2019-11-20,2021-11-20,Presacor 20,LGM,Prednisona
+359e9f98-6ff9-4398-9e64-f64d52fc2666,1,4,Cremas,Disponible,9YNCZ071,6.48,5.4,1827-MEE-0216,30,Gramos,2019-07-28,2021-07-28,Quadriderm,Schering-Plough,"	Betamesona, Gentamicina, Tolnaftato, Clioquinol"
+d8955955-83a7-4cd6-882a-59a4045143b2,100,161,Tabletas,Disponible,M18279019,19,5,958-MEE-0415,300,Miligramos,2018-12-28,2021-11-28,Ranitidina 300mg,Caplin Point,Ranitidina
+c97afb5f-55d5-41ce-8762-3b3278c65b50,1,1,Jarabe,Disponible,200051B,9.34,7.78,34-MEN-0214,220,Mililitros,2020-02-02,2023-02-02,Rebland ,Acromax,Lactulosa 65 %
+6f83d654-7058-453c-8054-b98062544e09,1,6,Tabletas,Disponible,03174,16.2,13.5,166-MEE-0314,0,Miligramos,2019-10-05,2022-10-05,Sisdial,Acromax,"Cinitaprida, Pancreatina, Simeticona"
+ebf74618-1239-48e7-a026-f26100e62950,10,27,Ampollas,Disponible,20000412,5.6,4.67,02384-MAC-01-03,10,Mililitros,2020-03-30,2025-03-30,Soletrol Na,Life,Solución de cloruro de sodio al 20%
+d9460f13-ffd2-42e5-8477-a2c98e949e5a,2,2,Jarabe,Disponible,2000262,8.55,7.13,5214-MAN-05-08,60,Mililitros,2020-02-28,2022-02-28,Sultamix 250mg/5ml,Life,Ampicilina + Sulbactam (Sultamicilina)
+df8f66b1-1d36-4446-b3a4-dfa926bea5f3,20,28,Tabletas,Disponible,200453D,5,4.17,8.154-1-08-04,500,Miligramos,2020-04-28,2024-04-28,Termax 500mg,Acromax,Paracetamol
+c24bcaf8-b0f5-4962-9415-b2fcb60091e9,20,21,Cremas,Aun disponible,415145,50,10,efec33,200,Gramos,2020-09-08,2020-09-17,test-product-name,test-laboratorio,test-activo
+5330d960-ba1b-4fb7-82bf-ffd995bd2c95,10,6,Gotas,Aun disponible,42205,10,5,efec33,400,Gramos,2020-09-01,2020-09-25,test-product-name,test-laboratorio,test-activo
+9f1e304b-cf49-4921-b095-08629e2995fd,1,101,Capsula,Disponible,9GC5279A,8.98,7.41,GBE-1031-04-07,100,Miligramos,2019-10-05,2022-09-16,Tetraciclina 500mgx100Cap,Genfar,Tetraciclina
+2f5ee8e3-f7a2-41a4-9785-bbfa248f9216,1,2,Cremas,Disponible,S011876,5.73,4.78,362281012,40,Gramos,2019-04-16,2022-04-01,Triderm,Schering-Plough,"Betametazona, Clotrimazol, Gentamicina"
+d9bf463e-a3d9-4f79-b19f-d41c5a5eb82d,1,1,Cremas,Disponible,2319,8.34,5.88,19.882-2-12-11,40,Gramos,2019-07-28,2023-07-28,Trigentax,Chalver,"Clotrimazol, Neomicina, Betametasona"
+8c12c752-f589-4bc4-a646-5e283547e72f,1,8,Tabletas,Disponible,0E7407,5.69,3.6,10514-ALE-0619,1,Gramos,2020-05-28,2022-05-28,Vita C+ Zinc Efervescente,MK,Vitamina C + Zinc
+7374df76-0b98-4615-a284-4575b2db7f3d,12,162,Tabletas,Disponible,0E1807,26.9,15.6,10321-ALE-0519,500,Miligramos,2020-05-28,2022-05-28,Vita C+Zinc Masticable,MK,Vitamina C + Zinc
+15eb97bf-adf2-4471-9aba-3581896f8ef4,30,22,Capsula,Disponible,19017,16.8,14,24.932-02-03,500,Miligramos,2019-08-28,2022-08-28,Vitacap G cap.blandasx30,Life,"Ginseng, aloe, multivitaminas y minerales"

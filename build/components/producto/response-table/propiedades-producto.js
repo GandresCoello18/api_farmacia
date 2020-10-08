@@ -38,14 +38,13 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-const db_1 = __importDefault(require("../../db"));
-class StoreFactura {
-  /* CREAR - INSERTAR - POST */
-  add_factura(Factura) {
+const db_1 = __importDefault(require("../../../db"));
+class Response {
+  responder_nombre_producto(name_product) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `INSERT INTO factura (id_factura, id_cliente, fecha_factura, descripcion_f, descuento, total, efectivo, cambio) VALUES ('${Factura.id_factura}', '${Factura.id_cliente}', '${Factura.fecha_factura}', '${Factura.descripcion}', ${Factura.descuento}, ${Factura.total}, ${Factura.efectivo}, ${Factura.cambio})`,
+          `SELECT * FROM nombre_producto WHERE product_name = '${name_product}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -54,12 +53,11 @@ class StoreFactura {
       });
     });
   }
-  /* SELECT - MOSTRAR - CONSULTA */
-  traer_facturas() {
+  responder_nombre_laboratorio(nombre_laboratorio) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.descuento, factura.iva, factura.total, cliente.correo, cliente.identificacion FROM factura INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente ORDER BY factura.id_factura DESC;`,
+          `SELECT * FROM nombre_laboratorio WHERE nombre_laboratorio = '${nombre_laboratorio}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -68,25 +66,11 @@ class StoreFactura {
       });
     });
   }
-  monto_total_por_fecha(fecha) {
+  responder_principio_activo(principio_activo) {
     return __awaiter(this, void 0, void 0, function* () {
       return yield new Promise((resolve, reject) => {
         db_1.default.query(
-          `SELECT SUM(total) as total, COUNT(id_factura) as cantidad FROM factura WHERE fecha_factura LIKE "%${fecha}%"`,
-          (err, data) => {
-            if (err) return reject(err);
-            resolve(data);
-          }
-        );
-      });
-    });
-  }
-  /* DELETE - ELIMINAR - BORRAR */
-  eliminar_factura(id_factura) {
-    return __awaiter(this, void 0, void 0, function* () {
-      return yield new Promise((resolve, reject) => {
-        db_1.default.query(
-          `DELETE FROM factura WHERE id_factura = '${id_factura}' `,
+          `SELECT * FROM principio_activo WHERE principio_activo = '${principio_activo}' `,
           (err, data) => {
             if (err) return reject(err);
             resolve(data);
@@ -96,5 +80,5 @@ class StoreFactura {
     });
   }
 }
-let Store = new StoreFactura();
-exports.default = Store;
+const response = new Response();
+exports.default = response;

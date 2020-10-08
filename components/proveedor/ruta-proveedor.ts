@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-proveedor";
+import ResponseProveedor from "./response/proveedor";
 import Respuesta from "../../network/response";
 import Fecha from "../util/util-fecha";
 import { Proveedor_INT, Producto_proveedor_INT } from "../../interface/index";
@@ -38,8 +39,11 @@ class Proveedor {
     };
 
     Store.add_proveedor(obj)
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
+      .then(async () => {
+        const resProveedor = await ResponseProveedor.responder_proveedor(
+          obj.id_proveedor
+        );
+        Respuesta.success(req, res, resProveedor, 200);
       })
       .catch((err) => {
         Respuesta.error(req, res, err, 500, "Error al crear proveedor");
@@ -51,8 +55,8 @@ class Proveedor {
       const { id_proveedor } = req.params || null;
 
       Store.eliminar_proveedor(id_proveedor)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error al eliminar proveedor");
@@ -106,7 +110,7 @@ class Proveedor {
       total,
       id_proveedor,
       estado_pp,
-      abono,
+      abonado,
     } = req.body;
 
     const obj: Producto_proveedor_INT = {
@@ -117,8 +121,10 @@ class Proveedor {
       total,
       id_proveedor,
       estado_pp,
-      abono,
+      abonado,
     };
+
+    console.log(obj);
 
     Store.add_product_proveedor(obj)
       .then((data) => {
@@ -136,7 +142,9 @@ class Proveedor {
   }
 
   mostrar_productos_proveedore(req: Request, res: Response) {
-    Store.mostrar_product_proveedor()
+    const { id_proveedor } = req.params || null;
+
+    Store.mostrar_product_proveedor(id_proveedor)
       .then((data) => {
         Respuesta.success(req, res, data, 200);
       })
@@ -168,8 +176,8 @@ class Proveedor {
       const { id_producto_proveedor } = req.params || null;
 
       Store.eliminar_product_proveedor(id_producto_proveedor)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(
@@ -230,24 +238,23 @@ class Proveedor {
     const { id_producto_proveedor } = req.params || null;
 
     Store.mostrar_unico_product_proveedor(id_producto_proveedor)
-      .then((data: any) => {
-        Store.pago_product_proveedor(
-          id_producto_proveedor,
-          data[0].total,
-          Fecha.fecha_actual()
-        )
-          .then((data) => {
-            Respuesta.success(req, res, data, 200);
-          })
-          .catch((err) => {
-            Respuesta.error(
-              req,
-              res,
-              err,
-              500,
-              "Error en pago de producto del proveedor"
-            );
-          });
+      .then(async (data: any) => {
+        try {
+          await Store.pago_product_proveedor(
+            id_producto_proveedor,
+            data[0].total,
+            Fecha.fecha_actual()
+          );
+          Respuesta.success(req, res, { update: true }, 200);
+        } catch (error) {
+          Respuesta.error(
+            req,
+            res,
+            error,
+            500,
+            "Error en pago de producto del proveedor"
+          );
+        }
       })
       .catch((err) => {
         console.log(`Error en traer producto unico ${err.message}`);
@@ -262,7 +269,10 @@ class Proveedor {
     this.router.put("/:id_proveedor", comprobar, this.editar_proveedor);
     ////////  NEW PRODUCT PROVEEDORES
     this.router.post("/producto", this.nuevo_producto_proveedor);
-    this.router.get("/producto", this.mostrar_productos_proveedore);
+    this.router.get(
+      "/producto/:id_proveedor",
+      this.mostrar_productos_proveedore
+    );
     this.router.get(
       "/producto/monto_total/:fecha",
       this.mostrar_monto_total_por_fecha_pp

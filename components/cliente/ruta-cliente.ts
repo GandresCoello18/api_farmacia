@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-cliente";
+import ResponseClient from "./response/cliente";
 import Respuesta from "../../network/response";
 import { Cliente_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
@@ -30,10 +31,14 @@ class Cliente {
           };
 
           if (obj.correo == "") obj.correo = "no especificado";
+          if (obj.direccion == "") obj.direccion = "no especificado";
 
           Store.add_cliente(obj)
-            .then((data) => {
-              Respuesta.success(req, res, data, 200);
+            .then(async () => {
+              const resClient = await ResponseClient.responder_cliente(
+                obj.id_cliente
+              );
+              Respuesta.success(req, res, resClient, 200);
             })
             .catch((err) => {
               Respuesta.error(req, res, err, 500, "Error en crear cliente");
@@ -99,8 +104,8 @@ class Cliente {
       const { id_cliente } = req.params || null;
 
       Store.borrar_cliente(id_cliente)
-        .then((data) => {
-          Respuesta.success(req, res, data, 200);
+        .then(() => {
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar cliente");

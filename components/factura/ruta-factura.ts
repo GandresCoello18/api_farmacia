@@ -1,7 +1,9 @@
 import { Request, Response, Router } from "express";
 import Store from "./Store-factura";
+import { obtener_facturas_ventas } from "./hooks";
 import StoreVenta from "../ventas/Store-ventas";
 import StoreProduct from "../producto/Store-producto";
+import ResponseFact from "../factura/response/factura";
 import Respuesta from "../../network/response";
 import { Factura_INT, Producto_Factura_INT } from "../../interface/index";
 const { comprobar } = require("../util/util-login");
@@ -21,11 +23,10 @@ class Factura {
       id_cliente,
       descripcion,
       descuento,
-      iva,
       total,
       efectivo = 0,
       cambio = 0,
-      productos,
+      carrito,
     } = req.body || null;
 
     const obj: Factura_INT = {
@@ -34,11 +35,10 @@ class Factura {
       fecha_factura: Fecha.fecha_con_hora_actual(),
       descripcion,
       descuento,
-      iva,
       total,
       efectivo,
       cambio,
-      productos,
+      carrito,
     };
 
     if (obj.id_cliente == "") {
@@ -47,86 +47,85 @@ class Factura {
     if (obj.descripcion == "") obj.descripcion = "Sin descripcion";
 
     Store.add_factura(obj)
-      .then((data) => {
-        for (let i = 0; i < obj.productos.length; i++) {
+      .then(async () => {
+        for (let i = 0; i < obj.carrito.length; i++) {
           let objVenta: Producto_Factura_INT = {
             id_producto_fac: uuidv4(),
-            id_producto: obj.productos[i].id_producto,
+            id_producto: obj.carrito[i].producto.id_producto,
             id_factura: obj.id_factura,
-            formato: `${obj.productos[i].formato}`,
-            cantidad: Number(obj.productos[i].unidades),
-            item_total: Number(obj.productos[i].item_total),
-            iva: Number(obj.productos[i].iva),
+            formato: `${obj.carrito[i].formato}`,
+            cantidad: Number(obj.carrito[i].cantidad),
+            item_total: Number(obj.carrito[i].total),
+            iva: Number(obj.carrito[i].iva),
           };
 
           StoreVenta.add_venta(objVenta)
-            .then((data) => {
-              Respuesta.success(req, res, data, 200);
+            .then(() => {
+              //Respuesta.success(req, res, data, 200);
+              console.log("Venta Registrada");
             })
             .catch((err) => {
               console.log("Error al crear venta: " + err.message);
             });
 
-          if (obj.productos[i].formato == "Por Unidad") {
-            StoreProduct.producto_unico(obj.productos[i].id_producto).then(
-              (data: any) => {
-                if (data == 0) {
-                  console.log("No hay productos para modificar las unidades");
-                } else {
-                  let estado: string = "";
-                  let nueva_cantidad =
+          StoreProduct.producto_unico(obj.carrito[i].producto.id_producto).then(
+            (data: any) => {
+              if (data == 0) {
+                console.log("No hay productos para modificar las unidades");
+              } else {
+                let estado: string = "";
+                let nueva_cantidad = 0;
+
+                if (obj.carrito[i].formato === "paquete") {
+                  nueva_cantidad =
                     Number(data[0].cantidad_disponible) -
-                    Number(obj.productos[i].unidades);
-
-                  if (nueva_cantidad == 0) {
-                    estado = "Vendido";
-                  } else {
-                    estado = "Aun disponible";
-                  }
-
-                  StoreProduct.cambiar_status_producto(
-                    obj.productos[i].id_producto,
-                    estado
-                  )
-                    .then((data) => {
-                      return Respuesta.success(req, res, data, 200);
-                    })
-                    .catch((err) => {
-                      console.log(
-                        "Error al cambiar estado producto: " + err.message
-                      );
-                    });
-
-                  StoreProduct.cambiar_cantidad_de_unidades_producto(
-                    obj.productos[i].id_producto,
-                    nueva_cantidad
-                  )
-                    .then(() => {
-                      console.log(
-                        "Se cambio la cantidad de unidades en producto"
-                      );
-                    })
-                    .catch((err) => {
-                      console.log(`Error: ${err.message}`);
-                    });
+                    Number(obj.carrito[i].producto.cantidad);
+                } else {
+                  nueva_cantidad =
+                    Number(data[0].cantidad_disponible) -
+                    Number(obj.carrito[i].cantidad);
                 }
+
+                if (nueva_cantidad == 0) {
+                  estado = "Vendido";
+                } else {
+                  estado = "Aun disponible";
+                }
+
+                StoreProduct.cambiar_status_producto(
+                  obj.carrito[i].producto.id_producto,
+                  estado
+                )
+                  .then(() => {
+                    console.log("Se cambio el estado del producto");
+                    //return Respuesta.success(req, res, data, 200);
+                  })
+                  .catch((err) => {
+                    console.log(
+                      "Error al cambiar estado producto: " + err.message
+                    );
+                  });
+
+                StoreProduct.cambiar_cantidad_de_unidades_producto(
+                  obj.carrito[i].producto.id_producto,
+                  nueva_cantidad
+                )
+                  .then(() => {
+                    console.log(
+                      "Se cambio la cantidad de unidades en producto"
+                    );
+                  })
+                  .catch((err) => {
+                    console.log(`Error: ${err.message}`);
+                  });
               }
-            );
-          } else {
-            StoreProduct.cambiar_status_producto(
-              obj.productos[i].id_producto,
-              "Vendido"
-            )
-              .then((data) => {
-                return Respuesta.success(req, res, data, 200);
-              })
-              .catch((err) => {
-                console.log("Error al cambiar estado producto: " + err.message);
-              });
-          }
+            }
+          );
         }
 
-        Respuesta.success(req, res, data, 200);
+        const resFact = await ResponseFact.responder_factura(obj.id_factura);
+        const factura = await obtener_facturas_ventas(resFact);
+        Respuesta.success(req, res, factura, 200);
       })
       .catch((err) => {
         Respuesta.error(
@@ -140,9 +139,12 @@ class Factura {
   }
 
   traer_facturas(req: Request, res: Response) {
-    Store.traer_facturas()
-      .then((data) => {
-        Respuesta.success(req, res, data, 200);
+    const { fecha_factura } = req.params || null;
+
+    Store.traer_facturas(fecha_factura)
+      .then(async (data) => {
+        const factura = await obtener_facturas_ventas(data);
+        Respuesta.success(req, res, factura, 200);
       })
       .catch((err) => {
         Respuesta.error(req, res, err, 500, "Error en traer facturas");
@@ -167,13 +169,36 @@ class Factura {
       });
   }
 
+  monto_venta_por_mes(req: Request, res: Response) {
+    Store.traer_solo_facturas()
+      .then((data) => {
+        let ventas_por_mes = [];
+        let mes: Factura_INT[] = [];
+
+        for (let i = 0; i < 12; i++) {
+          for (let j = 0; j < data.length; j++) {
+            if (new Date(data[j].fecha_factura).getMonth() === i) {
+              mes.push(data[j]);
+            }
+          }
+          ventas_por_mes.push(mes);
+          mes = [];
+        }
+
+        Respuesta.success(req, res, ventas_por_mes, 200);
+      })
+      .catch((error) => {
+        Respuesta.error(req, res, error, 500, "Error en traer solo facturas");
+      });
+  }
+
   eliminar_factura(req: Request, res: Response) {
     if (res.locals.datos_user.tipo_user == "Administrador") {
       const { id_factura } = req.params || null;
 
       Store.eliminar_factura(id_factura)
         .then((data) => {
-          Respuesta.success(req, res, data, 200);
+          Respuesta.success(req, res, { removed: true }, 200);
         })
         .catch((err) => {
           Respuesta.error(req, res, err, 500, "Error en eliminar factura");
@@ -191,7 +216,8 @@ class Factura {
   ruta() {
     this.router.post("/", this.crear_factura);
     this.router.get("/monto_total/:fecha", this.monto_total_por_fecha);
-    this.router.get("/", this.traer_facturas);
+    this.router.get("/ventas_por_mes", this.monto_venta_por_mes);
+    this.router.get("/:fecha_factura", this.traer_facturas);
     this.router.delete("/:id_factura", comprobar, this.eliminar_factura);
   }
 }

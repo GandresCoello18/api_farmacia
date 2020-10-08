@@ -7,7 +7,7 @@ class StoreFactura {
   async add_factura(Factura: Factura_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `INSERT INTO factura (id_factura, id_cliente, fecha_factura, descripcion_f, descuento, iva, total, efectivo, cambio) VALUES ('${Factura.id_factura}', '${Factura.id_cliente}', '${Factura.fecha_factura}', '${Factura.descripcion}', ${Factura.descuento}, ${Factura.iva}, ${Factura.total}, ${Factura.efectivo}, ${Factura.cambio})`,
+        `INSERT INTO factura (id_factura, id_cliente, fecha_factura, descripcion_f, descuento, total, efectivo, cambio) VALUES ('${Factura.id_factura}', '${Factura.id_cliente}', '${Factura.fecha_factura}', '${Factura.descripcion}', ${Factura.descuento}, ${Factura.total}, ${Factura.efectivo}, ${Factura.cambio})`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -18,10 +18,22 @@ class StoreFactura {
 
   /* SELECT - MOSTRAR - CONSULTA */
 
-  async traer_facturas(): Promise<Factura_INT> {
+  async traer_facturas(fecha_factura: string): Promise<Factura_INT[]> {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.descuento, factura.iva, factura.total, cliente.correo, cliente.identificacion FROM factura INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente ORDER BY factura.id_factura DESC;`,
+        `SELECT factura.id_factura, factura.fecha_factura, factura.descripcion_f, factura.descuento, factura.total, factura.efectivo, factura.cambio, cliente.nombres, cliente.apellidos, cliente.correo, cliente.identificacion FROM factura INNER JOIN cliente ON cliente.id_cliente = factura.id_cliente WHERE factura.fecha_factura LIKE '%${fecha_factura}%' ORDER BY factura.id_factura DESC;`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async traer_solo_facturas(): Promise<Factura_INT[]> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT fecha_factura, total FROM factura;`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

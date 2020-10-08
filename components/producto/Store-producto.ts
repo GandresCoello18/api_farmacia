@@ -57,7 +57,7 @@ class StoreProduct {
   async listar_principio_activo() {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT * FROM principio_activo WHERE principio_activo <> "none" ORDER BY id_principio_activo DESC`,
+        `SELECT * FROM principio_activo WHERE principio_activo <> "none" ORDER BY principio_activo ASC`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -81,7 +81,7 @@ class StoreProduct {
   async listar_name_producto() {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT * FROM nombre_producto ORDER BY id_product_name DESC`,
+        `SELECT * FROM nombre_producto ORDER BY product_name ASc`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -93,7 +93,7 @@ class StoreProduct {
   async listar_name_laboratorio() {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT * FROM nombre_laboratorio ORDER BY id_name_laboratorio DESC`,
+        `SELECT * FROM nombre_laboratorio ORDER BY nombre_laboratorio ASC`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -102,10 +102,10 @@ class StoreProduct {
     });
   }
 
-  async listar_producto(): Promise<Producto_INT> {
+  async listar_producto(): Promise<Producto_INT[]> {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT productos.id_producto, productos.cantidad, productos.cantidad_disponible, productos.presentacion, productos.estado, productos.lote, productos.pvp, productos.pvf, productos.registro_sanitario, productos.medida, productos.tipo_medida, productos.fecha_elaboracion, productos.fecha_caducidad, nombre_producto.product_name, nombre_laboratorio.nombre_laboratorio, principio_activo.principio_activo FROM productos INNER JOIN nombre_producto ON nombre_producto.id_product_name = productos.id_nombre_producto INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = productos.id_nombre_laboratorio INNER JOIN principio_activo ON principio_activo.id_principio_activo = productos.id_principio_activo ORDER BY productos.id_producto DESC;`,
+        `SELECT productos.id_producto, productos.cantidad, productos.cantidad_disponible, productos.presentacion, productos.estado, productos.lote, productos.pvp, productos.pvf, productos.registro_sanitario, productos.medida, productos.tipo_medida, productos.fecha_elaboracion, productos.fecha_caducidad, nombre_producto.product_name, nombre_laboratorio.nombre_laboratorio, principio_activo.principio_activo FROM productos INNER JOIN nombre_producto ON nombre_producto.id_product_name = productos.id_nombre_producto INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = productos.id_nombre_laboratorio INNER JOIN principio_activo ON principio_activo.id_principio_activo = productos.id_principio_activo WHERE productos.estado <> 'Caducado' or productos.estado <> 'Vendido' ORDER BY nombre_producto.product_name ASC;`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -114,7 +114,31 @@ class StoreProduct {
     });
   }
 
-  async producto_unico(id_producto: string): Promise<Producto_INT> {
+  async solo_producto(): Promise<Producto_INT[]> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT id_producto, fecha_caducidad FROM productos;`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async listar_producto_caducados(): Promise<Producto_INT[]> {
+    return await new Promise((resolve, reject) => {
+      database.query(
+        `SELECT productos.id_producto, productos.cantidad, productos.cantidad_disponible, productos.presentacion, productos.estado, productos.lote, productos.pvp, productos.pvf, productos.registro_sanitario, productos.medida, productos.tipo_medida, productos.fecha_elaboracion, productos.fecha_caducidad, nombre_producto.product_name, nombre_laboratorio.nombre_laboratorio, principio_activo.principio_activo FROM productos INNER JOIN nombre_producto ON nombre_producto.id_product_name = productos.id_nombre_producto INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = productos.id_nombre_laboratorio INNER JOIN principio_activo ON principio_activo.id_principio_activo = productos.id_principio_activo WHERE productos.estado = 'Caducado' ORDER BY productos.fecha_caducidad DESC;`,
+        (err, data) => {
+          if (err) return reject(err);
+          resolve(data);
+        }
+      );
+    });
+  }
+
+  async producto_unico(id_producto: string): Promise<Producto_INT[]> {
     return await new Promise((resolve, reject) => {
       database.query(
         `SELECT * FROM productos WHERE id_producto = '${id_producto}' `,
@@ -169,7 +193,7 @@ class StoreProduct {
   async cambiar_status_producto(id_producto: string, estado: string) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `UPDATE productos SET estado = '${estado}' WHERE id_producto = '${id_producto}' `,
+        `UPDATE productos SET estado = '${estado}' WHERE id_producto = '${id_producto}'; `,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);

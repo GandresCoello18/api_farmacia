@@ -19,7 +19,7 @@ class StoreProveedor {
   async add_product_proveedor(PP: Producto_proveedor_INT) {
     return await new Promise((resolve, reject) => {
       database.query(
-        `INSERT INTO producto_proveedor (id_product_proveedor, descripcion, fecha_pago, total, id_proveedor, fecha_ingreso, estado_pp, abonado) VALUES ('${PP.id_product_proveedor}', '${PP.descripcion}', '${PP.fecha_pago}', ${PP.total}, '${PP.id_proveedor}', '${PP.fecha_ingreso}', '${PP.estado_pp}', ${PP.abono})`,
+        `INSERT INTO producto_proveedor (id_product_proveedor, descripcion, fecha_pago, total, id_proveedor, fecha_ingreso, estado_pp, abonado) VALUES ('${PP.id_product_proveedor}', '${PP.descripcion}', '${PP.fecha_pago}', ${PP.total}, '${PP.id_proveedor}', '${PP.fecha_ingreso}', '${PP.estado_pp}', ${PP.abonado})`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
@@ -42,10 +42,12 @@ class StoreProveedor {
     });
   }
 
-  async mostrar_product_proveedor(): Promise<Producto_proveedor_INT> {
+  async mostrar_product_proveedor(
+    id_proveedor: string
+  ): Promise<Producto_proveedor_INT[]> {
     return await new Promise((resolve, reject) => {
       database.query(
-        `SELECT producto_proveedor.id_product_proveedor, producto_proveedor.descripcion, producto_proveedor.fecha_pago, producto_proveedor.total, producto_proveedor.fecha_ingreso, producto_proveedor.id_proveedor, producto_proveedor.estado_pp, producto_proveedor.abonado, proveedores.nombres, proveedores.correo, nombre_laboratorio.nombre_laboratorio FROM producto_proveedor INNER JOIN proveedores ON proveedores.id_proveedores = producto_proveedor.id_proveedor INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = proveedores.id_laboratorio;`,
+        `SELECT producto_proveedor.id_product_proveedor, producto_proveedor.descripcion, producto_proveedor.fecha_pago, producto_proveedor.total, producto_proveedor.fecha_ingreso, producto_proveedor.id_proveedor, producto_proveedor.estado_pp, producto_proveedor.abonado, nombre_laboratorio.nombre_laboratorio FROM producto_proveedor INNER JOIN proveedores ON proveedores.id_proveedores = producto_proveedor.id_proveedor INNER JOIN nombre_laboratorio ON nombre_laboratorio.id_name_laboratorio = proveedores.id_laboratorio WHERE producto_proveedor.id_proveedor = '${id_proveedor}';`,
         (err, data) => {
           if (err) return reject(err);
           resolve(data);
